@@ -1,4 +1,10 @@
 'use strict';
+const bcrypt = require("bcryptjs");
+
+let options = {};
+if (process.env.NODE_ENV === 'production') {
+  options.schema = process.env.SCHEMA;  // define your schema in options object
+}
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -7,31 +13,27 @@ module.exports = {
     await queryInterface.bulkInsert(options, [
       {
         spotId: 1,
-        userId: 1,
-        startDate: '2020-09-12',
-        endDate: '2020-09-18'
+        url: 'https://www.thoughtco.com/thmb/m03idLs8Mzqq-_73DelAzgLWRms=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/GettyImages-117950117-969baa3b88ca430d8e51d6132371fa8e.jpg',
+        preview: true
       },
       {
         spotId: 2,
-        userId: 2,
-        startDate: '2021-01-03',
-        endDate: '2021-01-05'
+        url: 'https://image.cnbcfm.com/api/v1/image/107123099-1663872668113-gettyimages-1423714478-029a3554_40a02cc0-73c3-4a25-86a9-63415451fac6.jpeg?v=1663890319&w=740&h=416&ffmt=webp&vtcrop=y',
+        preview: true
       },
       {
         spotId: 3,
-        userId: 3,
-        startDate: '2021-05-11',
-        endDate: '2021-05-15'
+        url: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/c5/71/f9/view-of-hearst-castle.jpg?w=1200&h=-1&s=1',
+        preview: true
       }
     ], {});
   },
 
   async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    options.tableName = 'SpotImages';
+    const Op = Sequelize.Op;
+    await queryInterface.bulkDelete(options, {
+      spotId: { [Op.in]: [1, 2, 3] }
+    }, {});
   }
 };
