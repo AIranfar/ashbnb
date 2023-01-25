@@ -37,6 +37,7 @@ module.exports = {
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
       spotId: { [Op.in]: [1, 2, 3] }
-    }, {});
+    });
   }
 };
+
