@@ -27,6 +27,13 @@ const validateSignup = [
     handleValidationErrors
   ];
 
+
+router.get('./current', requireAuth, async(req, res, next) => {
+  const currentUser = await User.findByPk(req.user.id)
+
+  return res.json(currentUser)
+})
+
 router.post(
     '/',
     validateSignup,
