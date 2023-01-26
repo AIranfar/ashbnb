@@ -197,6 +197,26 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 
 // Edit a Spot
 
+// Get Reviews by spotId
+
+router.get('/:spotId/reviews', async (req, res) => {
+    const allReviews = await Review.findAll({
+        where: {
+            spotId: req.params.spotId
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName'], as: 'User'
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
+            }
+        ]
+    })
+    res.json({ Review: allReviews })
+})
 
 // Delete a Spot
 
