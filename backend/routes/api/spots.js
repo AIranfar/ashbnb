@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
         delete spot.SpotImages
     }
 
-    return res.json(spots)
+    return res.json({ Spots: spots })
 })
 
 // Get all spots owned by the Current User
@@ -52,6 +52,7 @@ router.get('/current', requireAuth, async (req, res) => {
             SpotImage
         ]
     })
+
     let spots = [];
     for (let spot of allSpots) {
         spots.push(spot.toJSON())
@@ -78,7 +79,49 @@ router.get('/current', requireAuth, async (req, res) => {
         delete spot.SpotImages
     }
 
-    return res.json(spots)
+    return res.json({ Spots: spots })
+})
+
+// Get details of a Spot from ID
+
+router.get('/:spotId', requireAuth, async (req, res) => {
+    const allSpots = await Spot.findByPk(req.params.spotId, {
+        include: [
+            {
+                model: User, as: 'Owner',
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: SpotImage,
+                attributes: ['id', 'url', 'preview']
+            }
+        ]
+    })
+
+    if (req.user.id !== spots.ownerId){
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": res.statusCode
+        })
+    }
+
+    const reviews = await Review.findAll({
+        where: {
+            spotId: allSpots.id
+        }
+    })
+    const numReviews = reviews.length
+
+    for (let spot of allSpots) {
+        spot.numReviews = numReviews
+    }
+    if (!allSpots) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": res.statusCode
+        })
+    }
+    return res.json(allSpots)
 })
 
 
@@ -122,6 +165,38 @@ router.post('/', requireAuth, async(req, res, next) => {
         })
     }
 })
+
+// Add an Image to a Spot based on the Spot's id
+
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+    const spots = await Spot.findByPk(req.params.spotId);
+    const { url, preview } = req.body
+
+    if (req.user.id !== spots.ownerId){
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": res.statusCode
+        })
+    }
+
+    if (!spots) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": res.statusCode
+        })
+    }
+
+    let newImage = await SpotImage.create({
+        spotId: req.params.spotId,
+        url,
+        preview
+    })
+
+    res.json({ id: newImage.id, url: newImage.url, preview: newImage.preview  })
+})
+
+// Edit a Spot
+
 
 // Delete a Spot
 
