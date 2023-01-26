@@ -4,27 +4,44 @@ const { setTokenCookie, requireAuth } = require('../../utils/auth.js')
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
 // get all spots
-router.get('/', async(req, res) => {
-    const spots = await Spot.findAll({
+router.get('/', async (req, res) => {
+    const allSpots = await Spot.findAll({
         include: [
-            {
-            model: Review  // loop
-        },
-        {
-            model: SpotImage // if statement
+            SpotImage
+        ]
+    });
+
+    let spots = [];
+    for (let spot of allSpots) {
+        spots.push(spot.toJSON())
+    }
+
+    for (let spot of spots) {
+        const reviews = await Review.findAll({
+            where: {
+                spotId: spot.id
+            }
+        })
+        if (reviews.length) {
+            let sum = 0
+            for (let review of reviews) {
+                sum += review.stars;
+            }
+            let average = sum / reviews.length;
+            spot.avgRating = average;
+
         }
-    ]
-    })
+    }
 
-    // const review = await Review.findAll({
-    //     where: {
-    //         spotId: spots.id,
-    //         attributes: ['stars']
-    //     }
-    // })
+    for (let spot of spots) {
+        spot.previewImage = spot.SpotImages[0].url
+        delete spot.SpotImages
+    }
 
-    return res.json({spots})
+    return res.json(spots)
 })
+
+
 
 // Create a spot
 router.post('/', requireAuth, async(req, res, next) => {
@@ -79,14 +96,11 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
             "statusCode": res.statusCode
         })
     }
-
-    if (deletedSpot) {
-        await deletedSpot.destroy();
-        return res.status(200).json({
-            "message": "Successfully deleted",
-            "statusCode": res.statusCode
-        })
-    }
+    await deletedSpot.destroy();
+    return res.status(200).json({
+        "message": "Successfully deleted",
+        "statusCode": res.statusCode
+    })
 })
 
 
