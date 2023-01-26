@@ -41,12 +41,50 @@ router.get('/', async (req, res) => {
     return res.json(spots)
 })
 
+// Get all spots owned by the Current User
+
+router.get('/current', requireAuth, async (req, res) => {
+    const allSpots = await Spot.findAll({
+        where: {
+            ownerId: req.user.id
+        },
+        include: [
+            SpotImage
+        ]
+    })
+    let spots = [];
+    for (let spot of allSpots) {
+        spots.push(spot.toJSON())
+    }
+
+    for (let spot of spots) {
+        const reviews = await Review.findAll({
+            where: {
+                spotId: spot.id
+            }
+        })
+        if (reviews.length) {
+            let sum = 0
+            for (let review of reviews) {
+                sum += review.stars;
+            }
+            let average = sum / reviews.length;
+            spot.avgRating = average;
+        }
+    }
+
+    for (let spot of spots) {
+        spot.previewImage = spot.SpotImages[0].url
+        delete spot.SpotImages
+    }
+
+    return res.json(spots)
+})
+
 
 
 // Create a spot
 router.post('/', requireAuth, async(req, res, next) => {
-    const userId = req.user.id
-
     const { address, city, state, country, lat, lng, name, description, price} = req.body
 
     const newSpot = await Spot.create({
