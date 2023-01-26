@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const { setTokenCookie, requireAuth } = require('../../utils/auth.js')
-const { Spot, SpotImage, Review } = require('../../db/models');
+const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
 // get all spots
 router.get('/', async(req, res) => {
     const spots = await Spot.findAll({
         include: [
             {
-            model: Review
+            model: Review  // loop
         },
         {
-            model: SpotImage
+            model: SpotImage // if statement
         }
     ]
     })
@@ -45,9 +45,26 @@ router.post('/', requireAuth, async(req, res, next) => {
         price
     })
 
-    if (spots){
-        res.status(201)
-        res.json(spots)
+    if (newSpot){
+        return res.status(201).json(newSpot)
+    }
+
+    if (!newSpot) {
+        res.status(400).json({
+            "message": "Validation Error",
+            "statusCode": res.statusCode,
+            "errors": {
+                "address": "Street address is required",
+                "city": "City is required",
+                "state": "State is required",
+                "country": "Country is required",
+                "lat": "Latitude is not valid",
+                "lng": "Longitude is not valid",
+                "name": "Name must be less than 50 characters",
+                "description": "Description is required",
+                "price": "Price per day is required"
+            }
+        })
     }
 })
 
@@ -56,15 +73,17 @@ router.post('/', requireAuth, async(req, res, next) => {
 router.delete('/:spotId', requireAuth, async (req, res) => {
     const deletedSpot = await Spot.findByPk(req.params.spotId);
 
+    if (!deletedSpot) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": res.statusCode
+        })
+    }
+
     if (deletedSpot) {
         await deletedSpot.destroy();
         return res.status(200).json({
             "message": "Successfully deleted",
-            "statusCode": res.statusCode
-        })
-    } else if (!deletedSpot) {
-        return res.status(404).json({
-            "message": "Spot couldn't be found",
             "statusCode": res.statusCode
         })
     }
