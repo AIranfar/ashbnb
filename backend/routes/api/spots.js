@@ -171,22 +171,22 @@ router.post('/', requireAuth, async(req, res, next) => {
 router.post('/:spotId/images', requireAuth, async (req, res) => {
     const spots = await Spot.findByPk(req.params.spotId);
     const { url, preview } = req.body
-
-    if (req.user.id !== spots.ownerId){
-        return res.status(403).json({
-            "message": "Forbidden",
-            "statusCode": res.statusCode
-        })
-    }
-
+    
     if (!spots) {
-        return res.status(404).json({
+        res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": res.statusCode
         })
     }
 
-    let newImage = await SpotImage.create({
+    if (req.user.id !== spots.ownerId){
+        res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": res.statusCode
+        })
+    }
+
+    const newImage = await SpotImage.create({
         spotId: req.params.spotId,
         url,
         preview
@@ -219,7 +219,7 @@ router.get('/:spotId/reviews', async (req, res) => {
     const spot = await Spot.findByPk(req.params.spotId)
 
     if (!spot) {
-        return res.status(404).json({
+        res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": res.statusCode
         })
@@ -233,14 +233,21 @@ router.get('/:spotId/reviews', async (req, res) => {
 router.delete('/:spotId', requireAuth, async (req, res) => {
     const deletedSpot = await Spot.findByPk(req.params.spotId);
 
+    if (req.user.id !== deletedSpot.ownerId){
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": res.statusCode
+        })
+    }
+
     if (!deletedSpot) {
-        return res.status(404).json({
+        res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": res.statusCode
         })
     }
     await deletedSpot.destroy();
-    return res.status(200).json({
+    res.status(200).json({
         "message": "Successfully deleted",
         "statusCode": res.statusCode
     })

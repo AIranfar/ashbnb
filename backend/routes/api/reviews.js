@@ -86,24 +86,25 @@ router.get('/current', requireAuth, async (req, res) => {
 // Delete Reviews
 
 router.delete('/:reviewId', requireAuth, async (req, res) => {
-    const deletedReview = await Review.findByPk(req.params.reviewId);
-
+    const id = req.params.reviewId
+    const deletedReview = await Review.findByPk(id);
+    console.log(deletedReview)
     if (!deletedReview) {
-        return res.status(404).json({
+        res.status(404).json({
             "message": "Review couldn't be found",
             "statusCode": res.statusCode
         })
     }
 
     if (req.user.id !== deletedReview.userId) {
-        return res.status(403).json({
+        res.status(403).json({
             "message": "Forbidden",
             "statusCode": res.statusCode
         })
     }
 
     await deletedReview.destroy();
-    return res.status(200).json({
+    res.status(200).json({
         "message": "Successfully deleted",
         "statusCode": res.statusCode
     })
