@@ -10,13 +10,6 @@ router.get('/', async (req, res) => {
             {
                 model: SpotImage
             }
-        //     {
-        //         model: Review,
-        //         exclude: ['spotId']
-        //     }
-        // ],
-        // group: [
-        //     "Spot.id", "Reviews.id", "SpotImages.id"
         ]
     });
 
@@ -39,13 +32,6 @@ router.get('/', async (req, res) => {
             let average = sum / reviews.length;
             spot.avgRating = average;
         }
-        // console.log(spot.SpotImages[0].url)
-        // spots.SpotImage.forEach(image => {
-        //     if (image.preview){
-        //         spot.previewImage = image.url
-        //     }
-        // })
-        // delete spot.SpotImage
     }
 
     for (let spot of spots) {
@@ -55,7 +41,6 @@ router.get('/', async (req, res) => {
                 // console.log(spot.previewImage)
             }
         })
-        // spot.previewImage = spot.SpotImages[0].url
         // console.log(spot)
         delete spot.SpotImages
     }
