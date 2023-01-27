@@ -10,6 +10,9 @@ router.get('/', async (req, res) => {
             {
                 model: SpotImage
             }
+        ],
+        group: [
+            "Spot.id"
         ]
     });
 
