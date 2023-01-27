@@ -46,7 +46,7 @@ const validateSpotError = [
     handleValidationErrors
 ];
 
-// get all spots
+// get all spots --DONE
 router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll({
         include: [
@@ -177,7 +177,7 @@ router.get('/:spotId', requireAuth, async (req, res) => {
 
 
 
-// Create a spot
+// Create a spot --DONE
 router.post('/', validateSpotError,requireAuth, async(req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price} = req.body
 
@@ -226,7 +226,40 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     res.json({ id: newImage.id, url: newImage.url, preview: newImage.preview  })
 })
 
-// Edit a Spot
+// Edit a Spot --DONE
+
+router.put('/:spotId', validateSpotError, requireAuth, async (req, res) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+    const spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        return res.status(404).json({
+            "message": "Spot could not be found",
+            "statusCode": res.statusCode
+        })
+    }
+    if (req.user.id !== spot.ownerId){
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": res.statusCode
+        })
+    }
+
+    spot.address = address
+    spot.city = city
+    spot.state = state
+    spot.country = country
+    spot.lat = lat
+    spot.lng = lng
+    spot.name = name
+    spot.description = description
+    spot.price = price
+    spot.save();
+
+    return res.json(spot)
+
+})
 
 // Get Reviews by spotId --DONE
 
