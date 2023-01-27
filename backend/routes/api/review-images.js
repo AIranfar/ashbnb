@@ -8,6 +8,12 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../d
 router.delete('/:imageId', requireAuth, async (req, res, next) => {
     const deletedImage = await ReviewImage.findByPk(req.params.imageId);
 
+    if (req.user.id !== deletedImage.ownerId){
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": res.statusCode
+        })
+    }
     if (!deletedImage) {
         return res.status(404).json({
             "message": "Review Image couldn't be found",
