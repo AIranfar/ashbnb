@@ -3,7 +3,7 @@ const router = express.Router();
 const { setTokenCookie, requireAuth } = require('../../utils/auth.js')
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
-// get all spots
+// get all spots --DONE
 router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll({
         include: [
@@ -41,7 +41,7 @@ router.get('/', async (req, res) => {
     return res.json({ Spots: spots })
 })
 
-// Get all spots owned by the Current User
+// Get all spots owned by the Current User --DONE
 
 router.get('/current', requireAuth, async (req, res) => {
     const allSpots = await Spot.findAll({
@@ -166,7 +166,7 @@ router.post('/', requireAuth, async(req, res, next) => {
     }
 })
 
-// Add an Image to a Spot based on the Spot's id
+// Add an Image to a Spot based on the Spot's id --DONE
 
 router.post('/:spotId/images', requireAuth, async (req, res) => {
     const spots = await Spot.findByPk(req.params.spotId);
@@ -197,7 +197,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
 
 // Edit a Spot
 
-// Get Reviews by spotId
+// Get Reviews by spotId --DONE
 
 router.get('/:spotId/reviews', async (req, res) => {
     const allReviews = await Review.findAll({
@@ -228,7 +228,7 @@ router.get('/:spotId/reviews', async (req, res) => {
     res.json({ Review: allReviews })
 })
 
-// Delete a Spot
+// Delete a Spot --DONE
 
 router.delete('/:spotId', requireAuth, async (req, res) => {
     const deletedSpot = await Spot.findByPk(req.params.spotId);
@@ -245,7 +245,5 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
         "statusCode": res.statusCode
     })
 })
-
-
 
 module.exports = router;
