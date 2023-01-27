@@ -3,7 +3,7 @@ const router = express.Router();
 const { setTokenCookie, requireAuth } = require('../../utils/auth.js')
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
-// get all spots --DONE
+// get all spots
 router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll({
         include: [
@@ -29,14 +29,28 @@ router.get('/', async (req, res) => {
             }
             let average = sum / reviews.length;
             spot.avgRating = average;
-
         }
+        // console.log(spot.SpotImages[0].url)
+        // spots.SpotImage.forEach(image => {
+        //     if (image.preview){
+        //         spot.previewImage = image.url
+        //     }
+        // })
+        // delete spot.SpotImage
     }
 
     for (let spot of spots) {
-        spot.previewImage = spot.SpotImages[0].url
+        spot.SpotImages.forEach(img => {
+            if (img.preview === true){
+                spot.previewImage = img.url
+                // console.log(spot.previewImage)
+            }
+        })
+        // spot.previewImage = spot.SpotImages[0].url
+        // console.log(spot)
         delete spot.SpotImages
     }
+
 
     return res.json({ Spots: spots })
 })
@@ -131,7 +145,7 @@ router.post('/', requireAuth, async(req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price} = req.body
 
     const newSpot = await Spot.create({
-        ownerId: userId,
+        ownerId: req.user.id,
         address,
         city,
         state,
@@ -171,7 +185,7 @@ router.post('/', requireAuth, async(req, res, next) => {
 router.post('/:spotId/images', requireAuth, async (req, res) => {
     const spots = await Spot.findByPk(req.params.spotId);
     const { url, preview } = req.body
-    
+
     if (!spots) {
         res.status(404).json({
             "message": "Spot couldn't be found",
