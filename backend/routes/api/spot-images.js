@@ -5,7 +5,7 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../d
 
 // Delete spot image
 
-router.delete('/:imageId', requireAuth, async(req, res) => {
+router.delete('/:imageId', requireAuth, async (req, res) => {
     const deletedImage = await SpotImage.findByPk(req.params.imageId);
 
     if (!deletedImage) {
@@ -14,14 +14,11 @@ router.delete('/:imageId', requireAuth, async(req, res) => {
             "statusCode": res.statusCode
         })
     }
-    
-    if (deletedImage) {
-        await deletedImage.destroy();
-        return res.status(200).json({
-            "message": "Successfully deleted",
-            "statusCode": res.statusCode
-        })
-    }
+    await deletedImage.destroy();
+    return res.status(200).json({
+        "message": "Successfully deleted",
+        "statusCode": res.statusCode
+    })
 })
 
 
