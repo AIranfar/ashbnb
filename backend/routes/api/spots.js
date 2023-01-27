@@ -7,7 +7,9 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../d
 router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll({
         include: [
-            SpotImage
+            {
+                model: SpotImage
+            }
         ]
     });
 
