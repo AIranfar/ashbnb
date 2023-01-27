@@ -255,7 +255,7 @@ router.put('/:spotId', validateSpotError, requireAuth, async (req, res) => {
     spot.name = name
     spot.description = description
     spot.price = price
-    spot.save();
+    await spot.save();
 
     return res.json(spot)
 
@@ -291,6 +291,8 @@ router.get('/:spotId/reviews', async (req, res) => {
 
     return res.json({ Review: allReviews })
 })
+
+// Create a review for a Spot based on spotId
 
 // Delete a Spot --DONE
 
