@@ -10,9 +10,13 @@ router.get('/', async (req, res) => {
             {
                 model: SpotImage
             }
-        ],
-        group: [
-            "Spot.id"
+        //     {
+        //         model: Review,
+        //         exclude: ['spotId']
+        //     }
+        // ],
+        // group: [
+        //     "Spot.id", "Reviews.id", "SpotImages.id"
         ]
     });
 
@@ -192,14 +196,14 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     const { url, preview } = req.body
 
     if (!spots) {
-        res.status(404).json({
+        return res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": res.statusCode
         })
     }
 
     if (req.user.id !== spots.ownerId){
-        res.status(403).json({
+        return res.status(403).json({
             "message": "Forbidden",
             "statusCode": res.statusCode
         })
@@ -238,13 +242,13 @@ router.get('/:spotId/reviews', async (req, res) => {
     const spot = await Spot.findByPk(req.params.spotId)
 
     if (!spot) {
-        res.status(404).json({
+        return res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": res.statusCode
         })
     }
 
-    res.json({ Review: allReviews })
+    return res.json({ Review: allReviews })
 })
 
 // Delete a Spot --DONE
@@ -260,13 +264,13 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     }
 
     if (!deletedSpot) {
-        res.status(404).json({
+        return res.status(404).json({
             "message": "Spot couldn't be found",
             "statusCode": res.statusCode
         })
     }
     await deletedSpot.destroy();
-    res.status(200).json({
+    return res.status(200).json({
         "message": "Successfully deleted",
         "statusCode": res.statusCode
     })
