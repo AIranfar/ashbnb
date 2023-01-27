@@ -3,6 +3,42 @@ const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js')
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
+// Get all Current User's Bookings
+
+router.get('/current', requireAuth, async (req, res) => {
+    const allBookings = await Booking.findAll({
+        where: {
+            userId: req.user.id
+        },
+        include: [
+            {
+                model: Spot,
+                attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price']
+            }
+        ]
+    })
+    const allSpots = await Spot.findAll({
+        include: [
+            SpotImage
+        ]
+    });
+    let spots = [];
+    for (let spot of allSpots) {
+        spots.push(spot.toJSON())
+    }
+    for (let i = 0; i < spots.length; i++) {
+        let spot = spots[i]
+        spot.SpotImages.forEach(image => {
+            if(image.preview) {
+                allBookings.forEach(review => {
+                    review.Spot.dataValues.previewImage = image.url
+                })
+            }
+        })
+    }
+    res.json({ Bookings: allBookings })
+})
+
 // Delete a Booking
 
 router.delete('/:bookingId', requireAuth, async (req, res) => {
@@ -23,7 +59,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
     }
 
     await deletedBooking.destroy();
-    return res.status(200).json({
+    res.status(200).json({
         "message": "Successfully deleted",
         "statusCode": res.statusCode
     })

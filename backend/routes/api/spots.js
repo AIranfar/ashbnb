@@ -98,7 +98,7 @@ router.get('/:spotId', requireAuth, async (req, res) => {
         ]
     })
 
-    if (req.user.id !== spots.ownerId) {
+    if (req.user.id !== spots.ownerId){
         return res.status(403).json({
             "message": "Forbidden",
             "statusCode": res.statusCode
@@ -127,8 +127,8 @@ router.get('/:spotId', requireAuth, async (req, res) => {
 
 
 // Create a spot
-router.post('/', requireAuth, async (req, res, next) => {
-    const { address, city, state, country, lat, lng, name, description, price } = req.body
+router.post('/', requireAuth, async(req, res, next) => {
+    const { address, city, state, country, lat, lng, name, description, price} = req.body
 
     const newSpot = await Spot.create({
         ownerId: userId,
@@ -143,7 +143,7 @@ router.post('/', requireAuth, async (req, res, next) => {
         price
     })
 
-    if (newSpot) {
+    if (newSpot){
         return res.status(201).json(newSpot)
     }
 
@@ -172,7 +172,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     const spots = await Spot.findByPk(req.params.spotId);
     const { url, preview } = req.body
 
-    if (req.user.id !== spots.ownerId) {
+    if (req.user.id !== spots.ownerId){
         return res.status(403).json({
             "message": "Forbidden",
             "statusCode": res.statusCode
@@ -192,7 +192,7 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
         preview
     })
 
-    res.json({ id: newImage.id, url: newImage.url, preview: newImage.preview })
+    res.json({ id: newImage.id, url: newImage.url, preview: newImage.preview  })
 })
 
 // Edit a Spot

@@ -30,13 +30,57 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
             "statusCode": "403"
         })
     }
-    if (req.user.id !== reviews.userId){
+    if (req.user.id !== reviews.userId) {
         return res.status(403).json({
             "message": "Forbidden",
             "statusCode": res.statusCode
         })
     }
     res.json({ id: newImage.id, url: newImage.url })
+})
+
+// Get all reviews of Current User
+
+router.get('/current', requireAuth, async (req, res) => {
+    const allReviews = await Review.findAll({
+        where: {
+            userId: req.user.id
+        },
+        include: [
+            {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            },
+            {
+                model: Spot,
+                attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng', 'name', 'price']
+            },
+            {
+                model: ReviewImage,
+                attributes: ['id', 'url']
+            }
+        ]
+    })
+    const allSpots = await Spot.findAll({
+        include: [
+            SpotImage
+        ]
+    });
+    let spots = [];
+    for (let spot of allSpots) {
+        spots.push(spot.toJSON())
+    }
+    for (let i = 0; i < spots.length; i++) {
+        let spot = spots[i]
+        spot.SpotImages.forEach(image => {
+            if(image.preview) {
+                allReviews.forEach(review => {
+                    review.Spot.dataValues.previewImage = image.url
+                })
+            }
+        })
+    }
+    res.json({ Reviews: allReviews })
 })
 
 // Delete Reviews
@@ -51,7 +95,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
         })
     }
 
-    if (req.user.id !== deletedReview.userId){
+    if (req.user.id !== deletedReview.userId) {
         return res.status(403).json({
             "message": "Forbidden",
             "statusCode": res.statusCode
