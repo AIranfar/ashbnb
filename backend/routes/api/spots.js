@@ -180,7 +180,7 @@ router.get('/:spotId', requireAuth, async (req, res) => {
 
 // Create a spot --DONE
 
-router.post('/', validateSpotError,requireAuth, async(req, res, next) => {
+router.post('/', validateSpotError,requireAuth, async(req, res) => {
     const { address, city, state, country, lat, lng, name, description, price} = req.body
 
     const newSpot = await Spot.create({
