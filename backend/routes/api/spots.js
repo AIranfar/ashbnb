@@ -178,6 +178,7 @@ router.get('/:spotId', requireAuth, async (req, res) => {
 
 
 // Create a spot --DONE
+
 router.post('/', validateSpotError,requireAuth, async(req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price} = req.body
 
@@ -293,6 +294,47 @@ router.get('/:spotId/reviews', async (req, res) => {
 })
 
 // Create a review for a Spot based on spotId
+
+// Get all Bookings for Spot based on Spot's Id --DONE
+
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot){
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statuscode": res.statusCode
+        })
+    }
+
+    if (req.user.id === spot.ownerId) {
+        const ownerBookings = await Booking.findAll({
+            where: {
+                spotId: spot.id
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                }
+            ]
+        });
+
+        return res.json({ Bookings: ownerBookings })
+    }
+
+    if (req.user.id !== spot.ownerId) {
+        const visitorBookings = await Booking.findAll({
+            where: {
+                spotId: spot.id
+            },
+            attributes: ['spotId', 'startDate', 'endDate']
+        })
+        res.json({ Bookings: visitorBookings })
+    }
+
+
+})
 
 // Delete a Spot --DONE
 
