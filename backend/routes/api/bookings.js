@@ -3,7 +3,7 @@ const router = express.Router();
 const { requireAuth } = require('../../utils/auth.js')
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
-// Get all Current User's Bookings
+// Get all Current User's Bookings --DONE
 
 router.get('/current', requireAuth, async (req, res) => {
     const allBookings = await Booking.findAll({
@@ -39,7 +39,9 @@ router.get('/current', requireAuth, async (req, res) => {
     res.json({ Bookings: allBookings })
 })
 
-// Delete a Booking
+// Edit a Booking
+
+// Delete a Booking --DONE
 
 router.delete('/:bookingId', requireAuth, async (req, res) => {
     const deletedBooking = await Booking.findByPk(req.params.bookingId);
@@ -59,7 +61,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
     }
 
     await deletedBooking.destroy();
-    return res.status(200).json({
+    return res.json({
         "message": "Successfully deleted",
         "statusCode": res.statusCode
     })

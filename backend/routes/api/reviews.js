@@ -3,7 +3,7 @@ const router = express.Router();
 const { requireAuth } = require('../../utils/auth')
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
-// Get all reviews of Current User
+// Get all reviews of Current User --DONE
 
 router.get('/current', requireAuth, async (req, res) => {
     const allReviews = await Review.findAll({
@@ -83,7 +83,7 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     res.json({ id: newImage.id, url: newImage.url })
 })
 
-// Edit a Review
+// Edit a Review --DONE
 
 router.put('/:reviewId', requireAuth, async (req, res) => {
     const { review, stars } = req.body
@@ -128,12 +128,12 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
     return res.json(changedReview)
 })
 
-// Delete Reviews
+// Delete Reviews --DONE
 
 router.delete('/:reviewId', requireAuth, async (req, res) => {
     const id = req.params.reviewId
     const deletedReview = await Review.findByPk(id);
-    console.log(deletedReview)
+
     if (!deletedReview) {
         return res.status(404).json({
             "message": "Review couldn't be found",
@@ -149,7 +149,7 @@ router.delete('/:reviewId', requireAuth, async (req, res) => {
     }
 
     await deletedReview.destroy();
-    return res.status(200).json({
+    return res.json({
         "message": "Successfully deleted",
         "statusCode": res.statusCode
     })
