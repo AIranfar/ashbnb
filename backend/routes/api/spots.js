@@ -46,7 +46,8 @@ const validateSpotError = [
     handleValidationErrors
 ];
 
-// get all spots
+// get all spots --DONE
+
 router.get('/', async (req, res) => {
     const allSpots = await Spot.findAll({
         include: [
@@ -177,7 +178,8 @@ router.get('/:spotId', requireAuth, async (req, res) => {
 
 
 
-// Create a spot
+// Create a spot --DONE
+
 router.post('/', validateSpotError,requireAuth, async(req, res, next) => {
     const { address, city, state, country, lat, lng, name, description, price} = req.body
 
@@ -226,7 +228,40 @@ router.post('/:spotId/images', requireAuth, async (req, res) => {
     res.json({ id: newImage.id, url: newImage.url, preview: newImage.preview  })
 })
 
-// Edit a Spot
+// Edit a Spot --DONE
+
+router.put('/:spotId', validateSpotError, requireAuth, async (req, res) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+
+    const spot = await Spot.findByPk(req.params.spotId);
+
+    if (!spot) {
+        return res.status(404).json({
+            "message": "Spot could not be found",
+            "statusCode": res.statusCode
+        })
+    }
+    if (req.user.id !== spot.ownerId){
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": res.statusCode
+        })
+    }
+
+    spot.address = address
+    spot.city = city
+    spot.state = state
+    spot.country = country
+    spot.lat = lat
+    spot.lng = lng
+    spot.name = name
+    spot.description = description
+    spot.price = price
+    await spot.save();
+
+    return res.json(spot)
+
+})
 
 // Get Reviews by spotId --DONE
 
@@ -257,6 +292,94 @@ router.get('/:spotId/reviews', async (req, res) => {
     }
 
     return res.json({ Review: allReviews })
+})
+
+// Create a review for a Spot based on spotId
+
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+    const { review, stars } = req.body
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    const checkReview = await Review.findOne({
+        where: {
+            userId: req.user.id,
+            spotId: req.params.spotId
+        }
+    })
+
+    if (!spot) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statusCode": res.statusCode
+        })
+    }
+
+    if (checkReview) {
+        return res.status(403).json({
+            "message": "User already has a review for this spot",
+            "statusCode": res.statusCode
+        })
+    }
+
+    if (stars < 1 || stars > 5 || !review) {
+        return res.status(400).json({
+            "message": "Validation Error",
+            "statusCode": res.statusCode,
+            "errors": {
+                "review": "Review text is required",
+                "stars": "Stars must be an integer from 1 to 5"
+            }
+        })
+    }
+
+    const newReview = await Review.create({
+        userId: req.user.id,
+        spotId: req.params.spotId,
+        review,
+        stars
+    })
+    res.json(newReview)
+})
+
+// Get all Bookings for Spot based on Spot's Id --DONE
+
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId)
+
+    if (!spot){
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statuscode": res.statusCode
+        })
+    }
+
+    if (req.user.id === spot.ownerId) {
+        const ownerBookings = await Booking.findAll({
+            where: {
+                spotId: spot.id
+            },
+            include: [
+                {
+                    model: User,
+                    attributes: ['id', 'firstName', 'lastName']
+                }
+            ]
+        });
+
+        return res.json({ Bookings: ownerBookings })
+    }
+
+    if (req.user.id !== spot.ownerId) {
+        const visitorBookings = await Booking.findAll({
+            where: {
+                spotId: spot.id
+            },
+            attributes: ['spotId', 'startDate', 'endDate']
+        })
+        res.json({ Bookings: visitorBookings })
+    }
+
+
 })
 
 // Delete a Spot --DONE
