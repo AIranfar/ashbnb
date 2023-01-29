@@ -449,8 +449,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     return res.json(newBooking)
 })
 
-// Edit a Booking
-
 // Delete a Spot --DONE
 
 router.delete('/:spotId', requireAuth, async (req, res) => {

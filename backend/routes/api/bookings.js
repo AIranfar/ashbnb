@@ -39,7 +39,67 @@ router.get('/current', requireAuth, async (req, res) => {
     res.json({ Bookings: allBookings })
 })
 
-// Edit a Booking
+// Edit a Booking --DONE
+
+router.put('/:bookingId', requireAuth, async (req, res) => {
+    const booking = await Booking.findByPk(req.params.bookingId);
+    const { startDate, endDate } = req.body;
+
+    if (!booking) {
+        return res.status(404).json({
+            "message": "Booking couldn't be found",
+            "statusCode": res.statusCode
+        })
+    }
+
+    if (booking.userId !== req.user.id){
+        return res.status(403).json({
+            "message": "Forbidden",
+            "statusCode": res.statusCode
+        })
+    }
+
+    const requestedStart = new Date(startDate).getTime();
+    const requestedEnd = new Date(endDate).getTime();
+    const oldStart = new Date(booking.startDate).getTime();
+    const oldEnd = new Date(booking.endDate).getTime();
+    const currentDate = new Date().getTime();
+
+    if (requestedEnd <= requestedStart) {
+        return res.status(400).json({
+            "message": "Validation error",
+            "statusCode": res.statusCode,
+            "errors": {
+              "endDate": "endDate cannot come before startDate"
+            }
+        })
+    }
+
+    if (requestedEnd < currentDate) {
+        return res.status(403).json({
+            "message": "Past bookings can't be modified",
+            "statusCode": res.statusCode
+        })
+    }
+
+    if (oldStart >= requestedStart && oldEnd <= requestedEnd ||
+        oldStart <= requestedStart && oldEnd >= requestedEnd) {
+        return res.status(403).json({
+            "message": "Sorry, this spot is already booked for the specified dates",
+            "statusCode": res.statusCode,
+            "errors": {
+              "startDate": "Start date conflicts with an existing booking",
+              "endDate": "End date conflicts with an existing booking"
+            }
+        })
+    }
+
+    booking.startDate = startDate;
+    booking.endDate = endDate;
+    booking.save();
+
+    return res.json(booking)
+})
 
 // Delete a Booking --DONE
 
