@@ -174,7 +174,7 @@ router.get('/:spotId', async (req, res) => {
         let average = sum / reviews.length;
         spotJSON.avgRating = average;
         spotJSON.numReviews = reviews.length;
-    } 
+    }
 
     return res.json(spotJSON)
 })
@@ -382,6 +382,74 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 
 
 })
+
+// Create a Booking based on spotId --DONE
+
+router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+    const spot = await Spot.findByPk(req.params.spotId);
+    const { startDate, endDate } = req.body;
+
+    if (!spot) {
+        return res.status(404).json({
+            "message": "Spot couldn't be found",
+            "statuscode": res.statusCode
+        })
+    }
+
+    if (spot.ownerId === req.user.id) {
+        return res.status(403).json({
+            "message": "Forbidden: Booked spot must not belong to current user",
+            "statusCode": res.statusCode
+        })
+    }
+
+    const requestedStart = new Date(startDate).getTime()
+    const requestedEnd = new Date(endDate).getTime()
+
+    if (requestedEnd <= requestedStart){
+        return res.status(400).json({
+            "message": "Validation error",
+            "statusCode": res.statusCode,
+            "errors": {
+                "endDate": "endDate cannot be on or before startDate"
+            }
+        })
+    }
+
+    const allBookings = await Booking.findAll({
+        where: {
+            spotId: spot.id
+        }
+    })
+
+    for (let booking of allBookings) {
+        let oldStart = new Date(booking.startDate).getTime();
+        let oldEnd = new Date(booking.endDate).getTime();
+
+        if (oldStart >= requestedStart && oldEnd <= requestedEnd ||
+            oldStart <= requestedStart && oldEnd >= requestedEnd) {
+            return res.status(403).json({
+                "message": "Sorry, this spot is already booked for the specified dates",
+                "statusCode": res.statusCode,
+                "errors": {
+                  "startDate": "Start date conflicts with an existing booking",
+                  "endDate": "End date conflicts with an existing booking"
+                }
+            })
+        }
+    }
+
+    const newBooking = await Booking.create({
+        spotId: req.params.spotId,
+        userId: req.user.id,
+        startDate,
+        endDate
+    })
+
+    return res.json(newBooking)
+})
+
+// Edit a Booking
 
 // Delete a Spot --DONE
 
