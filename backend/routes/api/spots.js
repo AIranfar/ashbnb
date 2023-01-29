@@ -82,13 +82,10 @@ router.get('/', async (req, res) => {
         spot.SpotImages.forEach(img => {
             if (img.preview === true) {
                 spot.previewImage = img.url
-                // console.log(spot.previewImage)
             }
         })
-        // console.log(spot)
         delete spot.SpotImages
     }
-
 
     return res.json({ Spots: spots })
 })
@@ -99,10 +96,10 @@ router.get('/current', requireAuth, async (req, res) => {
     const allSpots = await Spot.findAll({
         where: {
             ownerId: req.user.id
-        },
-        include: [
-            SpotImage
-        ]
+        }
+        // include: [
+        //     SpotImage
+        // ]
     })
 
     let spots = [];
@@ -123,13 +120,26 @@ router.get('/current', requireAuth, async (req, res) => {
             }
             let average = sum / reviews.length;
             spot.avgRating = average;
+        } else {
+            spot.avgRating = 'No reviews yet'
         }
+        const image = await SpotImage.findOne({
+            where: {
+                spotId: spot.id
+            }
+        });
+
+        spot.previewImage = image.url
     }
 
-    for (let spot of spots) {
-        spot.previewImage = spot.SpotImages[0].url
-        delete spot.SpotImages
-    }
+
+    // for (let spot of spots) {
+    //     spot.SpotImages.forEach(img => {
+    //         if (img.preview === true) {
+    //             spot.previewImage = img.url
+    //         }
+    //     })
+    // }
 
     return res.json({ Spots: spots })
 })

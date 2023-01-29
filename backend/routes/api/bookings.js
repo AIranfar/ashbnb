@@ -63,7 +63,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     const requestedEnd = new Date(endDate).getTime();
     const oldStart = new Date(booking.startDate).getTime();
     const oldEnd = new Date(booking.endDate).getTime();
-    const currentDate = new Date().getTime();
+
 
     if (requestedEnd <= requestedStart) {
         return res.status(400).json({
@@ -109,6 +109,16 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
     if (!deletedBooking) {
         return res.status(404).json({
             "message": "Booking couldn't be found",
+            "statusCode": res.statusCode
+        })
+    }
+
+    const start_Date = new Date(deletedBooking.startDate).getTime();
+    const currentDate = new Date().getTime();
+
+    if (start_Date <= currentDate) {
+        return res.status(403).json({
+            "message": "Bookings that have been started can't be deleted",
             "statusCode": res.statusCode
         })
     }
