@@ -3,7 +3,7 @@ const router = express.Router();
 const { requireAuth } = require('../../utils/auth')
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
-// Delete spot image
+// Delete spot image --DONE
 
 router.delete('/:imageId', requireAuth, async (req, res) => {
     const deletedImage = await SpotImage.findByPk(req.params.imageId);
@@ -26,7 +26,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
     }
 
     await deletedImage.destroy();
-    return res.status(200).json({
+    return res.json({
         "message": "Successfully deleted",
         "statusCode": res.statusCode
     })
