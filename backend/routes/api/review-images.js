@@ -6,7 +6,11 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../d
 // Delete Review Image --DONE
 
 router.delete('/:imageId', requireAuth, async (req, res) => {
-    const deletedImage = await ReviewImage.findByPk(req.params.imageId);
+    const deletedImage = await ReviewImage.findByPk(req.params.imageId,{
+        include: {
+            model: Review
+        }
+    });
 
     if (!deletedImage) {
         return res.status(404).json({
@@ -15,9 +19,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
         })
     }
 
-    let review = await Review.findByPk(deletedImage.reviewId)
-
-    if (req.user.id !== review.userId){
+    if (req.user.id !== deletedImage.Review.userId){
         return res.status(403).json({
             "message": "Forbidden",
             "statusCode": res.statusCode
