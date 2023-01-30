@@ -6,32 +6,7 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../d
 // Delete Review Image --DONE
 
 router.delete('/:imageId', requireAuth, async (req, res) => {
-    // const deletedImage = await ReviewImage.findByPk(req.params.imageId)
-
-    // if (!deletedImage) {
-    //     return res.status(404).json({
-    //         "message": "Review Image couldn't be found",
-    //         "statusCode": res.statusCode
-    //     })
-    // }
-
-    // const review = await Review.findByPk(deletedImage.reviewId)
-
-    // if (req.user.id !== review.userId){
-    //     console.log(review)
-    //     return res.status(403).json({
-    //         "message": "Forbidden",
-    //         "statusCode": res.statusCode
-    //     })
-    // }
-
-    // await deletedImage.destroy();
-    // return res.json({
-    //     "message": "Successfully deleted",
-    //     "statusCode": res.statusCode
-    // })
-    const reviewImageId = req.params.imageId
-    const reviewImage = await ReviewImage.findByPk(reviewImageId)
+    const reviewImage = await ReviewImage.findByPk(req.params.imageId)
     const reviews = await Review.findAll()
     if(!reviewImage) {
         return res.status(404).json({
@@ -40,8 +15,8 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
         })
     }
     let userId;
-    reviews.forEach(element => {
-        userId = element.userId
+    reviews.forEach(review => {
+        userId = review.userId
     });
 
     if (req.user.id !== userId) {
@@ -50,6 +25,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
             "statusCode": res.statusCode
         })
     }
+
    await reviewImage.destroy()
    res.json(({
         message: "Successfully deleted",
