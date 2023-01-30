@@ -63,6 +63,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     const requestedEnd = new Date(endDate).getTime();
     const oldStart = new Date(booking.startDate).getTime();
     const oldEnd = new Date(booking.endDate).getTime();
+    const currentDate = new Date().getTime();
 
 
     if (requestedEnd <= requestedStart) {

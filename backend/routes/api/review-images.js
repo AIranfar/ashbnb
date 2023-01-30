@@ -15,9 +15,9 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
         })
     }
 
-    const review = await Spot.findByPk(deletedImage.reviewId)
+    let review = await Review.findByPk(deletedImage.reviewId)
 
-    if (req.user.id !== review.ownerId){
+    if (req.user.id !== review.userId){
         return res.status(403).json({
             "message": "Forbidden",
             "statusCode": res.statusCode

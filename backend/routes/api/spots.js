@@ -433,8 +433,6 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
         })
         res.json({ Bookings: visitorBookings })
     }
-
-
 })
 
 // Create a Booking based on spotId --DONE
