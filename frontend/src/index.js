@@ -10,16 +10,13 @@ import App from './App';
 
 import configureStore from './store';
 
-// frontend/src/index.js
-// ...
+
 const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
   window.store = store;
 }
 
-// frontend/src/index.js
-// ...
 function Root() {
   return (
     <Provider store={store}>
@@ -30,8 +27,6 @@ function Root() {
   );
 }
 
-// frontend/src/index.js
-// ...
 ReactDOM.render(
   <React.StrictMode>
     <Root />
@@ -49,4 +44,4 @@ root.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// reportWebVitals();
