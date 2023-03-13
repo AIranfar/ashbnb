@@ -1,0 +1,2 @@
+
+import './Spot.css';
