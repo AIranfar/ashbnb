@@ -12,7 +12,22 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
     padding: 10px 20px;
+}
+
+.button {
+    width: 40px;
+    height: 20px;
+    padding: 0 7px;
+    font-size: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #717171;
+    background-color: white;
+    border-radius: 30px;
+    border: 0.1px solid rgba(128, 128, 128);
 }
