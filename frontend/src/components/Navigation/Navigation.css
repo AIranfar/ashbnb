@@ -1,3 +1,18 @@
 .hidden {
     display: none;
-  }
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+    font-size: 35px;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 10px 20px;
+}
