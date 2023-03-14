@@ -13,9 +13,7 @@ function Navigation({ isLoaded }){
         <NavLink className='logo' exact to="/">ashbnb</NavLink>
       </ul>
       {isLoaded && (
-        <li>
           <ProfileButton user={sessionUser} />
-        </li>
       )}
     </ul>
   );
