@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const ALL = 'spots/ALL_SPOTS';
 const ONE = 'spots/ONE_SPOT';
+const CREATE = 'spots/CREATE_SPOT'
 
 const all = list => ({
     type: ALL,
@@ -32,18 +33,27 @@ export const getAllSpots = () => async dispatch => {
     }
 };
 
-export const getOneSpot = (id) => async dispatch => {
-    // console.log(id)
-
-    const response = await fetch(`/api/spots/${id}`);
-
-    // console.log(response)
+export const getOneSpot = (spotId) => async dispatch => {
+    const response = await fetch(`/api/spots/${spotId}`);
+    console.log('RESPONSE:', response)
     if (response.ok) {
         const spot = await response.json();
-        console.log(spot)
+        // console.log('SPOT:', spot)
         dispatch(one(spot));
         return response;
     }
+};
+
+export const AddSpot = (spot) => async dispatch => {
+	const res = await csrfFetch('/api/spots', {
+		method: 'POST',
+		body: JSON.stringify(spot)
+	});
+
+	if (res.ok) {
+		const newSpot = await res.json();
+		return newSpot;
+	}
 };
 
 const initialState = {
@@ -60,13 +70,13 @@ const spotsReducer = (state = initialState, action) => {
                     ...action.list
                 }
             };
-        case ONE:
+            case ONE:
                 const newState = { ...state };
                 newState.singleSpot = action.list;
                 return newState;
-        default:
-            return state;
-    }
-};
+                default:
+                    return state;
+                }
+            };
 
 export default spotsReducer;

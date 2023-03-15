@@ -7,33 +7,34 @@ import './SpotDetails.css';
 const SpotDetails = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
-    const spot = useSelector(state => state.spots.singleSpot)
-
     // console.log(spotId)
+    const spot = useSelector(state => state.spots.singleSpot)
+    console.log('SPOT:', spot)
 
     useEffect(() => {
         dispatch(getOneSpot(spotId));
     }, [dispatch, spotId])
 
-    if (!spot) {
-        return <h1>loading...</h1>
+    if (!spot || !spot.name) {
+        return (<h1>loading...</h1>)
     }
 
     function handleClick() {
         alert('Feature Coming Soon...')
     };
 
-    console.log(spot)
 
     return (
         <div className='spot-container'>
             <h1>{spot.name}</h1>
-            <div className="spot-images-div" />
+            <div className='spot-images-div' />
             <h3>{spot.city}, {spot.state}, {spot.country}</h3>
-            <img className='spot-image' src={spot.SpotImages[0].url}></img>
-            <p>{spot.description}</p>
-            <div>${spot.price} Night</div>
-            <div className='reserve-button'>
+            {spot.SpotImages.map(img => {
+                return <img className='spot-image' src={img.url} alt={spot.name}></img>
+            })}
+                        <div class='small-box'>
+                <p>{spot.description}</p>
+                <div>${spot.price} Night</div>
                 <button id='reserve-button-id' onClick={handleClick}>RESERVE</button>
             </div>
         </div>
