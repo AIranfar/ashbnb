@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
 import { useParams } from "react-router-dom";
 import { createASpot } from "../../store/spots";
 import './CreateASpot.css';
@@ -19,8 +18,7 @@ const CreateASpot = () => {
     const [imageUrl2, setImageUrl2] = useState('');
     const [imageUrl3, setImageUrl3] = useState('');
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e) => {
     }
 
     return (
