@@ -1,0 +1,14 @@
+.signup-outer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px;
+}
+
+.signup-inner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
