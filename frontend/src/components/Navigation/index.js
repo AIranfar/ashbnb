@@ -9,12 +9,11 @@ function Navigation({ isLoaded }){
 
   return (
     <ul className='nav-bar'>
-      <ul>
-        <NavLink className='logo' exact to="/">ashbnb</NavLink>
-      </ul>
+        <NavLink className='logo' exact to='/'>ashbnb</NavLink>
       {isLoaded && (
           <ProfileButton user={sessionUser} />
       )}
+      <NavLink exact to='/spots/new'>Create a New Spot</NavLink>
     </ul>
   );
 }

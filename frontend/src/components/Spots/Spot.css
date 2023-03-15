@@ -1,0 +1,24 @@
+.all-Spots {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-left: 100px;
+    margin-right: 100px;
+
+}
+
+.spot-cards {
+    border-radius: 5px;
+    border-color:white;
+    box-shadow: 0px 0px 8px 8px white;
+}
+
+.spot-image {
+    height: 200px;
+    width: 300px;
+    border: 10px;
+}
+
+.spot-link {
+    color: black
+}
