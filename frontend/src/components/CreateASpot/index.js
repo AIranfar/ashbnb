@@ -81,7 +81,7 @@ const CreateASpot = () => {
                     onChange={(e) => setName(e.target.value)}
                     value={name}
                     placeholder="Name of your Spot"
-                    name="State"
+                    name="Name"
                 />
                 <br />
                 <h3>Set a base price for your spot</h3>
@@ -95,6 +95,7 @@ const CreateASpot = () => {
                     name="State"
                 />
                 <br />
+                <div class='photo-container'>
                 <h3>Liven up your spot with photos</h3>
                 <p>Submit a link to at least one photo to publish your spot.</p>
                 <input
@@ -105,7 +106,6 @@ const CreateASpot = () => {
                     name="previewImage"
                 />
                 <br />
-                <br />
                 <input
                     type="text"
                     onChange={(e) => setPreviewImage(e.target.value)}
@@ -113,7 +113,6 @@ const CreateASpot = () => {
                     placeholder="Image URL"
                     name="imageUrl"
                 />
-                <br />
                 <br />
                 <input
                     type="text"
@@ -123,7 +122,6 @@ const CreateASpot = () => {
                     name="imageUrl"
                 />
                 <br />
-                <br />
                 <input
                     type="text"
                     onChange={(e) => setImageUrl2(e.target.value)}
@@ -131,7 +129,6 @@ const CreateASpot = () => {
                     placeholder="Image URL"
                     name="imageUrl2"
                 />
-                <br />
                 <br />
                 <input
                     type="text"
@@ -142,7 +139,10 @@ const CreateASpot = () => {
                 />
                 <br />
                 <br />
-                <button class='submit-button' type="submit">Create Spot</button>
+                </div>
+                <div className='submit-container'>
+                    <button class='submit-button' type="submit">Create Spot</button>
+                </div>
             </form>
         </div>
     );
