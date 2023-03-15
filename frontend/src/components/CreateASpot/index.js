@@ -19,6 +19,7 @@ const CreateASpot = () => {
     const [imageUrl3, setImageUrl3] = useState('');
 
     const handleSubmit = (e) => {
+        e.preventDefault();
     }
 
     return (
