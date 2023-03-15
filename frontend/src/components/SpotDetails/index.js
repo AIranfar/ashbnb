@@ -21,7 +21,6 @@ const SpotDetails = () => {
         alert('Feature Coming Soon...')
     };
 
-
     return (
         <div className='spot-container'>
             <h1>{spot.name}</h1>

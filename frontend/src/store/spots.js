@@ -48,31 +48,39 @@ export const getOneSpot = (spotId) => async dispatch => {
     }
 };
 
-// export const createASpot = (spots, spotImages) => async dispatch => {
-//     const response = await fetch(`/api/spots/new`)
-// }
+export const createASpot = (spots, spotImages) => async dispatch => {
+    const response = await fetch('/api/spots/new', {
+        'method': 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(createASpot),
+    });
+    if (response.ok) {
 
-const initialState = {
-    allSpots: {},
-    singleSpot: {}
-  };
-
-const spotsReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case ALL:
-            return {
-                ...state,
-                allSpots: {
-                    ...action.list
-                }
-            };
-        case ONE:
-            const newState = { ...state };
-            newState.singleSpot = action.list;
-            return newState;
-        default:
-            return state;
     }
-};
+}
+
+    const initialState = {
+        allSpots: {},
+        singleSpot: {}
+    };
+
+    const spotsReducer = (state = initialState, action) => {
+        switch (action.type) {
+            case ALL:
+                return {
+                    ...state,
+                    allSpots: {
+                        ...action.list
+                    }
+                };
+            case ONE:
+                const newState = { ...state };
+                newState.singleSpot = action.list;
+                return newState;
+            default:
+                return state;
+        }
+    };
+
 
 export default spotsReducer;
