@@ -14,6 +14,11 @@ const one = list => ({
     list
 })
 
+const create = list => ({
+    type: CREATE,
+    list
+})
+
 const allNormalSpots = (data) => {
     const allSpots = {};
     data.Spots.forEach(spot => {
@@ -35,26 +40,17 @@ export const getAllSpots = () => async dispatch => {
 
 export const getOneSpot = (spotId) => async dispatch => {
     const response = await fetch(`/api/spots/${spotId}`);
-    console.log('RESPONSE:', response)
+
     if (response.ok) {
         const spot = await response.json();
-        // console.log('SPOT:', spot)
         dispatch(one(spot));
         return response;
     }
 };
 
-export const AddSpot = (spot) => async dispatch => {
-	const res = await csrfFetch('/api/spots', {
-		method: 'POST',
-		body: JSON.stringify(spot)
-	});
-
-	if (res.ok) {
-		const newSpot = await res.json();
-		return newSpot;
-	}
-};
+// export const createASpot = (spots, spotImages) => async dispatch => {
+//     const response = await fetch(`/api/spots/new`)
+// }
 
 const initialState = {
     allSpots: {},
@@ -70,13 +66,13 @@ const spotsReducer = (state = initialState, action) => {
                     ...action.list
                 }
             };
-            case ONE:
-                const newState = { ...state };
-                newState.singleSpot = action.list;
-                return newState;
-                default:
-                    return state;
-                }
-            };
+        case ONE:
+            const newState = { ...state };
+            newState.singleSpot = action.list;
+            return newState;
+        default:
+            return state;
+    }
+};
 
 export default spotsReducer;

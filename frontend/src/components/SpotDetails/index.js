@@ -7,9 +7,7 @@ import './SpotDetails.css';
 const SpotDetails = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
-    // console.log(spotId)
     const spot = useSelector(state => state.spots.singleSpot)
-    console.log('SPOT:', spot)
 
     useEffect(() => {
         dispatch(getOneSpot(spotId));
@@ -30,9 +28,9 @@ const SpotDetails = () => {
             <div className='spot-images-div' />
             <h3>{spot.city}, {spot.state}, {spot.country}</h3>
             {spot.SpotImages.map(img => {
-                return <img className='spot-image' src={img.url} alt={spot.name}></img>
+                return <img className='spot-image' src={img.url} alt={spot.name} key={img.id}></img>
             })}
-                        <div class='small-box'>
+            <div class='small-box'>
                 <p>{spot.description}</p>
                 <div>${spot.price} Night</div>
                 <button id='reserve-button-id' onClick={handleClick}>RESERVE</button>
