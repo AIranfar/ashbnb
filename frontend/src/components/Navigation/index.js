@@ -9,11 +9,13 @@ function Navigation({ isLoaded }){
 
   return (
     <ul className='nav-bar'>
-        <NavLink className='logo' exact to='/'>ashbnb</NavLink>
-      {isLoaded && (
+      <NavLink className='logo' exact to='/'>ashbnb</NavLink>
+      <div className='sample'>
+        <NavLink className='create-button' to='/spots/new'>Create a New Spot</NavLink>
+        {isLoaded && (
           <ProfileButton user={sessionUser} />
-      )}
-      <NavLink exact to='/spots/new'>Create a New Spot</NavLink>
+        )}
+      </div>
     </ul>
   );
 }

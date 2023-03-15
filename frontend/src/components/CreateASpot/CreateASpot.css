@@ -1,0 +1,15 @@
+.submit-button {
+    background-color:red;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}

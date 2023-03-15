@@ -36,3 +36,18 @@
 .fas fa-user-circle {
     text-align: right;
 }
+
+.create-button {
+    display: flex;
+    color:white;
+    text-decoration: none;
+    font-weight: bold;
+    justify-content: flex-end;
+    margin-top: 5px;
+    padding-right: 10px;
+}
+
+.sample {
+    display: flex;
+    padding: 5px;
+}
