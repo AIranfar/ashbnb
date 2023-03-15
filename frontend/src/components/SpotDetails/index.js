@@ -19,6 +19,10 @@ const SpotDetails = () => {
         return <h1>loading...</h1>
     }
 
+    function handleClick() {
+        alert('Feature Coming Soon...')
+    };
+
     console.log(spot)
 
     return (
@@ -26,10 +30,12 @@ const SpotDetails = () => {
             <h1>{spot.name}</h1>
             <div className="spot-images-div" />
             <h3>{spot.city}, {spot.state}, {spot.country}</h3>
-            <img className='spot-image' src={`${spot.SpotImages[0].url}`}></img>
+            <img className='spot-image' src={spot.SpotImages[0].url}></img>
             <p>{spot.description}</p>
             <div>${spot.price} Night</div>
-            <button>RESERVE</button>
+            <div className='reserve-button'>
+                <button id='reserve-button-id' onClick={handleClick}>RESERVE</button>
+            </div>
         </div>
     );
 }
