@@ -50,12 +50,13 @@ export const getAllSpots = () => async dispatch => {
     }
 };
 
-export const getAllSpotCurrentUser = () => async dispatch =>{
+export const getAllSpotCurrentUser = () => async dispatch => {
     const response = await csrfFetch('/api/spots/current');
 
     if (response.ok) {
         const spots = await response.json();
-        dispatch(getUserSpots(spots))
+        const normalSpots = allNormalSpots(spots)
+        dispatch(getUserSpots(normalSpots))
         return spots;
     }
 }
@@ -108,9 +109,9 @@ export const removeSpot = (spotId) => async dispatch => {
     }
 }
 
-    const initialState = {
-        allSpots: {},
-        singleSpot: {}
+const initialState = {
+    allSpots: {},
+    singleSpot: {}
 };
 
 const spotsReducer = (state = initialState, action) => {
@@ -134,6 +135,13 @@ const spotsReducer = (state = initialState, action) => {
             const newState2 = { ...state, oneSpot: {} };
             delete newState2.allSpots[action.spotId];
             return newState2;
+        case GET_USER_SPOTS:
+            return {
+                ...state,
+                allSpots: {
+                    ...action.list
+                }
+            };
         default:
             return state;
     }
