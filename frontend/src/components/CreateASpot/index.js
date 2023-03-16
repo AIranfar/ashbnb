@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { createASpot } from "../../store/spots";
+import { useHistory } from 'react-router-dom';
 import './CreateASpot.css';
 
-const CreateASpot = () => {
+const CreateASpot = ({ id }) => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [country, setCountry] = useState('');
-    const [streetAddress, setStreetAddress] = useState('');
+    const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [description, setDescription] = useState('');
@@ -17,16 +19,81 @@ const CreateASpot = () => {
     const [imageUrl, setImageUrl] = useState('');
     const [imageUrl2, setImageUrl2] = useState('');
     const [imageUrl3, setImageUrl3] = useState('');
+    const [errors, setErrors] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-    }
+
+        let allErrors = {};
+
+        if (!country.length) allErrors.country = 'Country is required'
+        if (!address.length) allErrors.address = 'Address is required'
+        if (!state.length) allErrors.state = 'State is required'
+        if (description.length < 30) allErrors.description = 'Description needs 30 or more characters'
+        if (!name.length) allErrors.name = 'Spot name is required'
+        if (!price.length) allErrors.price = 'Price per night is required'
+        if (!previewImage.length) allErrors.image = 'Preview Image is required'
+        if (!previewImage || previewImage === '') allErrors.previewImage = 'Preview image is required'
+        if (!previewImage.endsWith('.png') && !previewImage.endsWith('.jpg') && !previewImage.endsWith('.jpeg')) allErrors.previewImage = 'Preview image URL must end in .png, .jpg, or .jpeg'
+        if (imageUrl !== "" && !imageUrl.endsWith('.png') && !imageUrl.endsWith('.jpg') && !imageUrl.endsWith('.jpeg')) allErrors.imageUrl = 'Image URL must end in .png, .jpg, or .jpeg'
+        if (imageUrl2 !== "" && !imageUrl2.endsWith('.png') && !imageUrl2.endsWith('.jpg') && !imageUrl2.endsWith('.jpeg')) allErrors.imageUrl2 = 'Image URL must end in .png, .jpg, or .jpeg'
+        if (imageUrl3 !== "" && !imageUrl3.endsWith('.png') && !imageUrl3.endsWith('.jpg') && !imageUrl3.endsWith('.jpeg')) allErrors.imageUrl3 = 'Image URL must end in .png, .jpg, or .jpeg'
+
+        if (Object.keys(errors).length > 0) {
+            return setErrors(allErrors)
+        }
+
+        const newSpot = {
+            country,
+            address,
+            city,
+            state,
+            description,
+            name,
+            price,
+            // previewImage
+        };
+
+        let photoArr = [];
+
+        let previewImg = {
+            url: previewImage,
+            preview: true
+        }
+
+        photoArr.push(previewImg)
+
+        if(imageUrl) {
+            photoArr.push({
+                url: imageUrl,
+                preview: false
+            });
+        }
+        if(imageUrl2) {
+            photoArr.push({
+                url: imageUrl2,
+                preview: false
+            });
+        }
+        if(imageUrl3) {
+            photoArr.push({
+                url: imageUrl3,
+                preview: false
+            });
+        }
+
+        const createdSpot = await dispatch(createASpot(newSpot, photoArr))
+        if (createdSpot) {
+            history.push(`/spots/${createdSpot.id}`);
+            return
+        }
+    };
 
     return (
         <div className="input-box">
             <h2>Create a new Spot</h2>
             <h3>Where's your place located?</h3>
-            <p>Guests will only get your exact adderess once they book a reservation.</p>
+            <p>Guests will only get your exact address once they book a reservation.</p>
             <form className='form-container' onSubmit={handleSubmit}>
                 <label>Country</label>
                 <input
@@ -39,10 +106,10 @@ const CreateASpot = () => {
                 <label>Street Address</label>
                 <input
                     type="text"
-                    onChange={(e) => setStreetAddress(e.target.value)}
-                    value={streetAddress}
+                    onChange={(e) => setAddress(e.target.value)}
+                    value={address}
                     placeholder="Address"
-                    name="Address"
+                    name="address"
                 />
                 <label>City</label>
                 <input
@@ -103,14 +170,6 @@ const CreateASpot = () => {
                     value={previewImage}
                     placeholder="Preview Image URL"
                     name="previewImage"
-                />
-                <br />
-                <input
-                    type="text"
-                    onChange={(e) => setPreviewImage(e.target.value)}
-                    value={previewImage}
-                    placeholder="Image URL"
-                    name="imageUrl"
                 />
                 <br />
                 <input

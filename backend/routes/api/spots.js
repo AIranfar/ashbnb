@@ -8,40 +8,42 @@ const { check } = require('express-validator')
 const validateSpotError = [
     check('address')
         .exists({ checkFalsy: true })
-        .notEmpty()
+        // .notEmpty()
         .withMessage("Street address is required"),
     check('city')
         .exists({ checkFalsy: true })
-        .notEmpty()
+        // .notEmpty()
         .withMessage("City is required"),
     check('state')
         .exists({ checkFalsy: true })
-        .notEmpty()
+        // .notEmpty()
         .withMessage("State is required"),
     check('country')
         .exists({ checkFalsy: true })
-        .notEmpty()
+        // .notEmpty()
         .withMessage('Country is required'),
     check('lat')
-        .exists({ checkFalsy: true })
-        .notEmpty()
-        .withMessage('Latitude is not valid'),
+        // .exists({ checkFalsy: true })
+        // .notEmpty()
+        .optional(),
+        // .withMessage('Latitude is not valid'),
     check('lng')
-        .exists({ checkFalsy: true })
-        .notEmpty()
-        .withMessage('Longitude is not valid'),
+        // .exists({ checkFalsy: true })
+        // .notEmpty()
+        .optional(),
+        // .withMessage('Longitude is not valid'),
     check('name')
         .exists({ checkFalsy: true })
-        .notEmpty()
+        // .notEmpty()
         .isLength({ max: 50 })
         .withMessage('Name must be less than 50 characters'),
     check('description')
         .exists({ checkFalsy: true })
-        .notEmpty()
+        // .notEmpty()
         .withMessage('Description is required'),
     check('price')
         .exists({ checkFalsy: true })
-        .notEmpty()
+        // .notEmpty()
         .withMessage('Price per day is required'),
     handleValidationErrors
 ];
@@ -237,7 +239,7 @@ router.get('/:spotId', async (req, res) => {
 
 router.post('/', validateSpotError, requireAuth, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
-
+    console.log('This sucks')
     const newSpot = await Spot.create({
         ownerId: req.user.id,
         address,

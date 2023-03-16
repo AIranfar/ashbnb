@@ -55,14 +55,30 @@ export const getOneSpot = (spotId) => async dispatch => {
 };
 
 export const createASpot = (spots, spotImages) => async dispatch => {
-    const response = await fetch('/api/spots/new', {
+    const response = await csrfFetch('/api/spots', {
         method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(createASpot),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(spots),
     });
     if (response.ok) {
+        console.log('asdfasdf')
+        const newSpot = await response.json();
 
+        for (let image of spotImages) {
+            const spotImageResponse = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(image)
+            });
+            if (spotImageResponse.ok) {
+                const spotImage = await spotImageResponse.json()
+                newSpot.previewImage = spotImage.spotImages
+                dispatch(create(newSpot))
+                return newSpot
+            }
+        }
     }
+    return response;
 }
 
 export const removeSpot = (spotId) => async dispatch => {
@@ -78,29 +94,33 @@ export const removeSpot = (spotId) => async dispatch => {
     const initialState = {
         allSpots: {},
         singleSpot: {}
-    };
+};
 
-    const spotsReducer = (state = initialState, action) => {
-        switch (action.type) {
-            case ALL:
-                return {
-                    ...state,
-                    allSpots: {
-                        ...action.list
-                    }
-                };
-            case ONE:
-                const newState = { ...state };
-                newState.singleSpot = action.list;
-                return newState;
-            case DELETE:
-                const newState2 = { ...state, oneSpot: {} };
-                delete newState2.allSpots[action.spotId];
-                return newState2;
-            default:
-                return state;
-        }
-    };
+const spotsReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case ALL:
+            return {
+                ...state,
+                allSpots: {
+                    ...action.list
+                }
+            };
+        case ONE:
+            const newState = { ...state };
+            newState.singleSpot = action.list;
+            return newState;
+        case CREATE:
+            const createdState = { ...state, singleSpot: {} }
+            createdState.allSpots[action.spot] = action.spot
+            return createdState;
+        case DELETE:
+            const newState2 = { ...state, oneSpot: {} };
+            delete newState2.allSpots[action.spotId];
+            return newState2;
+        default:
+            return state;
+    }
+};
 
 
 export default spotsReducer;
