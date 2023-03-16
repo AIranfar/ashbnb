@@ -4,6 +4,7 @@ const ALL = 'spots/ALL_SPOTS';
 const ONE = 'spots/ONE_SPOT';
 const CREATE = 'spots/CREATE_SPOT';
 const DELETE = 'spots/DELETE_SPOT';
+const GET_USER_SPOTS = 'spots/GET_USER_SPOTS';
 
 const all = list => ({
     type: ALL,
@@ -22,6 +23,11 @@ const create = list => ({
 
 const deleteSpot = list => ({
     type: DELETE,
+    list
+});
+
+const getUserSpots = list => ({
+    type: GET_USER_SPOTS,
     list
 })
 
@@ -43,6 +49,16 @@ export const getAllSpots = () => async dispatch => {
         return data;
     }
 };
+
+export const getAllSpotCurrentUser = () => async dispatch =>{
+    const response = await csrfFetch('/api/spots/current');
+
+    if (response.ok) {
+        const spots = await response.json();
+        dispatch(getUserSpots(spots))
+        return spots;
+    }
+}
 
 export const getOneSpot = (spotId) => async dispatch => {
     const response = await fetch(`/api/spots/${spotId}`);
@@ -86,9 +102,10 @@ export const removeSpot = (spotId) => async dispatch => {
         method: 'DELETE'
     });
     if (response.ok) {
+        const data = await response.json()
         dispatch(deleteSpot(spotId))
+        return data;
     }
-    return response;
 }
 
     const initialState = {
