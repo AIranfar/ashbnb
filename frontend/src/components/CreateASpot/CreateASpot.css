@@ -17,7 +17,8 @@
 .form-container {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    align-items: left;
+    width: 30%;
 }
 
 .submit-container {
@@ -31,4 +32,33 @@
     display: flex;
     flex-direction: column;
     border-bottom: 2px solid black;
+}
+
+.error-container {
+    display: flex;
+
+}
+
+.errors-style {
+    color: red;
+    font-weight: bold;
+}
+
+.placement {
+    padding-top: 15px;
+    padding-right: 10px;
+}
+
+.city-and-state {
+    display: flex;
+    flex-direction: column;
+}
+
+.city {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-size {
+    width: 100%
 }
