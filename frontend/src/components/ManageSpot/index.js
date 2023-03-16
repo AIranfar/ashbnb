@@ -7,6 +7,7 @@ import './ManageSpot.css';
 
 const ManageSpots = () => {
     const dispatch = useDispatch();
+    const [openModal, setopenModal] = useEffect(false);
     const spots = Object.values(useSelector(state => state.spots.allSpots));
 
     useEffect(() => {
