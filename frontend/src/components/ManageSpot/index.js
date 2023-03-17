@@ -14,7 +14,7 @@ const ManageSpots = () => {
         dispatch(getAllSpotCurrentUser());
     }, [dispatch])
 
-    if (!spots.length) return null;
+    if (!spots.length) return <h1>LOADING...</h1>;
 
     return (
         <div>
