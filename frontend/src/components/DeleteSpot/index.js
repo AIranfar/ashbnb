@@ -1,6 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from 'react';
-import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { removeSpot } from '../../store/spots';
 import { useModal } from '../../context/Modal'
 import './DeleteSpot.css';
