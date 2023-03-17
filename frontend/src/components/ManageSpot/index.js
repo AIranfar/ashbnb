@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getAllSpotCurrentUser } from "../../store/spots";
-import { NavLink, Link, useParams } from 'react-router-dom';
-import { removeSpot } from "../../store/spots";
+import { NavLink, useParams } from 'react-router-dom';
+import DeleteSpot from "../DeleteSpot"
+import OpenModalButton from '../OpenModalButton'
 import './ManageSpot.css';
 
 const ManageSpots = () => {
     const dispatch = useDispatch();
-    const [openModal, setopenModal] = useEffect(false);
     const spots = Object.values(useSelector(state => state.spots.allSpots));
 
     useEffect(() => {
@@ -35,9 +35,10 @@ const ManageSpots = () => {
                         <NavLink to={`/spots/${spot.id}/edit`}>
                             <button>Update</button>
                         </NavLink>
-                        <NavLink to={`/spots/${spot.id}/edit`}>
-                            <button>Delete</button>
-                        </NavLink>
+                        <OpenModalButton
+                            buttonText="Delete"
+                            modalComponent={<DeleteSpot spotId={spot.id} />}
+                        />
                     </div>
                 )}
             </div>
