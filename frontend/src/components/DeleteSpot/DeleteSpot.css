@@ -2,13 +2,12 @@
     background-color: white;
     border: 5px solid black;
     padding: 10px;
-    border-radius: 8px;
 }
 
 .delete-container button {
     margin: 10px;
     width: 90%;
-    height: 50px;
+    height: 40px;
     border: 2px solid black;
     font-weight: bolder;
     border-radius: 4px;
