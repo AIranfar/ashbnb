@@ -1,1 +1,41 @@
+.delete-container {
+    background-color: white;
+    border: 5px solid black;
+    padding: 10px;
+    border-radius: 8px;
+}
 
+.delete-container button {
+    margin: 10px;
+    width: 90%;
+    height: 50px;
+    border: 2px solid black;
+    font-weight: bolder;
+    border-radius: 4px;
+}
+
+#yes-delete {
+    color:white;
+    background-color: red;
+    box-shadow: 1px 1px 1px 1px black;
+}
+
+#yes-delete:hover{
+    cursor: pointer;
+    background-color: rgb(214, 95, 95);
+}
+
+#no-keep {
+    color: white;
+    background-color: gray;
+    box-shadow: 1px 1px 1px 1px black;
+}
+
+#no-keep:hover {
+    cursor: pointer;
+    background-color: darkgray;
+}
+
+.text {
+    padding-left: 30px;
+}
