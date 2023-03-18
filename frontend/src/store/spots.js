@@ -162,7 +162,7 @@ const spotsReducer = (state = initialState, action) => {
                 }
             };
         case EDIT:
-            const updatedState = { ...state, singleSpot: {} }
+            const updatedState = { ...state }
             updatedState.allSpots[action.spot] = action.spot
             return updatedState;
         default:

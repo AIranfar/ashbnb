@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { editSpot } from "../../store/spots";
+import { editSpot, getOneSpot } from "../../store/spots";
 import { useHistory } from 'react-router-dom';
 import './EditSpot.css';
 
@@ -9,14 +9,18 @@ const EditSpot = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const history = useHistory();
-    const [country, setCountry] = useState('');
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [description, setDescription] = useState('');
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
+
+    const spot = useSelector(state => state.spots.allSpots[id])
+
+    const [country, setCountry] = useState(spot.country);
+    const [address, setAddress] = useState(spot.address);
+    const [city, setCity] = useState(spot.city);
+    const [state, setState] = useState(spot.state);
+    const [description, setDescription] = useState(spot.description);
+    const [name, setName] = useState(spot.name);
+    const [price, setPrice] = useState(spot.price);
     const [errors, setErrors] = useState('');
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -148,7 +152,7 @@ const EditSpot = () => {
                 />
                 <br />
                 <div className='submit-container'>
-                    <button class='submit-button' type="submit">Create Spot</button>
+                    <button class='submit-button' type="submit">Update your Spot</button>
                 </div>
             </form>
         </div>
