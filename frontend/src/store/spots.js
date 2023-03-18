@@ -50,7 +50,9 @@ export const getAllSpots = () => async dispatch => {
 
     if (response.ok) {
         const spots = await response.json();
+        console.log(spots)
         const data = allNormalSpots(spots);
+        console.log(data)
         dispatch(all(data))
         return data;
     }
@@ -84,7 +86,6 @@ export const createASpot = (spots, spotImages) => async dispatch => {
         body: JSON.stringify(spots),
     });
     if (response.ok) {
-        console.log('asdfasdf')
         const newSpot = await response.json();
 
         for (let image of spotImages) {
@@ -136,12 +137,7 @@ const initialState = {
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ALL:
-            return {
-                ...state,
-                allSpots: {
-                    ...action.list
-                }
-            };
+            return { ...state, allSpots: { ...action.list }};
         case ONE:
             const newState = { ...state };
             newState.singleSpot = action.list;

@@ -9,16 +9,13 @@ import './ManageSpot.css';
 const ManageSpots = () => {
     const dispatch = useDispatch();
     const spots = Object.values(useSelector(state => state.spots.allSpots));
-    console.log(spots)
     useEffect(() => {
         dispatch(getAllSpotCurrentUser())
     }, [dispatch])
 
-    if (!spots.length) return <h1>LOADING...</h1>;
-
     return (
         <div>
-            <h1>Manage Your Spots</h1>
+            <h1>Manage Spots</h1>
             <NavLink to='/spots/new'>
                 <button>Create a New Spot</button>
             </NavLink>
