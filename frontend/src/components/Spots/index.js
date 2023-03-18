@@ -12,6 +12,17 @@ const AllSpots = () => {
         dispatch(getAllSpots())
     }, [dispatch])
 
+    const rating = (rating) => {
+        if (typeof rating === 'number') {
+            return (
+                <div>
+                    <i className='fa-solid fa-star star-icon' />
+                    {Number(rating).toFixed(1)}
+                </div>
+            )
+        }
+        else return '';
+    }
 
     return (
         <div className='all-Spots'>
@@ -20,9 +31,9 @@ const AllSpots = () => {
                     <NavLink to={`/spots/${spot.id}`} className='spot-link'>
                         <p>{spot.name}</p>
                         <img className='spot-image' src={`${spot.previewImage}`}></img>
-                    <div>{`$${spot.price}`} Night</div>
-                    <div>{`${spot.city}, ${spot.state}`}</div>
-                    <div>{spot.avgRating}</div>
+                    <div className='spot-location'>{`${spot.city}, ${spot.state}`}</div>
+                    <div className='spot-price'>{`$${spot.price}`} Night</div>
+                    <div className='star-rating'>{rating(spot.avgRating)}</div>
                     </NavLink>
                 </div>
             )}
