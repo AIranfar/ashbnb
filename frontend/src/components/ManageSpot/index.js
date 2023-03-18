@@ -11,7 +11,7 @@ const ManageSpots = () => {
     const spots = Object.values(useSelector(state => state.spots.allSpots));
 
     useEffect(() => {
-        dispatch(getAllSpotCurrentUser());
+        dispatch(getAllSpotCurrentUser())
     }, [dispatch])
 
     if (!spots.length) return <h1>LOADING...</h1>;
@@ -28,7 +28,7 @@ const ManageSpots = () => {
                         <NavLink to={`/spots/${spot.id}`} className='spot-link'>
                             <p>{spot.name}</p>
                             <img className='spot-image' src={`${spot.previewImage}`}></img>
-                            <div>{`$${spot.price}`} Night</div>
+                            <div className='spot-price'>{`$${spot.price}`} Night</div>
                             <div>{`${spot.city}, ${spot.state}`}</div>
                             <div>{spot.avgRating}</div>
                         </NavLink>

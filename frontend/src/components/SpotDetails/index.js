@@ -29,11 +29,15 @@ const SpotDetails = () => {
             {spot.SpotImages.map(img => {
                 return <img className='spot-image' src={img.url} alt={spot.name} key={img.id}></img>
             })}
-            <div class='small-box'>
-                <p>{spot.description}</p>
-                <div>${spot.price} Night</div>
-                <button id='reserve-button-id' onClick={handleClick}>RESERVE</button>
+            <div className='big-small-box'>
+                <div className='hosted-by'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</div>
+                <div className='small-box'>
+                    <div>${spot.price} Night</div>
+                    <br />
+                    <button id='reserve-button-id' onClick={handleClick}>RESERVE</button>
+                </div>
             </div>
+                <div>{spot.description}</div>
         </div>
     );
 }

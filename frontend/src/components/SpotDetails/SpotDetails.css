@@ -1,15 +1,39 @@
-.spot-image {
-    height: 300px;
-    width: 500px;
+.spot-container {
+    margin-left: 80px;
 }
 
+.spot-image {
+    height: 500px;
+    width: 800px;
+}
+
+.spot-price {
+
+}
+
+.big-small-box {
+    display: flex;
+    justify-content: space-between;
+}
+
+.hosted-by {
+    font-size: 40px;
+}
 .small-box {
-    border-radius: 5px;
-    border-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-right: 80px;
+    padding: 20px;
 }
 
 #reserve-button-id {
     font-weight: bold;
     background-color: red;
-    width: 200px;
+    width: 300px;
+    height: 50px;
+    box-shadow: 1px 1px 1px 1px black;
+    justify-content: flex-end;
 }
