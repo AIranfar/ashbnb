@@ -21,22 +21,23 @@ const AllSpots = () => {
                 </div>
             )
         }
-        else return '';
+        else return 'New';
     }
 
     return (
         <div className='all-Spots'>
-            {spots.map(spot =>
-                <div className='spot-cards' key={spot.id}>
-                    <NavLink to={`/spots/${spot.id}`} className='spot-link'>
-                        <p>{spot.name}</p>
-                        <img className='spot-image' src={`${spot.previewImage}`}></img>
-                    <div className='spot-location'>{`${spot.city}, ${spot.state}`}</div>
-                    <div className='spot-price'>{`$${spot.price}`} Night</div>
-                    <div className='star-rating'>{rating(spot.avgRating)}</div>
-                    </NavLink>
-                </div>
-            )}
+            <div className='spots-container'>
+                {spots.map(spot =>
+                    <div className='spot-cards' key={spot.id}>
+                        <NavLink to={`/spots/${spot.id}`} className='spot-link'>
+                            <img className='spot-image' src={`${spot.previewImage}`}></img>
+                            <div className='spot-location'>{`${spot.city}, ${spot.state}`}</div>
+                            <div className='spot-price'>{`$${spot.price}`} Night</div>
+                            <div className='star-rating'>{rating(spot.avgRating)}</div>
+                        </NavLink>
+                    </div>
+                )}
+            </div>
         </div>
     )
 }

@@ -36,4 +36,5 @@
     height: 50px;
     box-shadow: 1px 1px 1px 1px black;
     justify-content: flex-end;
+    cursor: pointer;
 }
