@@ -2,16 +2,22 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { getOneSpot } from "../../store/spots";
+import { getAllReviews } from '../../store/reviews';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
     const spot = useSelector(state => state.spots.singleSpot)
+    const numReviews = useSelector(state => state.spots.singleSpot.numReviews)
 
     useEffect(() => {
         dispatch(getOneSpot(spotId));
     }, [dispatch, spotId])
+
+    useEffect(() => {
+        dispatch(getAllReviews(spotId))
+    }, [dispatch, spot])
 
     if (!spot || !spot.name) {
         return (<h1>loading...</h1>)
@@ -32,12 +38,13 @@ const SpotDetails = () => {
             <div className='big-small-box'>
                 <div className='hosted-by'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</div>
                 <div className='small-box'>
-                    <div>${spot.price} Night</div>
+                    <div>${spot.price} Night {numReviews} Review</div>
                     <br />
                     <button id='reserve-button-id' onClick={handleClick}>RESERVE</button>
                 </div>
             </div>
                 <div>{spot.description}</div>
+            <h2>{numReviews} review</h2>
         </div>
     );
 }

@@ -50,9 +50,7 @@ export const getAllSpots = () => async dispatch => {
 
     if (response.ok) {
         const spots = await response.json();
-        console.log(spots)
         const data = allNormalSpots(spots);
-        console.log(data)
         dispatch(all(data))
         return data;
     }
@@ -165,6 +163,5 @@ const spotsReducer = (state = initialState, action) => {
             return state;
     }
 };
-
 
 export default spotsReducer;
