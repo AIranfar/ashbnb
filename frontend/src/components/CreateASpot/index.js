@@ -122,7 +122,7 @@ const CreateASpot = ({ id }) => {
                     <div className='city-and-state'>
                         <div className='error-container'>
                             <label className='placement'>City</label>
-                            {errors.address ? <p className='errors-style'>{errors.city}</p> : null}
+                            {errors.city ? <p className='errors-style'>{errors.city}</p> : null}
                         </div>
                         <input
                             type="text"

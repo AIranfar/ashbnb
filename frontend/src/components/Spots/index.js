@@ -23,6 +23,7 @@ const AllSpots = () => {
         }
         else return 'New';
     }
+    console.log("THIS IS THE SPOTS ARRAY:", spots)
 
     return (
         <div className='all-Spots'>
