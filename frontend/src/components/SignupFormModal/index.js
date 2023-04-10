@@ -15,6 +15,7 @@ function SignupFormPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [signUp, setSignUp] = useState()
   const { closeModal } = useModal();
 
 
@@ -26,25 +27,31 @@ function SignupFormPage() {
         .then(closeModal)
         .catch(async (res) => {
           const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
+          const errors = Object.values(data.errors)
+          return setErrors(errors)
         });
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
-  useEffect(() => {
-    let errors = [];
+  const disabledButton = () => {
+    if (!email.length || !username.length || !firstName.length || !lastName.length || !password.length || !confirmPassword.length) {
+      return true;
+    } else if (username.length < 4 || password.length < 6 || password !== confirmPassword) {
+      return true;
+    }
+    return false;
+  }
 
-    if (!email || !username || !firstName || !lastName || !password || !confirmPassword) {
-      errors.push('All fields required')
+  useEffect(() => {
+    if (!email.length || !username.length || !firstName.length || !password.length || !confirmPassword.length) {
+      setSignUp('submit-disabled')
     }
-    if (username.length < 4) {
-      errors.push('Username must be at least 4 characters')
+    else if (username.length < 4 || password.length < 6 || password !== confirmPassword) {
+      setSignUp('submit-disabled')
+    } else {
+      setSignUp('submit-enabled')
     }
-    if (password.length < 6) {
-      errors.push('Password must be longer than 6 characters')
-    }
-    setErrors(errors)
   }, [email, username, firstName, lastName, password, confirmPassword])
 
   if (sessionUser) return <Redirect to="/" />;
@@ -53,8 +60,8 @@ function SignupFormPage() {
     <div className='signup-outer-container'>
       <h1>Sign Up</h1>
       <form className='signup-inner-container' onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => <li className='errors' key={idx}>{error}</li>)}
+        <ul className='errors'>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
         </ul>
         <input
           type="text"
@@ -64,6 +71,7 @@ function SignupFormPage() {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        <br />
         <input
           type="text"
           className='form-input-width'
@@ -72,6 +80,7 @@ function SignupFormPage() {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
+        <br />
         <input
           type="text"
           className='form-input-width'
@@ -80,6 +89,7 @@ function SignupFormPage() {
           onChange={(e) => setFirstName(e.target.value)}
           required
         />
+        <br />
         <input
           type="text"
           className='form-input-width'
@@ -88,6 +98,7 @@ function SignupFormPage() {
           onChange={(e) => setLastName(e.target.value)}
           required
         />
+        <br />
         <input
           type="password"
           className='form-input-width'
@@ -96,6 +107,7 @@ function SignupFormPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
+        <br />
         <input
           type="password"
           className='form-input-width'
@@ -104,7 +116,8 @@ function SignupFormPage() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-        <button id='button' type="submit" disabled={errors.length ? true : false}>Sign Up</button>
+        <br />
+        <button id={signUp} type="submit" disabled={disabledButton()}>Sign Up</button>
       </form>
     </div>
   );
