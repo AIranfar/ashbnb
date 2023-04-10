@@ -65,7 +65,7 @@ function SignupFormPage() {
         </ul>
         <input
           type="text"
-          className='form-input-width'
+          className='form-input'
           value={email}
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
@@ -74,7 +74,7 @@ function SignupFormPage() {
         <br />
         <input
           type="text"
-          className='form-input-width'
+          className='form-input'
           value={username}
           placeholder='Username'
           onChange={(e) => setUsername(e.target.value)}
@@ -83,7 +83,7 @@ function SignupFormPage() {
         <br />
         <input
           type="text"
-          className='form-input-width'
+          className='form-input'
           value={firstName}
           placeholder='First Name'
           onChange={(e) => setFirstName(e.target.value)}
@@ -92,7 +92,7 @@ function SignupFormPage() {
         <br />
         <input
           type="text"
-          className='form-input-width'
+          className='form-input'
           value={lastName}
           placeholder='Last Name'
           onChange={(e) => setLastName(e.target.value)}
@@ -101,7 +101,7 @@ function SignupFormPage() {
         <br />
         <input
           type="password"
-          className='form-input-width'
+          className='form-input'
           value={password}
           placeholder='Password'
           onChange={(e) => setPassword(e.target.value)}
@@ -110,14 +110,14 @@ function SignupFormPage() {
         <br />
         <input
           type="password"
-          className='form-input-width'
+          className='form-input'
           value={confirmPassword}
           placeholder='Confirm Password'
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
         <br />
-        <button id={signUp} type="submit" disabled={disabledButton()}>Sign Up</button>
+        <button className='signup-button' id={signUp} type="submit" disabled={disabledButton()}>Sign Up</button>
       </form>
     </div>
   );
