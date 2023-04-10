@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
@@ -15,9 +15,9 @@ function SignupFormPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
+  const [signUp, setSignUp] = useState()
   const { closeModal } = useModal();
 
-  if (sessionUser) return <Redirect to="/" />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,65 +27,98 @@ function SignupFormPage() {
         .then(closeModal)
         .catch(async (res) => {
           const data = await res.json();
-          if (data && data.errors) setErrors(data.errors);
+          const errors = Object.values(data.errors)
+          return setErrors(errors)
         });
     }
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
+  const disabledButton = () => {
+    if (!email.length || !username.length || !firstName.length || !lastName.length || !password.length || !confirmPassword.length) {
+      return true;
+    } else if (username.length < 4 || password.length < 6 || password !== confirmPassword) {
+      return true;
+    }
+    return false;
+  }
+
+  useEffect(() => {
+    if (!email.length || !username.length || !firstName.length || !password.length || !confirmPassword.length) {
+      setSignUp('submit-disabled')
+    }
+    else if (username.length < 4 || password.length < 6 || password !== confirmPassword) {
+      setSignUp('submit-disabled')
+    } else {
+      setSignUp('submit-enabled')
+    }
+  }, [email, username, firstName, lastName, password, confirmPassword])
+
+  if (sessionUser) return <Redirect to="/" />;
+
   return (
     <div className='signup-outer-container'>
       <h1>Sign Up</h1>
-      <div className='signup-inner-container'>
-        <form onSubmit={handleSubmit}>
-          <ul>
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-          </ul>
-            <input
-              type="text"
-              value={email}
-              placeholder="Email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <input
-              type="text"
-              value={username}
-              placeholder='Username'
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-            <input
-              type="text"
-              value={firstName}
-              placeholder='First Name'
-              onChange={(e) => setFirstName(e.target.value)}
-              required
-            />
-            <input
-              type="text"
-              value={lastName}
-              placeholder='Last Name'
-              onChange={(e) => setLastName(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              value={password}
-              placeholder='Password'
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              value={confirmPassword}
-              placeholder='Confirm Password'
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          <button type="submit">Sign Up</button>
-        </form>
-      </div>
+      <form className='signup-inner-container' onSubmit={handleSubmit}>
+        <ul className='errors'>
+          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+        </ul>
+        <input
+          type="text"
+          className='form-input'
+          value={email}
+          placeholder="Email"
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <br />
+        <input
+          type="text"
+          className='form-input'
+          value={username}
+          placeholder='Username'
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <br />
+        <input
+          type="text"
+          className='form-input'
+          value={firstName}
+          placeholder='First Name'
+          onChange={(e) => setFirstName(e.target.value)}
+          required
+        />
+        <br />
+        <input
+          type="text"
+          className='form-input'
+          value={lastName}
+          placeholder='Last Name'
+          onChange={(e) => setLastName(e.target.value)}
+          required
+        />
+        <br />
+        <input
+          type="password"
+          className='form-input'
+          value={password}
+          placeholder='Password'
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <br />
+        <input
+          type="password"
+          className='form-input'
+          value={confirmPassword}
+          placeholder='Confirm Password'
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+        <br />
+        <button className='signup-button' id={signUp} type="submit" disabled={disabledButton()}>Sign Up</button>
+      </form>
     </div>
   );
 }
