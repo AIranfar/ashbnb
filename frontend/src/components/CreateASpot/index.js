@@ -235,7 +235,7 @@ const CreateASpot = ({ id }) => {
                     <br />
                 </div>
                 <div className='submit-container'>
-                    <button class='submit-button' type="submit">Create Spot</button>
+                    <button className='submit-button' type="submit">Create Spot</button>
                 </div>
             </form>
         </div>
