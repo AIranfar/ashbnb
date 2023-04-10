@@ -16,7 +16,7 @@ const SpotDetails = () => {
     }, [dispatch, spotId])
 
     useEffect(() => {
-        dispatch(getAllReviews(spotId))
+        dispatch(getAllReviews(spot))
     }, [dispatch, spot])
 
     if (!spot || !spot.name) {
@@ -26,6 +26,10 @@ const SpotDetails = () => {
     function handleClick() {
         alert('Feature Coming Soon...')
     };
+
+    if (!spot.Owner || !spot.SpotImages.length) {
+        return (<div>Loading...</div>)
+    }
 
     return (
         <div className='spot-container'>
