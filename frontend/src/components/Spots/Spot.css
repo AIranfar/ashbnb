@@ -1,6 +1,7 @@
 .all-Spots {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    flex-direction: row;
     flex-wrap: wrap;
     margin-left: 100px;
     margin-right: 100px;
@@ -8,27 +9,44 @@
 
 .spots-container {
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
-    width: 1175px;
+    width: 100vw;
     font-size: 14px;
     font-weight: bold;
 }
 
 .spot-cards {
-    border: 1px solid white;
-    border-color:white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 
 .spot-image {
+    object-fit: cover;
     height: 100px;
-    width: 200px;
+    width: 100px;
     border: 10px;
+    border-radius: 5px;
 }
 
 .spot-link {
-    color: black
+    color: black;
 }
 
 .spot-price {
     font-weight: bold;
 }
+
+
+.location-rating {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* @media (max-width: 600px) {
+    .spot-cards {
+        height: 300px;
+        width: 400px;
+    }
+} */
