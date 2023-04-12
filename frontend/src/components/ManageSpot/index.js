@@ -29,13 +29,15 @@ const ManageSpots = () => {
                             <div>{`${spot.city}, ${spot.state}`}</div>
                             <div>{spot.avgRating}</div>
                         </NavLink>
-                        <NavLink to={`/spots/${spot.id}/edit`}>
-                            <button>Update</button>
-                        </NavLink>
-                        <OpenModalButton
-                            buttonText="Delete"
-                            modalComponent={<DeleteSpot spotId={spot.id} />}
-                        />
+                        <div className='update-delete'>
+                            <NavLink to={`/spots/${spot.id}/edit`}>
+                                <button className="update">Update</button>
+                            </NavLink>
+                            <OpenModalButton
+                                buttonText="Delete"
+                                modalComponent={<DeleteSpot spotId={spot.id} />}
+                            />
+                        </div>
                     </div>
                 )}
             </div>

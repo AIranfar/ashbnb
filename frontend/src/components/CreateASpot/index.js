@@ -40,7 +40,7 @@ const CreateASpot = ({ id }) => {
         if (imageUrl2 !== "" && !imageUrl2.endsWith('.png') && !imageUrl2.endsWith('.jpg') && !imageUrl2.endsWith('.jpeg')) allErrors.imageUrl2 = 'Image URL must end in .png, .jpg, or .jpeg'
         if (imageUrl3 !== "" && !imageUrl3.endsWith('.png') && !imageUrl3.endsWith('.jpg') && !imageUrl3.endsWith('.jpeg')) allErrors.imageUrl3 = 'Image URL must end in .png, .jpg, or .jpeg'
 
-        if (Object.keys(allErrors).length > 0) {
+        if (Object.keys(allErrors).length) {
             return setErrors(allErrors)
         }
 
@@ -52,7 +52,7 @@ const CreateASpot = ({ id }) => {
             description,
             name,
             price,
-            // previewImage
+            previewImage
         };
 
         let photoArr = [];
