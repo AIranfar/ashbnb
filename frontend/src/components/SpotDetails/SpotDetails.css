@@ -1,5 +1,10 @@
 .spot-container {
     margin-left: 80px;
+    margin-right: 80px;
+}
+
+.top-spot {
+    border-bottom: 2px solid black;
 }
 
 .spot-image {
@@ -7,9 +12,13 @@
     width: 800px;
 }
 
-.spot-price {
-
+.price-reviews {
+    display: flex;
+    flex-direction: row;
+    align-items: space-between;
+    border-width: 5px solid black;
 }
+
 
 .big-small-box {
     display: flex;
@@ -19,6 +28,7 @@
 .hosted-by {
     font-size: 40px;
 }
+
 .small-box {
     display: flex;
     flex-direction: column;

@@ -5,7 +5,7 @@ import { createASpot } from "../../store/spots";
 import { useHistory } from 'react-router-dom';
 import './CreateASpot.css';
 
-const CreateASpot = ({ id }) => {
+const CreateASpot = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const [country, setCountry] = useState('');
