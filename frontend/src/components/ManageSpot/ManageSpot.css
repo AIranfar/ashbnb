@@ -1,0 +1,19 @@
+.update-delete {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.update {
+    color: white;
+    background-color: red;
+    font-weight: bold;
+    width: 200px;
+}
+
+.delete {
+    color: white;
+    background-color: red;
+    font-weight: bold;
+    width: 200px;
+}

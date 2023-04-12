@@ -26,6 +26,7 @@ function LoginFormModal() {
       );
   };
 
+
   const disabledButton = () => {
     if (!credential.length || !password.length) {
       return true;
@@ -45,6 +46,19 @@ function LoginFormModal() {
       setLogin('login-enabled')
     }
   }, [credential, password])
+
+  const demoUserButton = (e) => {
+    setCredential('Demo-lition');
+    setPassword('password');
+    return dispatch(sessionActions.login({ credential, password }))
+      .then(closeModal)
+      .catch(
+        async (res) => {
+          const data = await res.json();
+          if (data && data.errors) setErrors(data.errors)
+        }
+      )
+  }
 
   return (
     <div className='login-outer-container'>
@@ -74,6 +88,7 @@ function LoginFormModal() {
         />
         <br />
         <button className='login-button' id={login} type="submit" disabled={disabledButton()}>Log In</button>
+        <button onClick={demoUserButton} className='demo-user-button'>Demo User</button>
       </form>
     </div>
   );
