@@ -90,12 +90,13 @@ const SpotDetails = () => {
             </div>
             <div className='bottom-reviews'>
                 <h2 className='star-num-reviews'>
-                    {rating(spot.avgRating)} ·
+                    {rating(spot.avgRating)}
+                    <div>·</div>
                     {numReviews && numReviews === 1 ? numReviews + ' review' : null}
                     {numReviews && numReviews !== 1 ? numReviews + ' reviews' : null}
                 </h2>
                 {/* {sessionUser && sessionUser.id !== spot.Owner.id && !allReviewsObj.User.id.includes(sessionUser.id) && ( */}
-                    <div>
+                <div>
                         <OpenModalButton
                             buttonText='Post Your Review'
                             modalComponent={<ReviewFormModal spotId={spotId} />}
