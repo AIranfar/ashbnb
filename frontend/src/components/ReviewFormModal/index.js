@@ -12,8 +12,6 @@ const ReviewFormModal = () => {
     console.log('NEW REVIEW -->:', newReview);
     const { closeModal } = useModal();
 
-
-
     return (
         <div className='new-review-container'>
             <h2 className='title-header'>How was your stay?</h2>
