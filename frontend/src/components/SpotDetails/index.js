@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getOneSpot } from "../../store/spots";
 import { getAllReviews } from '../../store/reviews';
 import ReviewFormModal from '../ReviewFormModal';
-import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
+import OpenModalButton from '../OpenModalButton';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
@@ -50,7 +50,9 @@ const SpotDetails = () => {
             )
         }
         else return 'New';
-        }
+    }
+
+    console.log('HELLO:', spot.avgRating)
 
     return (
         <div className='spot-container'>
@@ -89,14 +91,14 @@ const SpotDetails = () => {
                     {numReviews && numReviews === 1 ? numReviews + ' review' : null}
                     {numReviews && numReviews !== 1 ? numReviews + ' reviews' : null}
                 </h2>
-                {/* {sessionUser && sessionUser.id !== spot.Owner.id && !allReviewsObj.User.id.includes(sessionUser.id) && (
+                {/* {sessionUser && sessionUser.id !== spot.Owner.id && !allReviewsObj.User.id.includes(sessionUser.id) && ( */}
                     <div>
-                        <OpenModalMenuItem
+                        <OpenModalButton
                             buttonText='Post Your Review'
                             modalComponent={<ReviewFormModal spotId={spotId} />}
                         />
                     </div>
-                )} */}
+
                 <div className='all-reviews'>
                     {reviewsArr.length ? reviewsArr.map(review =>
                         <div className='each-review' key={review.id}>
