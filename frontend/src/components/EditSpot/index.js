@@ -21,10 +21,10 @@ const EditSpot = () => {
     const [price, setPrice] = useState(spot.price);
     const [errors, setErrors] = useState('');
 
-    if (!spot) {
+    if (!spot || !country || !address || !city || !state || !description || !name || !price) {
         return (<div>Loading...</div>)
     }
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -49,7 +49,7 @@ const EditSpot = () => {
             state,
             description,
             name,
-            price,
+            price
         };
 
         const updatedSpot = await dispatch(editSpot(updateSpot, id))
