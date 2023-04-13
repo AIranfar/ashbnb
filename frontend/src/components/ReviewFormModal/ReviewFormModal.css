@@ -1,0 +1,19 @@
+.new-review-container {
+    width: 500px;
+    border-radius: 100px;
+}
+
+.title-header {
+    align-items: center;
+}
+
+.review-text-box {
+    width: 400px;
+    display: flex;
+    justify-content: center;
+}
+
+.review-stars {
+    display: flex;
+
+}
