@@ -9,7 +9,6 @@ const EditSpot = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const history = useHistory();
-
     const spot = useSelector(state => state.spots.allSpots[id])
     console.log('SPOTS ---> ', spot)
 
@@ -22,7 +21,10 @@ const EditSpot = () => {
     const [price, setPrice] = useState(spot.price);
     const [errors, setErrors] = useState('');
 
-
+    if (!spot) {
+        return (<div>Loading...</div>)
+    }
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -56,6 +58,7 @@ const EditSpot = () => {
             return
         }
     };
+
 
     return (
         <div className="input-box">
