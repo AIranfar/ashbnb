@@ -8,18 +8,21 @@ import './SpotDetails.css';
 const SpotDetails = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
-    const spot = useSelector(state => state.spots.singleSpot)
-    const numReviews = useSelector(state => state.spots.singleSpot.numReviews)
-    const reviews = useSelector(state => state)
-    console.log('REVIEWS --->', reviews)
+    const spot = useSelector(state => state.spots.singleSpot);
+    const numReviews = useSelector(state => state.spots.singleSpot.numReviews);
+    const allReviewsObj = useSelector(state => state.reviews.allReviews);
+    const reviewsArr = Object.values(allReviewsObj);
+    console.log('SPOT--->', spot)
+    console.log('REVIEWSOBJ --->', allReviewsObj);
+    console.log('REVIEWSARR --->', reviewsArr);
 
     useEffect(() => {
         dispatch(getOneSpot(spotId));
     }, [dispatch, spotId])
 
     useEffect(() => {
-        dispatch(getAllReviews(spot))
-    }, [dispatch])
+        dispatch(getAllReviews(spotId))
+    }, [dispatch, spotId])
 
     if (!spot || !spot.name) {
         return (<h1>loading...</h1>)
@@ -34,10 +37,15 @@ const SpotDetails = () => {
     }
 
     const rating = (rating) => {
+        if (typeof rating === 'number') {
+            return (
                 <div>
                     <i className='fa-solid fa-star star-icon' />
                     {Number(rating).toFixed(1)}
                 </div>
+            )
+        }
+        else return 'New';
         }
 
     return (
@@ -72,8 +80,20 @@ const SpotDetails = () => {
                 <br />
             </div>
             <div className='bottom-reviews'>
-                <h2>{numReviews} review(s)</h2>
-
+                <h2 className='star-num-reviews'>
+                    {rating(spot.avgRating)} ·
+                    {numReviews && numReviews === 1 ? numReviews + ' review' : null}
+                    {numReviews && numReviews !== 1 ? numReviews + ' reviews' : null}
+                </h2>
+                <div className='all-reviews'>
+                    {reviewsArr.length ? reviewsArr.map(review =>
+                        <div className='each-review' key={review.id}>
+                             <p>{review.User.firstName}</p>
+                             <p>{review.createdAt}</p>
+                             <p>{review.review}</p>
+                        </div>
+                    ) : null}
+                </div>
             </div>
         </div>
     );

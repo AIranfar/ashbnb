@@ -26,7 +26,8 @@
 }
 
 .hosted-by {
-    font-size: 40px;
+    font-size: 30px;
+    margin-top: 10px;
 }
 
 .small-box {
@@ -48,3 +49,18 @@
     justify-content: flex-end;
     cursor: pointer;
 }
+
+.bottom-reviews {
+    border-bottom: 2px solid black;
+    margin-bottom: 100px;
+}
+
+.each-review {
+    margin-bottom: 50px;
+}
+
+.star-num-reviews {
+    display: flex;
+    flex-direction: row;
+}
+
