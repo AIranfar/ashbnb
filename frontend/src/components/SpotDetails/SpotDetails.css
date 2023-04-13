@@ -15,8 +15,22 @@
 .price-reviews {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.average-rating {
+    padding-right: 10px
+}
+
+.num-reviews {
+    padding-left: 10px;
+}
+
+.rating-review {
+    display: flex;
+    flex-direction: row;
     align-items: space-between;
-    border-width: 5px solid black;
 }
 
 
@@ -63,4 +77,3 @@
     display: flex;
     flex-direction: row;
 }
-

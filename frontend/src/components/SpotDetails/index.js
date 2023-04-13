@@ -70,12 +70,15 @@ const SpotDetails = () => {
                             <div id='spot-price'>
                                 ${spot.price} Night
                             </div>
-                            <div>
-                                {rating(spot.avgRating)}
-                            </div>
-                            <div className='num-reviews'>
-                                {numReviews && numReviews === 1 ? numReviews + ' review' : ''}
-                                {numReviews && numReviews !== 1 ? numReviews + ' reviews' : ''}
+                            <div className='rating-review'>
+                                <div className='average-rating'>
+                                    {rating(spot.avgRating)}
+                                </div>
+                                    ·
+                                <div className='num-reviews'>
+                                    {numReviews && numReviews === 1 ? numReviews + ' review' : ''}
+                                    {numReviews && numReviews !== 1 ? numReviews + ' reviews' : ''}
+                                </div>
                             </div>
                         </div>
                         <br />

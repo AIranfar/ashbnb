@@ -11,6 +11,7 @@ const EditSpot = () => {
     const history = useHistory();
 
     const spot = useSelector(state => state.spots.allSpots[id])
+    console.log('SPOTS ---> ', spot)
 
     const [country, setCountry] = useState(spot.country);
     const [address, setAddress] = useState(spot.address);
