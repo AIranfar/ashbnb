@@ -97,12 +97,12 @@ const SpotDetails = () => {
                 </h2>
                 {/* {sessionUser && sessionUser.id !== spot.Owner.id && !allReviewsObj.User.id.includes(sessionUser.id) && ( */}
                 <div>
-                        <OpenModalButton
-                            buttonText='Post Your Review'
-                            modalComponent={<ReviewFormModal spotId={spotId} />}
-                        />
-                    </div>
-
+                    <OpenModalButton
+                        buttonText='Post Your Review'
+                        modalComponent={<ReviewFormModal spotId={spotId} />}
+                    />
+                </div>
+                <br />
                 <div className='all-reviews'>
                     {reviewsArr.length ? reviewsArr.map(review =>
                         <div className='each-review' key={review.id}>
@@ -110,7 +110,7 @@ const SpotDetails = () => {
                              <p>{review.createdAt}</p>
                              <p>{review.review}</p>
                         </div>
-                    ) : null}
+                    ) : 'Be the first to post a review'}
                 </div>
             </div>
         </div>
