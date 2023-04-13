@@ -11,9 +11,9 @@ const ReviewFormModal = () => {
         <div>
             <h2>How was your stay?</h2>
             <textarea
-            placeholder="Leave your review here" />
+                placeholder="Leave your review here" />
             <div>
-                <i class='fa-light fa-star'></i>
+                <i class="material-symbols-outlined" />
             </div>
             <div>
                 <i class='fa-light fa-star'></i>
