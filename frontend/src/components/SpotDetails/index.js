@@ -3,23 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { getOneSpot } from "../../store/spots";
 import { getAllReviews } from '../../store/reviews';
+import ReviewFormModal from '../ReviewFormModal';
+import OpenModalButton from '../OpenModalButton';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
     const dispatch = useDispatch();
     const { spotId } = useParams();
-    const spot = useSelector(state => state.spots.singleSpot)
-    const numReviews = useSelector(state => state.spots.singleSpot.numReviews)
-    const reviews = useSelector(state => state)
-    console.log('REVIEWS --->', reviews)
+    const spot = useSelector(state => state.spots.singleSpot);
+    const numReviews = useSelector(state => state.spots.singleSpot.numReviews);
+    const allReviewsObj = useSelector(state => state.reviews.allReviews);
+    const reviewsArr = Object.values(allReviewsObj);
+    const sessionUser = useSelector(state => state.session.user);
+    console.log('SPOT--->', spot);
+    console.log('REVIEWSOBJ --->', allReviewsObj);
+    console.log('REVIEWSARR --->', reviewsArr);
+    console.log('USER --->', sessionUser);
 
     useEffect(() => {
         dispatch(getOneSpot(spotId));
     }, [dispatch, spotId])
 
     useEffect(() => {
-        dispatch(getAllReviews(spot))
-    }, [dispatch])
+        dispatch(getAllReviews(spotId))
+    }, [dispatch, spotId])
 
     if (!spot || !spot.name) {
         return (<h1>loading...</h1>)
@@ -34,11 +41,18 @@ const SpotDetails = () => {
     }
 
     const rating = (rating) => {
+        if (typeof rating === 'number') {
+            return (
                 <div>
                     <i className='fa-solid fa-star star-icon' />
                     {Number(rating).toFixed(1)}
                 </div>
+            )
         }
+        else return 'New';
+    }
+
+    console.log('HELLO:', spot.avgRating)
 
     return (
         <div className='spot-container'>
@@ -72,8 +86,28 @@ const SpotDetails = () => {
                 <br />
             </div>
             <div className='bottom-reviews'>
-                <h2>{numReviews} review(s)</h2>
+                <h2 className='star-num-reviews'>
+                    {rating(spot.avgRating)} ·
+                    {numReviews && numReviews === 1 ? numReviews + ' review' : null}
+                    {numReviews && numReviews !== 1 ? numReviews + ' reviews' : null}
+                </h2>
+                {/* {sessionUser && sessionUser.id !== spot.Owner.id && !allReviewsObj.User.id.includes(sessionUser.id) && ( */}
+                    <div>
+                        <OpenModalButton
+                            buttonText='Post Your Review'
+                            modalComponent={<ReviewFormModal spotId={spotId} />}
+                        />
+                    </div>
 
+                <div className='all-reviews'>
+                    {reviewsArr.length ? reviewsArr.map(review =>
+                        <div className='each-review' key={review.id}>
+                             <p>{review.User.firstName}</p>
+                             <p>{review.createdAt}</p>
+                             <p>{review.review}</p>
+                        </div>
+                    ) : null}
+                </div>
             </div>
         </div>
     );

@@ -61,6 +61,7 @@ export const getAllSpotCurrentUser = () => async dispatch => {
 
     if (response.ok) {
         const spots = await response.json();
+        console.log('SPOTSSS:', spots)
         const normalSpots = allNormalSpots(spots)
         dispatch(getUserSpots(normalSpots))
         return spots;

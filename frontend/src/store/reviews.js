@@ -7,11 +7,20 @@ const loadReviews = reviews => ({
     reviews
 })
 
+const allNormalReviews = (data) => {
+    const allReviews = {};
+    data.forEach(review => {
+        allReviews[review.id] = review;
+    });
+    return allReviews;
+}
+
 export const getAllReviews = (spotId) => async dispatch => {
     const response = await fetch(`/api/spots/${spotId}/reviews`)
 
     if (response.ok) {
-        const data = await response.json();
+        const reviews = await response.json();
+        const data = allNormalReviews(reviews.Review)
         dispatch(loadReviews(data))
         return data;
     }
@@ -22,7 +31,7 @@ const initialState = { allReviews: {}, oneReview: {} }
 const reviewsReducer = (state = initialState, action) => {
     switch(action.type) {
         case ALL:
-            return { ...state, allReviews: { ...action.list }};
+            return { ...state, allReviews: { ...action.reviews }};
         default:
             return state;
     }
