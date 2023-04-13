@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 import { getOneSpot } from "../../store/spots";
 import { getAllReviews } from '../../store/reviews';
+import ReviewFormModal from '../ReviewFormModal';
+import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
@@ -12,9 +14,11 @@ const SpotDetails = () => {
     const numReviews = useSelector(state => state.spots.singleSpot.numReviews);
     const allReviewsObj = useSelector(state => state.reviews.allReviews);
     const reviewsArr = Object.values(allReviewsObj);
-    console.log('SPOT--->', spot)
+    const sessionUser = useSelector(state => state.session.user);
+    console.log('SPOT--->', spot);
     console.log('REVIEWSOBJ --->', allReviewsObj);
     console.log('REVIEWSARR --->', reviewsArr);
+    console.log('USER --->', sessionUser);
 
     useEffect(() => {
         dispatch(getOneSpot(spotId));
@@ -85,6 +89,14 @@ const SpotDetails = () => {
                     {numReviews && numReviews === 1 ? numReviews + ' review' : null}
                     {numReviews && numReviews !== 1 ? numReviews + ' reviews' : null}
                 </h2>
+                {/* {sessionUser && sessionUser.id !== spot.Owner.id && !allReviewsObj.User.id.includes(sessionUser.id) && (
+                    <div>
+                        <OpenModalMenuItem
+                            buttonText='Post Your Review'
+                            modalComponent={<ReviewFormModal spotId={spotId} />}
+                        />
+                    </div>
+                )} */}
                 <div className='all-reviews'>
                     {reviewsArr.length ? reviewsArr.map(review =>
                         <div className='each-review' key={review.id}>
