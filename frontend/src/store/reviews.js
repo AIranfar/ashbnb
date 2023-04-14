@@ -3,6 +3,7 @@ import { getOneSpot } from "./spots";
 
 const ALL = 'reviews/All_REVIEWS';
 const CREATE = 'reviews/CREATE_REVIEW';
+const DELETE = 'spots/DELETE-REVIEW';
 
 const loadReviews = reviews => ({
     type: ALL,
@@ -12,6 +13,11 @@ const loadReviews = reviews => ({
 const addReview = review => ({
     type: CREATE,
     review
+});
+
+const deleteReviews = reviewId => ({
+    type: DELETE,
+    reviewId
 })
 
 const allNormalReviews = (data) => {
@@ -44,7 +50,19 @@ export const addNewReview = (review, spotId) => async dispatch => {
     if (response.ok) {
         const newReview = await response.json();
         await dispatch(addReview(newReview));
+        await dispatch(getOneSpot(spotId))
         return newReview;
+    }
+}
+
+export const deleteReview = (reviewId) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        const data = await response.json()
+        dispatch(deleteReviews(reviewId))
     }
 }
 
@@ -57,7 +75,11 @@ const reviewsReducer = (state = initialState, action) => {
         case CREATE:
             const newState = { ...state, oneReview: {} }
             newState.oneReview = action.review
-            return newState
+            return newState;
+        case DELETE:
+            const newState2 = { ...state, allReviews: { ...state.allReviews }}
+            delete newState2.allReviews[action.list];
+            return newState2
         default:
             return state;
     }

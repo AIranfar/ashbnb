@@ -5,7 +5,9 @@ import { getOneSpot } from "../../store/spots";
 import { getAllReviews } from '../../store/reviews';
 import ReviewFormModal from '../ReviewFormModal';
 import OpenModalButton from '../OpenModalButton';
+import DeleteReviewModal from '../DeleteReviewModal';
 import './SpotDetails.css';
+import DeleteReview from '../DeleteReviewModal';
 
 const SpotDetails = () => {
     const dispatch = useDispatch();
@@ -18,9 +20,10 @@ const SpotDetails = () => {
     const singleReview = reviewsArr.map(review => (
         review.User.id)
     )
-    console.log('singleReview ->', singleReview)
-    console.log('SPOT--->', spot);
-    console.log('REVIEWSOBJ --->', allReviewsObj);
+    console.log('ReviewArr', reviewsArr)
+    // console.log('singleReview ->', singleReview)
+    // console.log('SPOT--->', spot);
+    // console.log('REVIEWSOBJ --->', allReviewsObj);
     console.log('USER --->', sessionUser);
 
     useEffect(() => {
@@ -109,9 +112,14 @@ const SpotDetails = () => {
                 <div className='all-reviews'>
                     {reviewsArr.length ? reviewsArr.map(review =>
                         <div className='each-review' key={review.id}>
-                             <p>{review.User.firstName}</p>
-                             <p>{review.createdAt}</p>
-                             <p>{review.review}</p>
+                            <p>{review.User.firstName}</p>
+                            <p>{review.createdAt}</p>
+                            <p>{review.review}</p>
+                            {/* {sessionUser.id === review.User.id} */}
+                            <OpenModalButton
+                                buttonText='Delete'
+                                modalComponent={<DeleteReviewModal reviewId={review.id} />}
+                            />
                         </div>
                     ) : 'Be the first to post a review'}
                 </div>
