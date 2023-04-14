@@ -5,9 +5,8 @@ import { addNewReview } from "../../store/reviews";
 import { useParams } from "react-router-dom";
 import './ReviewFormModal.css';
 
-const ReviewFormModal = () => {
+const ReviewFormModal = ({spotId}) => {
     const dispatch = useDispatch();
-    const { spotId } = useParams();
     const [review, setReview] = useState('');
     const [rating, setRating] = useState(null)
     const [stars, setStars] = useState(null);
@@ -15,6 +14,8 @@ const ReviewFormModal = () => {
     const [reviewButton, setReviewButton] = useState();
 
     const { closeModal } = useModal();
+
+    console.log('SPOTID', spotId)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -24,8 +25,8 @@ const ReviewFormModal = () => {
             stars
         }
 
-        dispatch(addNewReview(newReview))
-        .then(closeModal)
+        dispatch(addNewReview(newReview, spotId))
+        .then(closeModal())
     };
 
     const handleClick = (num) => {
@@ -53,11 +54,11 @@ const ReviewFormModal = () => {
         <div className='new-review-container'>
             <h2 className='title-header'>How was your stay?</h2>
             <form onSubmit={handleSubmit} className='review-form'>
-                <ul className='errors'>
+                {/* <ul className='errors'>
                     {errors.map((error, idx) => (
                         <li key={idx}>{error}</li>
                     ))}
-                </ul>
+                </ul> */}
                 <textarea
                     className="review-text-box"
                     type='text'

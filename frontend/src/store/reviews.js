@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { getOneSpot } from "./spots";
 
 const ALL = 'reviews/All_REVIEWS';
 const CREATE = 'reviews/CREATE_REVIEW';
@@ -33,6 +34,7 @@ export const getAllReviews = (spotId) => async dispatch => {
 }
 
 export const addNewReview = (review, spotId) => async dispatch => {
+    // console.log('REVIEWWWWW --> ', review)
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -41,7 +43,7 @@ export const addNewReview = (review, spotId) => async dispatch => {
 
     if (response.ok) {
         const newReview = await response.json();
-        dispatch(addReview(newReview));
+        await dispatch(addReview(newReview));
         return newReview;
     }
 }
