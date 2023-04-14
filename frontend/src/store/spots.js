@@ -136,6 +136,7 @@ const initialState = {
 const spotsReducer = (state = initialState, action) => {
     switch (action.type) {
         case ALL:
+            console.log('ACTION -->', action)
             return { ...state, allSpots: { ...action.list }};
         case ONE:
             const newState = { ...state };
@@ -158,7 +159,7 @@ const spotsReducer = (state = initialState, action) => {
             };
         case EDIT:
             const updatedState = { ...state }
-            updatedState.allSpots[action.spot] = action.spot
+            updatedState.allSpots[action.list] = action.list
             return updatedState;
         default:
             return state;
