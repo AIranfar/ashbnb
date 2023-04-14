@@ -15,9 +15,12 @@ const SpotDetails = () => {
     const allReviewsObj = useSelector(state => state.reviews.allReviews);
     const reviewsArr = Object.values(allReviewsObj);
     const sessionUser = useSelector(state => state.session.user);
+    const singleReview = reviewsArr.map(review => (
+        review.User.id)
+    )
+    console.log('singleReview ->', singleReview)
     console.log('SPOT--->', spot);
     console.log('REVIEWSOBJ --->', allReviewsObj);
-    console.log('REVIEWSARR --->', reviewsArr);
     console.log('USER --->', sessionUser);
 
     useEffect(() => {
@@ -52,7 +55,7 @@ const SpotDetails = () => {
         else return 'New';
     }
 
-    console.log('HELLO:', spot.avgRating)
+    console.log('HELLO:', spotId)
 
     return (
         <div className='spot-container'>
@@ -95,13 +98,13 @@ const SpotDetails = () => {
                     {numReviews && numReviews === 1 ? numReviews + ' review' : null}
                     {numReviews && numReviews !== 1 ? numReviews + ' reviews' : null}
                 </h2>
-                {/* {sessionUser && sessionUser.id !== spot.Owner.id && !allReviewsObj.User.id.includes(sessionUser.id) && ( */}
+                {sessionUser && sessionUser.id !== spot.Owner.id && !singleReview.includes(sessionUser.id) && (
                 <div>
                     <OpenModalButton
                         buttonText='Post Your Review'
                         modalComponent={<ReviewFormModal spotId={spotId} />}
                     />
-                </div>
+                </div>)}
                 <br />
                 <div className='all-reviews'>
                     {reviewsArr.length ? reviewsArr.map(review =>

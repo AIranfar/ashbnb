@@ -5,52 +5,60 @@ import { addNewReview } from "../../store/reviews";
 import { useParams } from "react-router-dom";
 import './ReviewFormModal.css';
 
-const ReviewFormModal = () => {
+const ReviewFormModal = ({spotId}) => {
     const dispatch = useDispatch();
-    const { spotId } = useParams();
     const [review, setReview] = useState('');
     const [rating, setRating] = useState(null)
-    const [stars, setStars] = useState(0);
+    const [stars, setStars] = useState(null);
     const [errors, setErrors] = useState([]);
     const [reviewButton, setReviewButton] = useState();
 
     const { closeModal } = useModal();
 
+    console.log('SPOTID', spotId)
+
     const handleSubmit = (e) => {
-        e.preventDefault();
-        setErrors([]);
-        return dispatch(addNewReview({ review, spotId }))
-            .then(closeModal)
-            .catch(
-                async (res) => {
-                    const data = await res.json();
-                    const errors = Object.values(data.errors)
-                    return setErrors(errors)
-                }
-            );
+        e.preventDefault()
+
+        const newReview = {
+            review,
+            stars
+        }
+
+        dispatch(addNewReview(newReview, spotId))
+        .then(closeModal())
     };
 
+    const handleClick = (num) => {
+        setStars(num)
+    }
+
+    const changeClassName = (value) => {
+        if (value <= stars) {
+            return 'fa-solid fa-star'
+        } else return 'fa-regular fa-star'
+    }
+
     const disabledButton = () => {
-        if (review.length < 10 || !stars) {
-            return true
-        } else return false
+        if (review.length < 10 || !stars) return true;
+        return false;
     }
 
     useEffect(() => {
-        if(review.length < 10) {
+        if(review.length < 10 || !stars) {
             setReviewButton('review-button-disabled')
         } else setReviewButton('review-button-enabled')
-    }, [rating, review])
+    }, [stars, review])
 
     return (
         <div className='new-review-container'>
             <h2 className='title-header'>How was your stay?</h2>
             <form onSubmit={handleSubmit} className='review-form'>
-                <ul className='errors'>
+                {/* <ul className='errors'>
                     {errors.map((error, idx) => (
                         <li key={idx}>{error}</li>
                     ))}
-                </ul>
+                </ul> */}
                 <textarea
                     className="review-text-box"
                     type='text'
@@ -62,19 +70,19 @@ const ReviewFormModal = () => {
                 <br />
                 <div className='review-stars'>
                     <div>
-                        <span class="material-symbols-outlined">grade</span>
+                        <i class={changeClassName(1)} onClick={() => handleClick(1)}></i>
                     </div>
                     <div>
-                        <span class="material-symbols-outlined">grade</span>
+                        <i class={changeClassName(2)} onClick={() => handleClick(2)}></i>
                     </div>
                     <div>
-                        <span class="material-symbols-outlined">grade</span>
+                        <i class={changeClassName(3)} onClick={() => handleClick(3)}></i>
                     </div>
                     <div>
-                        <span class="material-symbols-outlined">grade</span>
+                        <i class={changeClassName(4)} onClick={() => handleClick(4)}></i>
                     </div>
                     <div>
-                        <span class="material-symbols-outlined">grade</span>
+                        <i class={changeClassName(5)} onClick={() => handleClick(5)}></i>
                     </div>
                     <p>Stars</p>
                 </div>
