@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { removeSpot } from '../../store/spots';
+import { removeSpot, getOneSpot } from '../../store/spots';
 import { useModal } from '../../context/Modal'
 import './DeleteSpot.css';
 
@@ -11,6 +11,7 @@ const DeleteSpot = ({ spotId }) => {
 
     const handleSubmit = () => {
         dispatch(removeSpot(spotId))
+        dispatch(getOneSpot(spotId))
         (closeModal())
         (setRefreshPage(true));
     };
