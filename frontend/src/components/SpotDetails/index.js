@@ -118,7 +118,7 @@ const SpotDetails = () => {
                             <p>{review.createdAt}</p>
                             <p>{review.review}</p>
 
-                            {sessionUser && sessionUser.id === review.User?.id ?
+                            {sessionUser.id === review.User?.id ?
                             <OpenModalButton
                                 buttonText='Delete'
                                 modalComponent={<DeleteReviewModal reviewId={review.id} />}
