@@ -7,7 +7,6 @@ import ReviewFormModal from '../ReviewFormModal';
 import OpenModalButton from '../OpenModalButton';
 import DeleteReviewModal from '../DeleteReviewModal';
 import './SpotDetails.css';
-import DeleteReview from '../DeleteReviewModal';
 
 const SpotDetails = () => {
     const dispatch = useDispatch();
@@ -17,14 +16,16 @@ const SpotDetails = () => {
     const allReviewsObj = useSelector(state => state.reviews.allReviews);
     const reviewsArr = Object.values(allReviewsObj);
     const sessionUser = useSelector(state => state.session.user);
-    const singleReview = reviewsArr.map(review => (
-        review.User.id)
-    )
-    console.log('ReviewArr', reviewsArr)
-    // console.log('singleReview ->', singleReview)
-    // console.log('SPOT--->', spot);
+
+    function renderPost() {
+        return reviewsArr.find(review => review.userId === sessionUser.id)
+    }
+    // console.log('singleReview ->')
+
+    // console.log('ReviewArr', reviewsArr)
+    // // console.log('SPOT--->', spot);
     // console.log('REVIEWSOBJ --->', allReviewsObj);
-    console.log('USER --->', sessionUser);
+    // console.log('USER --->', sessionUser);
 
     useEffect(() => {
         dispatch(getOneSpot(spotId));
@@ -101,7 +102,7 @@ const SpotDetails = () => {
                     {numReviews && numReviews === 1 ? numReviews + ' review' : null}
                     {numReviews && numReviews !== 1 ? numReviews + ' reviews' : null}
                 </h2>
-                {sessionUser && sessionUser.id !== spot.Owner.id && !singleReview.includes(sessionUser.id) && (
+                {sessionUser && sessionUser.id !== spot.Owner.id && !renderPost() && (
                 <div>
                     <OpenModalButton
                         buttonText='Post Your Review'
@@ -112,14 +113,16 @@ const SpotDetails = () => {
                 <div className='all-reviews'>
                     {reviewsArr.length ? reviewsArr.map(review =>
                         <div className='each-review' key={review.id}>
-                            <p>{review.User.firstName}</p>
+                            {console.log('REVIEWWWW-------->', review)}
+                            <p>{review.User?.firstName}</p>
                             <p>{review.createdAt}</p>
                             <p>{review.review}</p>
-                            {/* {sessionUser.id === review.User.id} */}
+
+                            {sessionUser.id === review.User?.id ?
                             <OpenModalButton
                                 buttonText='Delete'
                                 modalComponent={<DeleteReviewModal reviewId={review.id} />}
-                            />
+                            /> : null}
                         </div>
                     ) : 'Be the first to post a review'}
                 </div>

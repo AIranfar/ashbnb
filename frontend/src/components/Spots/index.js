@@ -6,11 +6,19 @@ import './Spot.css';
 
 const AllSpots = () => {
     const dispatch = useDispatch();
-    const spots = Object.values(useSelector(state => state.spots.allSpots))
+    const spots = useSelector(state => state.spots.allSpots)
+    const spotsArr = Object.values(spots)
+    console.log('SPOTSarr-->', spotsArr)
+    console.log('Spots', spots)
+
 
     useEffect(() => {
         dispatch(getAllSpots())
-    }, [dispatch])
+    }, [dispatch]);
+
+    if (!spotsArr.length) {
+        return <h1>Loading...</h1>
+    }
 
     const rating = (rating) => {
         if (typeof rating === 'number') {
@@ -24,10 +32,12 @@ const AllSpots = () => {
         else return 'New';
     }
 
+
+
     return (
         <div className='all-Spots'>
             <div className='spots-container'>
-                {spots.map(spot =>
+                {spotsArr.map(spot =>
                     <div className='spot-cards' key={spot.id}>
                         <NavLink to={`/spots/${spot.id}`} className='spot-link'>
                             <img className='spot-image' src={`${spot.previewImage}`}></img>

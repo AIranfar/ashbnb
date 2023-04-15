@@ -21,9 +21,22 @@ const EditSpot = () => {
     const [price, setPrice] = useState(spot.price);
     const [errors, setErrors] = useState('');
 
-    if (!spot || !country || !address || !city || !state || !description || !name || !price) {
+    useEffect(() => {
+        if (spot) {
+          setCountry(spot.country || '');
+          setAddress(spot.address || '');
+          setCity(spot.city || '');
+          setState(spot.state || '');
+          setDescription(spot.description || '');
+          setName(spot.name || '');
+          setPrice(Number(spot.price).toFixed(2) || '');
+        }
+      }, [spot]);
+
+    if (!spot) {
         return (<div>Loading...</div>)
     }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
