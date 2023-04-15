@@ -25,7 +25,7 @@ const SpotDetails = () => {
     // console.log('ReviewArr', reviewsArr)
     // // console.log('SPOT--->', spot);
     // console.log('REVIEWSOBJ --->', allReviewsObj);
-    // console.log('USER --->', sessionUser);
+    console.log('USER --->', sessionUser);
 
     useEffect(() => {
         dispatch(getOneSpot(spotId));
@@ -118,7 +118,7 @@ const SpotDetails = () => {
                             <p>{review.createdAt}</p>
                             <p>{review.review}</p>
 
-                            {sessionUser.id === review.User?.id ?
+                            {sessionUser && sessionUser.id === review.User?.id ?
                             <OpenModalButton
                                 buttonText='Delete'
                                 modalComponent={<DeleteReviewModal reviewId={review.id} />}
