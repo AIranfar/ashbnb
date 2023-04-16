@@ -111,7 +111,7 @@ const SpotDetails = () => {
                 </div>)}
                 <br />
                 <div className='all-reviews'>
-                    {reviewsArr.length ? reviewsArr.map(review =>
+                    {reviewsArr.length ? reviewsArr.reverse().map(review =>
                         <div className='each-review' key={review.id}>
                             {console.log('REVIEWWWW-------->', review)}
                             <p>{review.User?.firstName}</p>
