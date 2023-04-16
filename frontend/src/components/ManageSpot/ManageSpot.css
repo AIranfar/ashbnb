@@ -1,19 +1,22 @@
 .update-delete {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 
 .update {
     color: white;
-    background-color: red;
+    background-color: gray;
     font-weight: bold;
     width: 200px;
+    cursor: pointer;
+    margin-right: 3em;
 }
 
-.delete {
+.delete-button {
     color: white;
     background-color: red;
     font-weight: bold;
     width: 200px;
+    cursor: pointer;
 }

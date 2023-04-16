@@ -3,19 +3,18 @@ import { useState } from "react";
 import { deleteReview } from "../../store/reviews";
 import { useModal } from '../../context/Modal'
 import './DeleteReviewModal.css';
-import { useParams } from "react-router-dom";
 
-const DeleteReviewModal = ({ reviewId }) => {
+const DeleteReviewModal = ({ reviewId, spotId }) => {
+    const dispatch = useDispatch();
     // const { reviewId } = useParams();
     console.log('ID--->', reviewId)
-    const dispatch = useDispatch();
     const { closeModal } = useModal();
     const [refreshPage, setRefreshPage] = useState(false)
 
     const handleSubmit = () => {
-        dispatch(deleteReview(reviewId))
-        (closeModal())
-        (setRefreshPage(true));
+        dispatch(deleteReview(reviewId, spotId));
+        closeModal();
+        setRefreshPage(true);
     };
 
     return (

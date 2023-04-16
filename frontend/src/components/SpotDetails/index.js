@@ -22,7 +22,7 @@ const SpotDetails = () => {
     }
     // console.log('singleReview ->')
 
-    // console.log('ReviewArr', reviewsArr)
+    console.log('ReviewArr', reviewsArr)
     // // console.log('SPOT--->', spot);
     // console.log('REVIEWSOBJ --->', allReviewsObj);
     console.log('USER --->', sessionUser);
@@ -121,7 +121,7 @@ const SpotDetails = () => {
                             {sessionUser && sessionUser.id === review.User?.id ?
                             <OpenModalButton
                                 buttonText='Delete'
-                                modalComponent={<DeleteReviewModal reviewId={review.id} />}
+                                modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
                             /> : null}
                         </div>
                     ) : 'Be the first to post a review'}

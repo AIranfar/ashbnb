@@ -45,21 +45,23 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button className='button' onClick={openMenu}>
+      <button className='profile-button' onClick={openMenu}>
         <i className="fas fa-user-circle" />
         <i className='fa-solid fa-bars-staggered' />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <ul>Hello, {user.firstName}</ul>
-            <ul>{user.email}</ul>
-            <NavLink to='/spots/current' id='manage-spots'>Manage Spots</NavLink>
-            <ul>
-              <button onClick={logout}>
+            <div className='profile-container'>
+              <ul className='hello-first-name'>Hello, {user.firstName}</ul>
+              <ul className='user-email'>{user.email}</ul>
+              <NavLink to='/spots/current' className='manage-spots'>Manage Spots</NavLink>
+              <ul>
+                <button className='logout-button' onClick={logout}>
                   Log Out
-              </button>
-            </ul>
+                </button>
+              </ul>
+            </div>
           </>
         ) : (
           <>

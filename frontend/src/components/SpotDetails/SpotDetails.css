@@ -70,7 +70,8 @@
 }
 
 .each-review {
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    border-top: 2px solid black;
 }
 
 .star-num-reviews {
