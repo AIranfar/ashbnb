@@ -12,8 +12,6 @@ const ReviewFormModal = ({spotId}) => {
 
     const { closeModal } = useModal();
 
-    console.log('SPOTID', spotId)
-
     const handleSubmit = (e) => {
         e.preventDefault()
 
