@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { addNewReview } from "../../store/reviews";
-import { useParams } from "react-router-dom";
 import './ReviewFormModal.css';
 
 const ReviewFormModal = ({spotId}) => {
     const dispatch = useDispatch();
     const [review, setReview] = useState('');
-    const [rating, setRating] = useState(null)
     const [stars, setStars] = useState(null);
-    const [errors, setErrors] = useState([]);
     const [reviewButton, setReviewButton] = useState();
 
     const { closeModal } = useModal();
@@ -84,7 +81,7 @@ const ReviewFormModal = ({spotId}) => {
                     <div>
                         <i class={changeClassName(5)} onClick={() => handleClick(5)}></i>
                     </div>
-                    <p>Stars</p>
+                    <div className='stars'>Stars</div>
                 </div>
                 <div className='submit-container'>
                     <button id={reviewButton} type="submit" disabled={disabledButton()}>Submit Your Review</button>

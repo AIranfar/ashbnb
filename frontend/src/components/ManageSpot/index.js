@@ -34,6 +34,7 @@ const ManageSpots = () => {
                                 <button className="update">Update</button>
                             </NavLink>
                             <OpenModalButton
+                                className='delete-button'
                                 buttonText="Delete"
                                 modalComponent={<DeleteSpot spotId={spot.id} />}
                             />

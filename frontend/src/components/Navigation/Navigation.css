@@ -22,9 +22,32 @@
     border-top: 1px solid white;
     border-bottom: 1px solid white;
     padding: 10px 20px;
+    position: sticky;
 }
 
-.button {
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: none;
+    border: 2px solid black;
+}
+
+.hello-first-name {
+    margin-top: 10px;
+    margin-right: 40px;
+}
+
+.user-email {
+    margin-right: 40px;
+}
+
+.logout-button {
+    margin-right: 40px;
+    margin-bottom:10px;
+}
+
+.profile-button {
     width: 60px;
     height: 30px;
     padding: 0 7px;
@@ -42,7 +65,6 @@
 .fas fa-user-circle {
     text-align: right;
 }
-
 
 .create-button {
     display: flex;
@@ -63,8 +85,9 @@
     width: 90px;
 }
 
-#manage-spots {
+.manage-spots {
     color: white;
+    display: flex;
 }
 
 .test {
