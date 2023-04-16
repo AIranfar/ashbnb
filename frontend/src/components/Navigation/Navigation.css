@@ -30,7 +30,14 @@
     flex-direction: column;
     align-items: center;
     padding: none;
-    border: 2px solid black;
+    /* border: 2px solid black; */
+    /* z-index: 1; */
+    position: absolute;
+    margin-top: 40px;
+    right: 40px;
+    background-color: white;
+    box-shadow: 5px 4px 4px gray;
+    border-radius: 10px;
 }
 
 .hello-first-name {
@@ -86,7 +93,7 @@
 }
 
 .manage-spots {
-    color: white;
+    color: black;
     display: flex;
 }
 
