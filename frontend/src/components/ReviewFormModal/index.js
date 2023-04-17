@@ -10,7 +10,7 @@ const ReviewFormModal = ({ spotId }) => {
   const [stars, setStars] = useState(null);
   const [reviewButton, setReviewButton] = useState();
   const [hoveredStars, setHoveredStars] = useState(null);
-
+  const numbers = [1, 2, 3, 4, 5]
   const { closeModal } = useModal();
 
   const handleSubmit = (e) => {
@@ -18,10 +18,11 @@ const ReviewFormModal = ({ spotId }) => {
 
     const newReview = {
       review,
-      stars,
+      stars
     };
 
-    dispatch(addNewReview(newReview, spotId)).then(closeModal());
+    dispatch(addNewReview(newReview, spotId))
+    closeModal();
   };
 
   const handleMouseOver = (num) => {
@@ -73,7 +74,7 @@ const ReviewFormModal = ({ spotId }) => {
           className="review-stars"
           onMouseLeave={handleMouseLeave}
         >
-          {[1, 2, 3, 4, 5].map((value) => (
+          {numbers.map((value) => (
             <div key={value}>
               <i
                 className={changeClassName(value)}
