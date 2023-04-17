@@ -1,15 +1,17 @@
 .spot-container {
     margin-left: 80px;
     margin-right: 80px;
+    /* max-width: 1000px; */
 }
 
-.top-spot {
-    border-bottom: 2px solid black;
+.spot-detials {
+    max-width: 1000px;;
 }
 
-.spot-image {
+.spot-details-image {
     height: 500px;
     width: 800px;
+    display: flex;
 }
 
 .price-reviews {
@@ -52,6 +54,7 @@
     border-radius: 10px;
     margin-right: 80px;
     padding: 20px;
+    /* margin-bottom: 50px; */
 }
 
 #reserve-button-id {
@@ -64,7 +67,13 @@
     cursor: pointer;
 }
 
+.spot-description {
+    width:60%;
+}
+
 .bottom-reviews {
+    margin-top: 50px;
+    border-top: 2px solid black;
     border-bottom: 2px solid black;
     margin-bottom: 100px;
 }

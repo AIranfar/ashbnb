@@ -1,37 +1,25 @@
-.all-Spots {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-left: 100px;
-    margin-right: 100px;
-}
-
-.spots-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    width: 100vw;
-    /* font-size: 14px; */
-    font-weight: bold;
+.all-spots-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 0px;
 }
 
 .spot-cards {
+    margin-left:50px;
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    width: 2
+    padding-bottom: 30px;
 }
 
 .spot-image {
     object-fit: cover;
-    height: 100px;
-    width: 200px;
-    border: 10px;
+    height: 300px;
+    width: 380px;
     border-radius: 5px;
 }
 
 .spot-link {
     color: black;
+    height: auto;
 }
 
 .spot-price {
@@ -44,4 +32,20 @@
     justify-content: space-between;
 }
 
+@media screen and (max-width: 1470px) {
+    .all-spots-container {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
 
+  @media screen and (max-width: 1150px) {
+    .all-spots-container {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media screen and (max-width: 775px) {
+    .all-spots-container {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+  }

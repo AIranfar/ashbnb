@@ -32,25 +32,21 @@ const AllSpots = () => {
         else return 'New';
     }
 
-
-
     return (
-        <div className='all-Spots'>
-            <div className='spots-container'>
+        <div className='all-spots-container'>
                 {spotsArr.map(spot =>
                     <div className='spot-cards' key={spot.id}>
                         <NavLink to={`/spots/${spot.id}`} className='spot-link'>
                             <img className='spot-image' src={`${spot.previewImage}`}></img>
-                                <div className='location-rating'>
-                                    <div className='spot-location'>{`${spot.city}, ${spot.state}`}</div>
-                                    <div className='star-rating'>{rating(spot.avgRating)}</div>
-                                </div>
-                                <div className='spot-price'>{`$${spot.price}`} Night</div>
+                            <div className='location-rating'>
+                                <div className='spot-location'>{`${spot.city}, ${spot.state}`}</div>
+                                <div className='star-rating'>{rating(spot.avgRating)}</div>
+                            </div>
+                            <div className='spot-price'>{`$${spot.price}`} Night</div>
                         </NavLink>
                     </div>
                 )}
             </div>
-        </div>
     )
 }
 

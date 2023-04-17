@@ -107,6 +107,7 @@
 
 .ash-pic {
     width: 90px;
+    cursor: pointer;
 }
 
 .manage-spots {

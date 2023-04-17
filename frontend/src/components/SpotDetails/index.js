@@ -23,7 +23,7 @@ const SpotDetails = () => {
     // console.log('singleReview ->')
 
     // console.log('ReviewArr', reviewsArr)
-    // // console.log('SPOT--->', spot);
+    console.log('SPOT--->', spot);
     // console.log('REVIEWSOBJ --->', allReviewsObj);
     // console.log('USER --->', sessionUser);
 
@@ -69,68 +69,68 @@ const SpotDetails = () => {
 
     return (
         <div className='spot-container'>
-            <div className='top-spot'>
-                <h1>{spot.name}</h1>
-                <div className='spot-images-div' />
-                <h3>{spot.city}, {spot.state}, {spot.country}</h3>
-                {spot.SpotImages.map(img => {
-                    return <img className='spot-image' src={img.url} alt={spot.name} key={img.id}></img>
-                })}
-                <div className='big-small-box'>
-                    <div className='hosted-by'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</div>
-                    <div className='small-box'>
-                        <div className='price-reviews'>
-                            <div id='spot-price'>
-                                ${spot.price} Night
-                            </div>
-                            <div className='rating-review'>
-                                <div className='average-rating'>
-                                    {rating(spot.avgRating)}
+            <div className='spot-details'>
+                <div className='top-spot'>
+                    <h1>{spot.name}</h1>
+                    <div className='spot-images-div' />
+                    <h3>{spot.city}, {spot.state}, {spot.country}</h3>
+                    {spot.SpotImages.map(img => {
+                        return <img className='spot-details-image' src={img.url} alt={spot.name} key={img.id}></img>
+                    })}
+                    <div className='big-small-box'>
+                        <div className='hosted-by'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</div>
+                        <div className='small-box'>
+                            <div className='price-reviews'>
+                                <div id='spot-price'>
+                                    ${spot.price} Night
                                 </div>
-                                {reviewsArr.length ? <div>·</div> : null}
-                                <div className='num-reviews'>
-                                    {numReviews && numReviews === 1 ? numReviews + ' review' : ''}
-                                    {numReviews && numReviews !== 1 ? numReviews + ' reviews' : ''}
+                                <div className='rating-review'>
+                                    <div className='average-rating'>
+                                        {rating(spot.avgRating)}
+                                    </div>
+                                    {reviewsArr.length ? <div>·</div> : null}
+                                    <div className='num-reviews'>
+                                        {numReviews && numReviews === 1 ? numReviews + ' review' : ''}
+                                        {numReviews && numReviews !== 1 ? numReviews + ' reviews' : ''}
+                                    </div>
                                 </div>
                             </div>
+                            <button id='reserve-button-id' onClick={handleClick}>RESERVE</button>
                         </div>
-                        <br />
-                        <button id='reserve-button-id' onClick={handleClick}>RESERVE</button>
                     </div>
+                    <div className='spot-description'>{spot.description}</div>
                 </div>
-                <div>{spot.description}</div>
-                <br />
-            </div>
-            <div className='bottom-reviews'>
-                <h2 className='star-num-reviews'>
-                    {rating(spot.avgRating)}
-                    {reviewsArr.length ? <div>·</div> : null}
-                    {numReviews && numReviews === 1 ? numReviews + ' review' : null}
-                    {numReviews && numReviews !== 1 ? numReviews + ' reviews' : null}
-                </h2>
-                {sessionUser && sessionUser.id !== spot.Owner.id && !renderPost() && (
-                <div>
-                    <OpenModalButton
-                        buttonText='Post Your Review'
-                        modalComponent={<ReviewFormModal spotId={spotId} />}
-                    />
-                </div>)}
-                <br />
-                <div className='all-reviews'>
-                    {reviewsArr.length ? reviewsArr.reverse().map(review =>
-                        <div className='each-review' key={review.id}>
-                            {console.log('REVIEWWWW-------->', review)}
-                            <p>{review.User?.firstName}</p>
-                            <p>{dateString(review.createdAt)}</p>
-                            <p>{review.review}</p>
-
-                            {sessionUser && sessionUser.id === review.User?.id ?
+                <div className='bottom-reviews'>
+                    <h2 className='star-num-reviews'>
+                        {rating(spot.avgRating)}
+                        {reviewsArr.length ? <div>·</div> : null}
+                        {numReviews && numReviews === 1 ? numReviews + ' review' : null}
+                        {numReviews && numReviews !== 1 ? numReviews + ' reviews' : null}
+                    </h2>
+                    {sessionUser && sessionUser.id !== spot.Owner.id && !renderPost() && (
+                        <div>
                             <OpenModalButton
-                                buttonText='Delete'
-                                modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
-                            /> : null}
-                        </div>
-                    ) : 'Be the first to post a review'}
+                                buttonText='Post Your Review'
+                                modalComponent={<ReviewFormModal spotId={spotId} />}
+                            />
+                        </div>)}
+                    <br />
+                    <div className='all-reviews'>
+                        {reviewsArr.length ? reviewsArr.reverse().map(review =>
+                            <div className='each-review' key={review.id}>
+                                {/* {console.log('REVIEWWWW-------->', review)} */}
+                                <p>{review.User?.firstName}</p>
+                                <p>{dateString(review.createdAt)}</p>
+                                <p>{review.review}</p>
+
+                                {sessionUser && sessionUser.id === review.User?.id ?
+                                    <OpenModalButton
+                                        buttonText='Delete'
+                                        modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
+                                    /> : null}
+                            </div>
+                        ) : 'Be the first to post a review'}
+                    </div>
                 </div>
             </div>
         </div>
