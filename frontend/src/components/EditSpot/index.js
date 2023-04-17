@@ -10,7 +10,7 @@ const EditSpot = () => {
     const { id } = useParams();
     const history = useHistory();
     const spot = useSelector(state => state.spots.allSpots[id])
-    console.log('SPOTS ---> ', spot)
+    // console.log('SPOTS ---> ', spot)
 
     const [country, setCountry] = useState(spot.country);
     const [address, setAddress] = useState(spot.address);
@@ -36,7 +36,6 @@ const EditSpot = () => {
     if (!spot) {
         return (<div>Loading...</div>)
     }
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();

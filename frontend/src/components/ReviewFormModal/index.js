@@ -4,15 +4,13 @@ import { useModal } from "../../context/Modal";
 import { addNewReview } from "../../store/reviews";
 import './ReviewFormModal.css';
 
-const ReviewFormModal = ({spotId}) => {
+const ReviewFormModal = ({ spotId }) => {
     const dispatch = useDispatch();
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(null);
     const [reviewButton, setReviewButton] = useState();
 
     const { closeModal } = useModal();
-
-    console.log('SPOTID', spotId)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -23,7 +21,7 @@ const ReviewFormModal = ({spotId}) => {
         }
 
         dispatch(addNewReview(newReview, spotId))
-        .then(closeModal())
+            .then(closeModal())
     };
 
     const handleClick = (num) => {
@@ -42,7 +40,7 @@ const ReviewFormModal = ({spotId}) => {
     }
 
     useEffect(() => {
-        if(review.length < 10 || !stars) {
+        if (review.length < 10 || !stars) {
             setReviewButton('review-button-disabled')
         } else setReviewButton('review-button-enabled')
     }, [stars, review])
@@ -51,11 +49,6 @@ const ReviewFormModal = ({spotId}) => {
         <div className='new-review-container'>
             <h2 className='title-header'>How was your stay?</h2>
             <form onSubmit={handleSubmit} className='review-form'>
-                {/* <ul className='errors'>
-                    {errors.map((error, idx) => (
-                        <li key={idx}>{error}</li>
-                    ))}
-                </ul> */}
                 <textarea
                     className="review-text-box"
                     type='text'
