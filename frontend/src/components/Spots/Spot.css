@@ -45,7 +45,7 @@
   justify-content: space-between;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1470px) {
   .all-spots-container {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

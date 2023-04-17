@@ -1,11 +1,11 @@
 .spot-container {
     margin-left: 80px;
     margin-right: 80px;
-    /* max-width: 1000px; */
+    /* display: flex; */
 }
 
-.spot-detials {
-    max-width: 1000px;;
+.spot-details {
+    max-width: 1000px;
 }
 
 .spot-details-image {
