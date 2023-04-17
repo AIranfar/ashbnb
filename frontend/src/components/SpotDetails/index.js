@@ -81,7 +81,7 @@ const SpotDetails = () => {
                                 <div className='average-rating'>
                                     {rating(spot.avgRating)}
                                 </div>
-                                    ·
+                                {reviewsArr.length ? <div>·</div> : null}
                                 <div className='num-reviews'>
                                     {numReviews && numReviews === 1 ? numReviews + ' review' : ''}
                                     {numReviews && numReviews !== 1 ? numReviews + ' reviews' : ''}
@@ -98,7 +98,7 @@ const SpotDetails = () => {
             <div className='bottom-reviews'>
                 <h2 className='star-num-reviews'>
                     {rating(spot.avgRating)}
-                    <div>·</div>
+                    {reviewsArr.length ? <div>·</div> : null}
                     {numReviews && numReviews === 1 ? numReviews + ' review' : null}
                     {numReviews && numReviews !== 1 ? numReviews + ' reviews' : null}
                 </h2>
