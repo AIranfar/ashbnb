@@ -8,8 +8,19 @@
     margin-left:50px;
     display: flex;
     padding-bottom: 30px;
+    position: relative;
 }
 
+.spot-cards:hover:before {
+  content: attr(data-tooltip);
+  position: absolute;
+  background-color: black;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 1;
+}
 .spot-image {
     object-fit: cover;
     height: 300px;

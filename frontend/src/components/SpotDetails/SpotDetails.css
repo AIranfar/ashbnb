@@ -9,8 +9,8 @@
 }
 
 .spot-details-image {
-    height: 500px;
-    width: 800px;
+    height: 400px;
+    width: 600px;
     display: flex;
 }
 
@@ -84,8 +84,25 @@
 }
 
 .star-num-reviews {
-    width: 12%;
+    width: 15%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.images-not-found-container {
+    display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.images-container {
+    display: flex;
+}
+
+.image-not-found {
+    height: 195px;
+    width: 250px;
+    padding: 10px;
+    margin-top: -10px;
 }

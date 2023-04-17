@@ -75,7 +75,15 @@ const SpotDetails = () => {
                     <div className='spot-images-div' />
                     <h3>{spot.city}, {spot.state}, {spot.country}</h3>
                     {spot.SpotImages.map(img => {
-                        return <img className='spot-details-image' src={img.url} alt={spot.name} key={img.id}></img>
+                        return <div className='images-container'>
+                            <img className='spot-details-image' src={img.url} alt={spot.name} key={img.id} />
+                            <div className='images-not-found-container'>
+                                <img src='https://www.dunstableroadrunners.org/wp-content/uploads/2019/04/image-coming-soon.jpg' alt='no-image' className='image-not-found'></img>
+                                <img src='https://www.dunstableroadrunners.org/wp-content/uploads/2019/04/image-coming-soon.jpg' alt='no-image' className='image-not-found'></img>
+                                <img src='https://www.dunstableroadrunners.org/wp-content/uploads/2019/04/image-coming-soon.jpg' alt='no-image' className='image-not-found'></img>
+                                <img src='https://www.dunstableroadrunners.org/wp-content/uploads/2019/04/image-coming-soon.jpg' alt='no-image' className='image-not-found'></img>
+                            </div>
+                        </div>
                     })}
                     <div className='big-small-box'>
                         <div className='hosted-by'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</div>
@@ -126,7 +134,7 @@ const SpotDetails = () => {
                                 {sessionUser && sessionUser.id === review.User?.id ?
                                     <OpenModalButton
                                         buttonText='Delete'
-                                        modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
+                                        modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
                                     /> : null}
                             </div>
                         ) : 'Be the first to post a review'}
