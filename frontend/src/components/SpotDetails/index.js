@@ -22,10 +22,10 @@ const SpotDetails = () => {
     }
     // console.log('singleReview ->')
 
-    console.log('ReviewArr', reviewsArr)
+    // console.log('ReviewArr', reviewsArr)
     // // console.log('SPOT--->', spot);
     // console.log('REVIEWSOBJ --->', allReviewsObj);
-    console.log('USER --->', sessionUser);
+    // console.log('USER --->', sessionUser);
 
     useEffect(() => {
         dispatch(getOneSpot(spotId));
@@ -59,7 +59,13 @@ const SpotDetails = () => {
         else return 'New';
     }
 
-    console.log('HELLO:', spotId)
+    // console.log('HELLO:', spotId)
+
+    const dateString = (date) => {
+        const newDate = new Date(date);
+        const formattedDate = newDate.toLocaleString('default', { month: 'long', year: 'numeric' })
+        return formattedDate
+    }
 
     return (
         <div className='spot-container'>
@@ -115,7 +121,7 @@ const SpotDetails = () => {
                         <div className='each-review' key={review.id}>
                             {console.log('REVIEWWWW-------->', review)}
                             <p>{review.User?.firstName}</p>
-                            <p>{review.createdAt}</p>
+                            <p>{dateString(review.createdAt)}</p>
                             <p>{review.review}</p>
 
                             {sessionUser && sessionUser.id === review.User?.id ?
