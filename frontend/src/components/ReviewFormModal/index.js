@@ -9,6 +9,7 @@ const ReviewFormModal = ({ spotId }) => {
   const [review, setReview] = useState("");
   const [stars, setStars] = useState(null);
   const [reviewButton, setReviewButton] = useState();
+  const [hoveredStars, setHoveredStars] = useState(null);
 
   const { closeModal } = useModal();
 
@@ -54,7 +55,6 @@ const ReviewFormModal = ({ spotId }) => {
     } else setReviewButton("review-button-enabled");
   }, [stars, review]);
 
-  const [hoveredStars, setHoveredStars] = useState(null);
 
   return (
     <div className="new-review-container">
