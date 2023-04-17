@@ -1,14 +1,85 @@
-.update-delete {
+.header-manage {
+    margin-left: 50px;
+}
+
+.manage-create-spot {
+    margin-left: 50px;
+}
+
+.manage-spots-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 0px;
+}
+
+.manage-spot-cards {
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 30px;
+    position: relative;
+}
+
+.manage-spot-image {
+    object-fit: cover;
+    height: 300px;
+    width: 380px;
+    border-radius: 5px;
+}
+
+.manage-spot-link {
+    color: black;
+    height: auto;
+}
+
+.manage-spot-price {
+    font-weight: bold;
+}
+
+.manage-avg-rating {
+    margin-right: 50px
+}
+.manage-location-price {
+    display: flex;
+    justify-content: space-between;
+}
+
+.manage-location-rating {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 1470px) {
+    .manage-spots-container {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 1150px) {
+    .manage-spots-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media screen and (max-width: 775px) {
+    .manage-spots-container {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+
+
+.manage-update-delete {
+    margin-top:10px;
     display: flex;
     flex-direction: row;
-    /* justify-content: space-around; */
+    /* justify-content:  */
 }
 
 .update {
     color: white;
     background-color: gray;
     font-weight: bold;
-    width: 200px;
+    width: 140px;
     cursor: pointer;
     margin-right: 3em;
 }
@@ -17,6 +88,6 @@
     color: white;
     background-color: red;
     font-weight: bold;
-    width: 200px;
+    width: 140px;
     cursor: pointer;
 }

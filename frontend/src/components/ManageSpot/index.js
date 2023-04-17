@@ -13,23 +13,37 @@ const ManageSpots = () => {
         dispatch(getAllSpotCurrentUser())
     }, [dispatch])
 
+    const rating = (rating) => {
+        if (typeof rating === 'number') {
+            return (
+                <div>
+                    <i className='fa-solid fa-star star-icon' />
+                    {Number(rating).toFixed(1)}
+                </div>
+            )
+        }
+        else return 'New';
+    }
+
     return (
         <div>
-            <h1>Manage Spots</h1>
-            <NavLink to='/spots/new'>
+            <h1 className='header-manage'>Manage Spots</h1>
+            <NavLink to='/spots/new' className='manage-create-spot'>
                 <button>Create a New Spot</button>
             </NavLink>
-            <div className='all-Spots'>
+            <div className='manage-spots-container'>
                 {spots.map((spot) =>
-                    <div className='spot-cards' key={spot.id}>
-                        <NavLink to={`/spots/${spot.id}`} className='spot-link'>
+                    <div className='manage-spot-cards' key={spot.id}>
+                        <NavLink to={`/spots/${spot.id}`} className='manage-spot-link'>
                             <p>{spot.name}</p>
-                            <img className='spot-image' src={`${spot.previewImage}`}></img>
-                            <div className='spot-price'>{`$${spot.price}`} Night</div>
+                            <img className='manage-spot-image' src={`${spot.previewImage}`}></img>
+                            <div className='manage-location-price'>
                             <div>{`${spot.city}, ${spot.state}`}</div>
-                            <div>{spot.avgRating}</div>
+                            <div className="manage-avg-rating">{rating(spot.avgRating)}</div>
+                            </div>
+                            <div className='manage-spot-price'>{`$${spot.price}`} Night</div>
                         </NavLink>
-                        <div className='update-delete'>
+                        <div className='manage-update-delete'>
                             <NavLink to={`/spots/${spot.id}/edit`}>
                                 <button className="update">Update</button>
                             </NavLink>

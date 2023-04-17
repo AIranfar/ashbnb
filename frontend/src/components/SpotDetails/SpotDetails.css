@@ -9,8 +9,8 @@
 }
 
 .spot-details-image {
-    height: 400px;
-    width: 600px;
+    height: 200px;
+    width: 400px;
     display: flex;
 }
 
@@ -58,6 +58,7 @@
 }
 
 #reserve-button-id {
+    margin-top: 10px;
     font-weight: bold;
     background-color: red;
     width: 300px;
@@ -84,7 +85,7 @@
 }
 
 .star-num-reviews {
-    width: 15%;
+    width: 200px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -92,8 +93,8 @@
 
 .images-not-found-container {
     display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .images-container {
@@ -101,8 +102,9 @@
 }
 
 .image-not-found {
-    height: 195px;
-    width: 250px;
+    height: 90px;
+    width: 175px;
     padding: 10px;
     margin-top: -10px;
+    margin-bottom: 10px;
 }
