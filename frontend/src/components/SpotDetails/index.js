@@ -126,7 +126,7 @@ const SpotDetails = () => {
                                 {sessionUser && sessionUser.id === review.User?.id ?
                                     <OpenModalButton
                                         buttonText='Delete'
-                                        modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} />}
+                                        modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
                                     /> : null}
                             </div>
                         ) : 'Be the first to post a review'}
