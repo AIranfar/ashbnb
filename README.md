@@ -3,10 +3,11 @@
 
 Welcome to my AirBnB clone. Here you can create your own profile. Post and edit spots. Review spots where you have stayed. And much much more.
 
+
+[Ashbnb Live Link](https://ash-auth-me.onrender.com/)
+
 [airbnb-dbdiagram]: ./assets/splash-page.png
 ![airbnb-dbdiagram]
-
-Live Link: https://ash-auth-me.onrender.com/
 
 ## API Documentation
 
