@@ -29,7 +29,11 @@ const AllSpots = () => {
                 </div>
             )
         }
-        else return 'New';
+        else return (
+        <div>
+            <i className='fa-solid fa-star star-icon' /> New
+        </div>
+        )
     }
 
     return (
