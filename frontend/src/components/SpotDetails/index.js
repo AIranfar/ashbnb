@@ -6,6 +6,7 @@ import { getAllReviews } from '../../store/reviews';
 import ReviewFormModal from '../ReviewFormModal';
 import OpenModalButton from '../OpenModalButton';
 import DeleteReviewModal from '../DeleteReviewModal';
+import EditReviewModal from '../EditReviewModal';
 import './SpotDetails.css';
 
 const SpotDetails = () => {
@@ -132,12 +133,21 @@ const SpotDetails = () => {
                                 <p>{review.User?.firstName}</p>
                                 <p>{dateString(review.createdAt)}</p>
                                 <p>{review.review}</p>
-                                {sessionUser && sessionUser.id === review.User?.id ?
-                                    <OpenModalButton
-                                        className='delete-review-button'
-                                        buttonText='Delete'
-                                        modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
-                                    /> : null}
+                                {sessionUser && sessionUser.id === review.User?.id ? (
+                                    <>
+                                        <OpenModalButton
+                                            className='delete-review-button'
+                                            buttonText='Edit'
+                                            modalComponent={<EditReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
+                                        />
+                                        <OpenModalButton
+                                            className='delete-review-button'
+                                            buttonText='Delete'
+                                            modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
+                                        />
+                                    </>
+) : null}
+
                             </div>
                         ) : 'Be the first to post a review'}
                     </div>
