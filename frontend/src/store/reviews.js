@@ -86,6 +86,7 @@ export const deleteReview = (reviewId, spotId) => async dispatch => {
         const data = await response.json()
         dispatch(deleteReviews(reviewId))
         dispatch(getAllReviews(spotId))
+        dispatch(getOneSpot(spotId))
         return data
     }
 }
