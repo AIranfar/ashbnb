@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { useHistory } from "react-router-dom";
 import "./LoginForm.css";
 
 function LoginFormModal() {
-  const history = useHistory();
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
@@ -56,7 +54,7 @@ function LoginFormModal() {
       .catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) {
-          setErrors({credential: "The provided credentials were invalid."});
+          setErrors({credential: "*The provided credentials were invalid"});
         }
       });
   }
@@ -65,11 +63,11 @@ function LoginFormModal() {
     <div className='login-outer-container'>
       <h1 className='login'>Log In</h1>
       <form className='login-inner-container' onSubmit={handleSubmit}>
-        <ul className='errors'>
+        <div className='login-errors'>
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <div key={idx}>{error}</div>
           ))}
-        </ul>
+        </div>
         <input
           type="text"
           className='login-form-input'
