@@ -131,7 +131,6 @@ const CreateASpot = () => {
                             placeholder="City"
                             name="City"
                         />
-                        ,
                         <div className='error-container'>
                             <label className='placement'>State</label>
                             {errors.address ? <p className='errors-style'>{errors.state}</p> : null}
@@ -234,7 +233,7 @@ const CreateASpot = () => {
                     <br />
                     <br />
                 </div>
-                <div className='submit-container'>
+                <div className='new-spot-submit-container'>
                     <button className='submit-button' type="submit">Create Spot</button>
                 </div>
             </form>

@@ -1,11 +1,20 @@
 .submit-button {
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color:red;
     color: white;
-    width: 150px;
-    box-shadow: 2px 2px 2px black;
+    width: 300px;
+    height: 3rem;
     padding: 5px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+.submit-button:hover {
+    background-color: rgba(252, 43, 43, 0.864);
 }
 
 .input-box {
@@ -21,17 +30,17 @@
     width: 30%;
 }
 
-.submit-container {
+.new-spot-submit-container {
     display: flex;
     justify-content: center;
     margin-bottom: 100px;
-    margin-top: 30px;
+    /* margin-top: 30px; */
+    border-top: 2px solid black;
 }
 
 .photo-container {
     display: flex;
     flex-direction: column;
-    border-bottom: 2px solid black;
 }
 
 .error-container {

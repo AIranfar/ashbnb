@@ -42,7 +42,7 @@ const allNormalSpots = (data) => {
     data.Spots.forEach(spot => {
         allSpots[spot.id] = spot;
     });
-    console.log('NORMAL:', allSpots)
+    // console.log('NORMAL:', allSpots)
     return allSpots;
 }
 
@@ -51,7 +51,7 @@ export const getAllSpots = () => async dispatch => {
 
     if (response.ok) {
         const spots = await response.json();
-        console.log('SPOTS!!', spots)
+        // console.log('SPOTS!!', spots)
         const data = allNormalSpots(spots);
         dispatch(all(data))
         return data;
@@ -63,9 +63,9 @@ export const getAllSpotCurrentUser = () => async dispatch => {
 
     if (response.ok) {
         const spots = await response.json();
-        console.log('SPOTSSS:', spots)
+        // console.log('SPOTSSS:', spots)
         const normalSpots = allNormalSpots(spots)
-        console.log('DATA!!', normalSpots)
+        // console.log('DATA!!', normalSpots)
         dispatch(getUserSpots(normalSpots))
         return spots;
     }
