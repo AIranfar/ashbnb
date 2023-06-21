@@ -56,29 +56,25 @@ function ProfileButton({ user }) {
               <ul className='hello-first-name'>Hello, {user.firstName}</ul>
               <ul className='user-email'>{user.email}</ul>
               <NavLink to='/spots/current' className='manage-spots'>Manage Spots</NavLink>
-              <ul>
-                <button className='logout-button' onClick={logout}>
-                  Log Out
-                </button>
-              </ul>
+              <button className='logout-button' onClick={logout}>
+                Log Out
+              </button>
             </div>
           </>
         ) : (
           <div className='login-signup-container'>
-            <ul className="login-button">
               <OpenModalButton
+                className='profile-login-button'
                 buttonText="Log In"
                 onButtonClick={closeMenu}
                 modalComponent={<LoginFormModal />}
                 />
-            </ul>
-            <ul>
               <OpenModalButton
                 buttonText="Sign Up"
+                className='sign-up-login-button'
                 onButtonClick={closeMenu}
                 modalComponent={<SignupFormModal />}
                 />
-            </ul>
           </div>
         )}
       </ul>

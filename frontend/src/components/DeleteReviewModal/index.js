@@ -6,11 +6,10 @@ import './DeleteReviewModal.css';
 
 const DeleteReviewModal = ({ reviewId, spotId }) => {
     const dispatch = useDispatch();
-    // const { reviewId } = useParams();
-    console.log('ID--->', reviewId)
     const { closeModal } = useModal();
     const [refreshPage, setRefreshPage] = useState(false)
 
+    // console.log('ID--->', reviewId)
     const handleSubmit = () => {
         dispatch(deleteReview(reviewId, spotId));
         closeModal();

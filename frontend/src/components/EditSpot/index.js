@@ -12,14 +12,18 @@ const EditSpot = () => {
     const spot = useSelector(state => state.spots.allSpots[id])
     // console.log('SPOTS ---> ', spot)
 
-    const [country, setCountry] = useState(spot.country);
-    const [address, setAddress] = useState(spot.address);
-    const [city, setCity] = useState(spot.city);
-    const [state, setState] = useState(spot.state);
-    const [description, setDescription] = useState(spot.description);
-    const [name, setName] = useState(spot.name);
-    const [price, setPrice] = useState(spot.price);
+    const [country, setCountry] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [description, setDescription] = useState('');
+    const [name, setName] = useState('');
+    const [price, setPrice] = useState('');
     const [errors, setErrors] = useState('');
+
+    useEffect(() => {
+        dispatch(getOneSpot(id));
+    }, [dispatch]);
 
     useEffect(() => {
         if (spot) {
@@ -33,8 +37,10 @@ const EditSpot = () => {
         }
       }, [spot]);
 
-    if (!spot) {
-        return (<div>Loading...</div>)
+
+
+      if (!spot || !country || !address || !city || !state || !description || !name || !price) {
+        return null; // or render a placeholder component, such as a loading spinner
     }
 
     const handleSubmit = async (e) => {
@@ -167,7 +173,7 @@ const EditSpot = () => {
                     name="State"
                 />
                 <br />
-                <div className='submit-container'>
+                <div className='edit-spot-submit-container'>
                     <button class='submit-button' type="submit">Update your Spot</button>
                 </div>
             </form>

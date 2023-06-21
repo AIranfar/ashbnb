@@ -16,7 +16,7 @@ function LoginFormModal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    history.push('/')
+    // history.push('/')
     setErrors([]);
     return dispatch(sessionActions.login({ credential, password }))
       .then(closeModal)
@@ -50,17 +50,15 @@ function LoginFormModal() {
     }
   }, [credential, password])
 
-  const demoUserButton = (e) => {
-    setCredential('Demo-lition');
-    setPassword('password');
-    return dispatch(sessionActions.login({ credential, password }))
+  const demoUserButton = () => {
+    return dispatch(sessionActions.login({ credential: "Demo-lition", password: "password" }))
       .then(closeModal)
-      .catch(
-        async (res) => {
-          const data = await res.json();
-          if (data && data.errors) setErrors(data.errors)
+      .catch(async (res) => {
+        const data = await res.json();
+        if (data && data.errors) {
+          setErrors({credential: "The provided credentials were invalid."});
         }
-      )
+      });
   }
 
   return (

@@ -1,0 +1,7 @@
+.edit-spot-submit-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 100px;
+    margin-top: 30px;
+    border-top: 2px solid black;
+}

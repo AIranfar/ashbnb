@@ -60,6 +60,7 @@
     box-shadow: 1px 1px 1px 1px black;
     justify-content: flex-end;
     cursor: pointer;
+    border-radius: 30px;
 }
 
 .spot-description {
@@ -101,4 +102,17 @@
     padding: 10px;
     margin-top: -10px;
     margin-bottom: 10px;
+}
+
+.post-new-review-button,.delete-review-button {
+    height: 2rem;
+    width: 200px;
+    color: white;
+    background-color: gray;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.post-new-review-button:hover, .delete-review-button:hover {
+    background-color: rgb(160, 160, 160);
 }

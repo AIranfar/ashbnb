@@ -22,14 +22,18 @@ const ManageSpots = () => {
                 </div>
             )
         }
-        else return 'New';
+        else return (
+            <div>
+                <i className='fa-solid fa-star star-icon' /> New
+            </div>
+            )
     }
 
     return (
         <div>
             <h1 className='header-manage'>Manage Spots</h1>
             <NavLink to='/spots/new' className='manage-create-spot'>
-                <button>Create a New Spot</button>
+                <button className="create-spot-button">Create a New Spot</button>
             </NavLink>
             <div className='manage-spots-container'>
                 {spots.map((spot) =>

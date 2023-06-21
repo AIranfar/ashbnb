@@ -77,17 +77,38 @@
 
 .update {
     color: white;
-    background-color: gray;
-    font-weight: bold;
+    background-color: rgb(128, 128, 128);
     width: 140px;
     cursor: pointer;
     margin-right: 3em;
+    border-radius: 10px;
 }
 
 .delete-button {
     color: white;
     background-color: red;
-    font-weight: bold;
     width: 140px;
     cursor: pointer;
+    border-radius: 10px;
+}
+
+.update:hover, .create-spot-button:hover {
+    background-color: rgba(155, 155, 155, 0.882);
+    font-weight: bold;
+}
+
+.delete-button:hover {
+    background-color: rgba(255, 0, 0, 0.78);
+    font-weight: bold;
+}
+
+.create-spot-button {
+    color: white;
+    background-color: rgb(128, 128, 128);
+    width: 140px;
+    cursor: pointer;
+    margin-right: 3em;
+    border-radius: 20px;
+    width: 10rem;
+    height: 2rem;
 }

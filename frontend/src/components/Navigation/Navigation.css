@@ -1,6 +1,7 @@
 .hidden {
     display: none;
 }
+
 .login {
     display: flex;
     flex-direction: column;
@@ -29,12 +30,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: none;
     position: absolute;
-    margin-top: 30px;
-    right: 40px;
+    gap: 3px;
+    margin-top: 40px;
+    right: 65px;
     background-color: white;
-    box-shadow: 5px 4px 4px gray;
+    box-shadow: 2px 2px 2px gray;
     border-radius: 10px;
 }
 
@@ -43,12 +44,15 @@
     flex-direction: column;
     height: 60px;
     justify-content: space-evenly;
+    align-items: center;
     position: absolute;
-    right: 40px;
+    right: 70px;
     top: 70px;
     background-color: white;
     box-shadow: 5px 4px 4px gray;
     border-radius: 10px;
+    width: 10rem;
+    height: 5rem;
 }
 
 .login-button {
@@ -67,8 +71,11 @@
 }
 
 .logout-button {
-    margin-right: 40px;
-    margin-bottom:10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 1rem;
 }
 
 .profile-button {
@@ -92,7 +99,7 @@
 
 .create-button {
     display: flex;
-    color:white;
+    color: white;
     text-decoration: none;
     font-weight: bold;
     justify-content: flex-end;
@@ -120,4 +127,20 @@
 
 .test {
     display: flex;
+}
+
+.profile-login-button, .sign-up-login-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 550;
+    color: rgb(83, 83, 83);
+}
+
+
+.profile-login-button:hover, .sign-up-login-button:hover, .logout-button:hover, .manage-spots:hover {
+    color: rgba(255, 0, 0, 0.634);
+    text-decoration: underline;
 }

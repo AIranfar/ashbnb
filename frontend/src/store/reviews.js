@@ -48,9 +48,11 @@ export const addNewReview = (review, spotId) => async dispatch => {
 
     if (response.ok) {
         const newReview = await response.json();
-        await dispatch(addReview(newReview));
-        await dispatch(getOneSpot(spotId));
-        return newReview;
+        console.log('NEW REVIEW', newReview)
+        dispatch(addReview(newReview));
+        dispatch(getAllReviews(spotId))
+        dispatch(getOneSpot(spotId));
+        // return newReview;
     }
 }
 

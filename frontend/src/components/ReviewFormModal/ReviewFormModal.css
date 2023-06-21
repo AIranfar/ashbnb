@@ -36,7 +36,7 @@
 }
 
 #review-button-enabled {
-    background-color: red;
+    background-color: rgb(253, 55, 55);
     color: white;
     width: 300px;
     box-shadow: 1px 1px 1px 1px black;
@@ -45,4 +45,15 @@
 #review-button-enabled:hover {
     cursor: pointer;
     background-color: rgb(214, 95, 95);
+}
+
+.submit-review-button {
+    height: 2rem;
+    border-radius: 20px;
+}
+
+.new-review-submit-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
 }

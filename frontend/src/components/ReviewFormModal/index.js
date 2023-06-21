@@ -66,7 +66,7 @@ const ReviewFormModal = ({ spotId }) => {
           type="text"
           rows="10"
           value={review}
-          placeholder="Leave your review here"
+          placeholder="Leave your review here..."
           onChange={(e) => setReview(e.target.value)}
         />
         <br />
@@ -85,8 +85,9 @@ const ReviewFormModal = ({ spotId }) => {
           ))}
           <div className="stars">Stars</div>
         </div>
-        <div className="submit-container">
+        <div className="new-review-submit-container">
           <button
+            className='submit-review-button'
             id={reviewButton}
             type="submit"
             disabled={disabledButton()}
