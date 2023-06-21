@@ -134,9 +134,9 @@ const SpotDetails = () => {
                                 <p>{dateString(review.createdAt)}</p>
                                 <p>{review.review}</p>
                                 {sessionUser && sessionUser.id === review.User?.id ? (
-                                    <>
+                                    <div className='review-actions-container'>
                                         <OpenModalButton
-                                            className='delete-review-button'
+                                            className='edit-review-button'
                                             buttonText='Edit'
                                             modalComponent={<EditReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
                                         />
@@ -145,7 +145,7 @@ const SpotDetails = () => {
                                             buttonText='Delete'
                                             modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
                                         />
-                                    </>
+                                    </div>
 ) : null}
 
                             </div>

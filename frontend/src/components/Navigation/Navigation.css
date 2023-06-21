@@ -7,13 +7,19 @@
     flex-direction: column;
 }
 
+.logo-container {
+    display: flex;
+    gap: 0px
+}
+
 .logo {
-    color: black;
+    color: rgb(62, 62, 62);
     text-decoration: none;
-    font-size: 40px;
+    font-size: 75px;
     align-items: right;
-    margin-top: 17px;
-    /* margin-left: px; */
+    margin-top: 20px;
+    margin-left: -20px;
+    font-family: 'Tangerine', cursive;
 }
 
 .nav-bar {
@@ -113,8 +119,8 @@
 }
 
 .fancy-a-pic {
-    height: 70px;
-    width: 70px;
+    height: 100px;
+    width: 100px;
     cursor: pointer;
     margin-left: 25px;
 }
@@ -123,10 +129,6 @@
     color: black;
     display: flex;
     margin-bottom: 5px;
-}
-
-.test {
-    display: flex;
 }
 
 .profile-login-button, .sign-up-login-button {
