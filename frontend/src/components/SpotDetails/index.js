@@ -119,6 +119,7 @@ const SpotDetails = () => {
                     {sessionUser && sessionUser.id !== spot.Owner.id && !renderPost() && (
                         <div>
                             <OpenModalButton
+                                className='post-new-review-button'
                                 buttonText='Post Your Review'
                                 modalComponent={<ReviewFormModal spotId={spotId} />}
                             />
@@ -131,9 +132,9 @@ const SpotDetails = () => {
                                 <p>{review.User?.firstName}</p>
                                 <p>{dateString(review.createdAt)}</p>
                                 <p>{review.review}</p>
-
                                 {sessionUser && sessionUser.id === review.User?.id ?
                                     <OpenModalButton
+                                        className='delete-review-button'
                                         buttonText='Delete'
                                         modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
                                     /> : null}
