@@ -23,7 +23,7 @@ const SpotDetails = () => {
     // console.log('singleReview ->')
 
     // console.log('ReviewArr', reviewsArr)
-    console.log('SPOT--->', spot);
+    // console.log('SPOT--->', spot);
     // console.log('REVIEWSOBJ --->', allReviewsObj);
     // console.log('USER --->', sessionUser);
 

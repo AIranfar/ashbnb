@@ -137,7 +137,7 @@ const initialState = {
 };
 
 const spotsReducer = (state = initialState, action) => {
-    console.log('ACTION -->', action)
+    // console.log('ACTION -->', action)
     switch (action.type) {
         case ALL:
             return { ...state, allSpots: { ...action.list }};
