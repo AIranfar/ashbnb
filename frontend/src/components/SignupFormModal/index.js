@@ -60,18 +60,26 @@ function SignupFormPage() {
     <div className='signup-outer-container'>
       <h1>Sign Up</h1>
       <form className='signup-inner-container' onSubmit={handleSubmit}>
-        <ul className='errors'>
-          {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-        </ul>
-        <input
-          type="text"
-          className='form-input'
-          value={email}
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <br />
+        <div className='signup-errors'>
+          {errors.map((error, idx) => <div key={idx}>{error}</div>)}
+        </div>
+        <div className="signup-container">
+          <label className="signup-label-text">
+            Email
+          </label>
+          <input
+            type="text"
+            className='form-input'
+            value={email}
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="signup-container">
+          <label className="signup-label-text">
+            Username
+          </label>
         <input
           type="text"
           className='form-input'
@@ -80,7 +88,11 @@ function SignupFormPage() {
           onChange={(e) => setUsername(e.target.value)}
           required
         />
-        <br />
+        </div>
+        <div className="signup-container">
+          <label className="signup-label-text">
+            First Name
+          </label>
         <input
           type="text"
           className='form-input'
@@ -89,7 +101,11 @@ function SignupFormPage() {
           onChange={(e) => setFirstName(e.target.value)}
           required
         />
-        <br />
+        </div>
+        <div className="signup-container">
+          <label className="signup-label-text">
+            Last Name
+          </label>
         <input
           type="text"
           className='form-input'
@@ -98,7 +114,11 @@ function SignupFormPage() {
           onChange={(e) => setLastName(e.target.value)}
           required
         />
-        <br />
+        </div>
+        <div className="signup-container">
+          <label className="signup-label-text">
+            Password
+          </label>
         <input
           type="password"
           className='form-input'
@@ -107,7 +127,11 @@ function SignupFormPage() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <br />
+        </div>
+        <div className="signup-container">
+          <label className="signup-label-text">
+            Confirm Password
+          </label>
         <input
           type="password"
           className='form-input'
@@ -116,7 +140,7 @@ function SignupFormPage() {
           onChange={(e) => setConfirmPassword(e.target.value)}
           required
         />
-        <br />
+        </div>
         <button className='signup-button' id={signUp} type="submit" disabled={disabledButton()}>Sign Up</button>
       </form>
     </div>

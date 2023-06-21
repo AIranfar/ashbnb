@@ -55,6 +55,7 @@
     margin-top: 10px;
     font-weight: bold;
     background-color: red;
+    color: white;
     width: 300px;
     height: 50px;
     box-shadow: 1px 1px 1px 1px black;
@@ -104,7 +105,7 @@
     margin-bottom: 10px;
 }
 
-.post-new-review-button,.delete-review-button {
+.post-new-review-button {
     height: 2rem;
     width: 200px;
     color: white;
@@ -113,6 +114,32 @@
     cursor: pointer;
 }
 
-.post-new-review-button:hover, .delete-review-button:hover {
+.edit-review-button {
+    height: 2rem;
+    width: 200px;
+    color: white;
+    background-color: gray;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.delete-review-button {
+    color: white;
+    background-color: red;
+    width: 200px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.post-new-review-button:hover, .edit-review-button:hover {
     background-color: rgb(160, 160, 160);
+}
+
+.delete-review-button:hover {
+    background-color: rgba(255, 0, 0, 0.78);
+}
+
+.review-actions-container {
+    display: flex;
+    gap: 1rem;
 }

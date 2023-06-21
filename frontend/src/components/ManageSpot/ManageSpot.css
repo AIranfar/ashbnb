@@ -79,6 +79,7 @@
     color: white;
     background-color: rgb(128, 128, 128);
     width: 140px;
+    height: 1.5rem;
     cursor: pointer;
     margin-right: 3em;
     border-radius: 10px;
@@ -90,6 +91,7 @@
     width: 140px;
     cursor: pointer;
     border-radius: 10px;
+    height: 1.5rem;
 }
 
 .update:hover, .create-spot-button:hover {

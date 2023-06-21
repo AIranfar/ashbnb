@@ -28,11 +28,11 @@ function Navigation({ isLoaded }) {
 
   return (
     <ul className='nav-bar'>
-      <div className='test'>
+      <div className='logo-container'>
         <NavLink exact to='/'>
           <img src='/images/fancy-a.png' alt='fancy-a' className='fancy-a-pic' />
         </NavLink>
-        <NavLink className='logo' exact to='/'>ashbnb</NavLink>
+        <NavLink className='logo' exact to='/'>shbnb</NavLink>
       </div>
       <div className='create'>
         {sessionUser ? <NavLink className='create-button' to='/spots/new'>Create a New Spot</NavLink> : null}
