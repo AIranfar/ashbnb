@@ -36,7 +36,7 @@ const ManageReviews = () => {
                 {userReviewsArr.length ? userReviewsArr.reverse().map((review) =>
                 <div key={review.id}>
                     {/* <div>{review.user}</div> */}
-                    {console.log('REVIEW USER-->', review)}
+                    {/* {console.log('REVIEW USER-->', review)} */}
                 </div>
                 ) : 'You have no reviews'}
             </div>

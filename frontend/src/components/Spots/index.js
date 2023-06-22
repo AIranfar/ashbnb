@@ -8,8 +8,8 @@ const AllSpots = () => {
     const dispatch = useDispatch();
     const spots = useSelector(state => state.spots.allSpots)
     const spotsArr = Object.values(spots)
-    console.log('SPOTSarr-->', spotsArr)
-    console.log('Spots', spots)
+    // console.log('SPOTSarr-->', spotsArr)
+    // console.log('Spots', spots)
 
 
     useEffect(() => {

@@ -18,6 +18,7 @@ const CreateBooking = ({ spotId, spot }) => {
     e.preventDefault();
 
     const newBooking = {
+        spot,
         spotId,
         startDate,
         endDate

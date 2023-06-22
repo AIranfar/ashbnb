@@ -34,10 +34,6 @@ const SpotDetails = () => {
         dispatch(getAllReviews(spotId))
     }, [dispatch, spotId])
 
-    // useEffect(() => {
-    //     dispatch(getAllReviews(spotId))
-    // }, [dispatch, spotId])
-
     if (!spot || !spot.name) {
         return (<h1>loading...</h1>)
     }

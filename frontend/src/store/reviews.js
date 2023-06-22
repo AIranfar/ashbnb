@@ -12,7 +12,7 @@ const loadReviews = reviews => ({
     reviews
 });
 
-const user_reviews = reviews => ({
+const userReviews = reviews => ({
     type: USER_REVIEWS,
     reviews
 })
@@ -51,14 +51,13 @@ export const getAllReviews = (spotId) => async dispatch => {
     }
 }
 
-export const getUserReviews = (userId) => async dispatch => {
-    const response = await csrfFetch(`/api/reviews/${userId}`)
+export const getUserReviews = () => async dispatch => {
+    const response = await csrfFetch('/api/reviews/current')
 
     if (response.ok) {
         const reviews = await response.json();
-        console.log('Review Response', reviews)
-        // const normalReviews = allNormalReviews(reviews)
-        dispatch(user_reviews(reviews))
+        const normalReviews = allNormalReviews(reviews.Reviews)
+        dispatch(userReviews(normalReviews))
     }
 }
 

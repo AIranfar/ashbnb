@@ -25,26 +25,41 @@ export const actionDeleteBooking = (bookingid) => ({
     bookingid
 })
 
+const allNormalBookings = (data) => {
+    const allBookings = {};
+    data.Bookings.forEach(booking => {
+        allBookings[booking.id] = booking;
+    });
+    // console.log('NORMAL:', allSpots)
+    return allBookings;
+}
+
 export const getUserBookings = () => async dispatch => {
     const response = await csrfFetch('/api/bookings/current')
 
     if (response.ok) {
         const bookings = await response.json()
-        dispatch(actionGetUserBookings(bookings))
+        const normalBookings = allNormalBookings(bookings)
+        dispatch(actionGetUserBookings(normalBookings))
     }
 }
 
 export const createNewBooking = (newBooking) => async dispatch => {
-    const { spotId, startDate, endDate } = newBooking
-    const response = await csrfFetch(`/api/bookings/${spotId}/bookings`, {
+    const { spot, spotId, startDate, endDate } = newBooking
+    // console.log('NEW BOOKING', newBooking)
+    const response = await csrfFetch(`/api/spots/${spotId}/bookings`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({spotId, startDate, endDate})
+        body: JSON.stringify({spot, spotId, startDate, endDate})
     })
 
     if (response.ok) {
         const newBooking = await response.json();
+        // console.log('NEW BOOKING RESPONSE', newBooking)
         dispatch(actionCreateBooking(newBooking))
+    } else {
+        const bookingErrors = await response.json();
+        return bookingErrors
     }
 }
 
