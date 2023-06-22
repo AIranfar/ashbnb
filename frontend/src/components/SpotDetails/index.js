@@ -7,6 +7,7 @@ import ReviewFormModal from '../ReviewFormModal';
 import OpenModalButton from '../OpenModalButton';
 import DeleteReviewModal from '../DeleteReviewModal';
 import EditReviewModal from '../EditReviewModal';
+import CreateBookingModal from '../CreateBookingModal'
 import './SpotDetails.css';
 
 const SpotDetails = () => {
@@ -105,7 +106,11 @@ const SpotDetails = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button id='reserve-button-id' onClick={handleClick}>RESERVE</button>
+                            <OpenModalButton
+                                className='reserve-button-id'
+                                buttonText='Reserve'
+                                modalComponent={<CreateBookingModal spotId={spotId} />}
+                            />
                         </div>
                     </div>
                     <div className='spot-description'>{spot.description}</div>
