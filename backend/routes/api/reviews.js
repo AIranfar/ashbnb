@@ -5,7 +5,7 @@ const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../d
 
 // Get all reviews of Current User --DONE
 
-router.get('/current', requireAuth, async (req, res) => {
+router.get('/:userId', requireAuth, async (req, res) => {
     const allReviews = await Review.findAll({
         where: {
             userId: req.user.id
