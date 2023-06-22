@@ -465,7 +465,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             "message": "Validation error",
             "statusCode": res.statusCode,
             "errors": {
-                "endDate": "endDate cannot be on or before startDate"
+                "endDate": "End Date cannot be on or before Start Date"
             }
         })
     }

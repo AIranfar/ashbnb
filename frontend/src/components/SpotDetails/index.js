@@ -42,10 +42,6 @@ const SpotDetails = () => {
         return (<h1>loading...</h1>)
     }
 
-    function handleClick() {
-        alert('Feature Coming Soon...')
-    };
-
     if (!spot.Owner || !spot.SpotImages.length) {
         return (<div>Loading...</div>)
     }
@@ -109,7 +105,7 @@ const SpotDetails = () => {
                             <OpenModalButton
                                 className='reserve-button-id'
                                 buttonText='Reserve'
-                                modalComponent={<CreateBookingModal spotId={spotId} />}
+                                modalComponent={<CreateBookingModal spotId={spotId} spot={spot} />}
                             />
                         </div>
                     </div>

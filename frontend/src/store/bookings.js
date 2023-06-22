@@ -34,6 +34,20 @@ export const getUserBookings = () => async dispatch => {
     }
 }
 
+export const createNewBooking = (newBooking) => async dispatch => {
+    const { spotId, startDate, endDate } = newBooking
+    const response = await csrfFetch(`/api/bookings/${spotId}/bookings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({spotId, startDate, endDate})
+    })
+
+    if (response.ok) {
+        const newBooking = await response.json();
+        dispatch(actionCreateBooking(newBooking))
+    }
+}
+
 const initialState = { bookings: {} }
 
 const bookingsReducer = (state = initialState, action) => {
