@@ -1,5 +1,48 @@
+.manage-reviews-content-wrapper {
+    display: flex;
+    gap: 50px
+}
+
 .manage-reviews-image {
-    height: 100px;
-    width: 100px;
+    height: 200px;
+    width: 250px;
     object-fit: cover;
+}
+
+
+.manage-reviews-reviews {
+    margin-top: 50px;
+    margin-left: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px
+}
+
+.manage-reviews-spot-name {
+    color: black;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.manage-reviews-navlink {
+    text-decoration: none;
+}
+
+.manage-reviews-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px
+}
+
+
+.manage-reviews-date-review {
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+
+.manage-review-review-content {
+    font-size: 20px;
+
 }
