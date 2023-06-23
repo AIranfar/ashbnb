@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { getOneSpot } from "../../store/spots";
 import { getAllReviews } from '../../store/reviews';
 import ReviewFormModal from '../ReviewFormModal';
@@ -97,13 +97,17 @@ const SpotDetails = () => {
                                         {numReviews && numReviews !== 1 ? numReviews + ' reviews' : ''}
                                     </div>
                                 </div>
-                                {/* {console.log('SPOTSPOTSPOT', spot)} */}
                             </div>
-                            <OpenModalButton
-                                className='reserve-button-id'
-                                buttonText='Reserve this spot'
-                                modalComponent={<CreateBookingModal spotId={spotId} spot={spot} />}
-                            />
+                            {sessionUser.id !== spot.ownerId ?
+                                <OpenModalButton
+                                    className='reserve-button-id'
+                                    buttonText='Reserve this spot'
+                                    modalComponent={<CreateBookingModal spotId={spotId} spot={spot} />}
+                                /> :
+                                <NavLink to={`/spots/${spot.id}/edit`}>
+                                    <button className="reserve-button-id">Update Spot Details</button>
+                                </NavLink>
+                                }
                         </div>
                     </div>
                     <div className='spot-description'>{spot.description}</div>
