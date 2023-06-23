@@ -10,6 +10,8 @@ const CreateBooking = ({ spotId, spot }) => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
 
+  console.log('SPOTSPOT ->', spot)
+  
   useEffect(() => {
     dispatch(getUserBookings())
   }, [dispatch])

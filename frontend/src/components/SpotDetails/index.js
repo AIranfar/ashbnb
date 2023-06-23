@@ -97,10 +97,11 @@ const SpotDetails = () => {
                                         {numReviews && numReviews !== 1 ? numReviews + ' reviews' : ''}
                                     </div>
                                 </div>
+                                {/* {console.log('SPOTSPOTSPOT', spot)} */}
                             </div>
                             <OpenModalButton
                                 className='reserve-button-id'
-                                buttonText='Reserve'
+                                buttonText='Reserve this spot'
                                 modalComponent={<CreateBookingModal spotId={spotId} spot={spot} />}
                             />
                         </div>

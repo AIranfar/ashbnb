@@ -30,7 +30,6 @@ const allNormalBookings = (data) => {
     data.Bookings.forEach(booking => {
         allBookings[booking.id] = booking;
     });
-    // console.log('NORMAL:', allSpots)
     return allBookings;
 }
 
@@ -55,7 +54,7 @@ export const createNewBooking = (newBooking) => async dispatch => {
 
     if (response.ok) {
         const newBooking = await response.json();
-        // console.log('NEW BOOKING RESPONSE', newBooking)
+        console.log('NEW BOOKING RESPONSE', newBooking)
         dispatch(actionCreateBooking(newBooking))
     } else {
         const bookingErrors = await response.json();
