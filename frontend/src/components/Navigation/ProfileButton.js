@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from "react-router-dom";
 import * as sessionActions from '../../store/session';
 import OpenModalButton from '../OpenModalButton';
@@ -12,6 +12,7 @@ function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const sessionUser = useSelector((state) => state.session.user)
 
   const openMenu = () => {
     if (showMenu) return;
@@ -55,7 +56,9 @@ function ProfileButton({ user }) {
             <div className='profile-container'>
               <ul className='hello-first-name'>Hello, {user.firstName}</ul>
               <ul className='user-email'>{user.email}</ul>
-              <NavLink to='/spots/current' className='manage-spots'>Manage Spots</NavLink>
+              <NavLink to='/spots/current' className='menu-manage-buttons'>Manage Spots</NavLink>
+              <NavLink to='/reviews/current' className='menu-manage-buttons'>Manage Reviews</NavLink>
+              <NavLink to='/bookings/current' className='menu-manage-buttons'>Manage Bookings</NavLink>
               <button className='logout-button' onClick={logout}>
                 Log Out
               </button>

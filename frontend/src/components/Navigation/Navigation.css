@@ -36,6 +36,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     position: absolute;
     gap: 3px;
     margin-top: 40px;
@@ -113,6 +114,10 @@
     padding-right: 10px;
 }
 
+.create-button:hover {
+    text-decoration: underline;
+}
+
 .create {
     display: flex;
     padding: 5px;
@@ -125,10 +130,11 @@
     margin-left: 25px;
 }
 
-.manage-spots {
+.menu-manage-buttons {
     color: black;
     display: flex;
     margin-bottom: 5px;
+    text-decoration: none;
 }
 
 .profile-login-button, .sign-up-login-button {
@@ -142,7 +148,7 @@
 }
 
 
-.profile-login-button:hover, .sign-up-login-button:hover, .logout-button:hover, .manage-spots:hover {
+.profile-login-button:hover, .sign-up-login-button:hover, .logout-button:hover, .menu-manage-buttons:hover {
     color: rgba(255, 0, 0, 0.634);
     text-decoration: underline;
 }

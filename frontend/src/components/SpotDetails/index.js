@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 import { getOneSpot } from "../../store/spots";
 import { getAllReviews } from '../../store/reviews';
 import ReviewFormModal from '../ReviewFormModal';
 import OpenModalButton from '../OpenModalButton';
 import DeleteReviewModal from '../DeleteReviewModal';
 import EditReviewModal from '../EditReviewModal';
+import CreateBookingModal from '../CreateBookingModal'
 import './SpotDetails.css';
 
 const SpotDetails = () => {
@@ -33,17 +34,9 @@ const SpotDetails = () => {
         dispatch(getAllReviews(spotId))
     }, [dispatch, spotId])
 
-    // useEffect(() => {
-    //     dispatch(getAllReviews(spotId))
-    // }, [dispatch, spotId])
-
     if (!spot || !spot.name) {
         return (<h1>loading...</h1>)
     }
-
-    function handleClick() {
-        alert('Feature Coming Soon...')
-    };
 
     if (!spot.Owner || !spot.SpotImages.length) {
         return (<div>Loading...</div>)
@@ -105,7 +98,16 @@ const SpotDetails = () => {
                                     </div>
                                 </div>
                             </div>
-                            <button id='reserve-button-id' onClick={handleClick}>RESERVE</button>
+                            {sessionUser.id !== spot.ownerId ?
+                                <OpenModalButton
+                                    className='reserve-button-id'
+                                    buttonText='Reserve this spot'
+                                    modalComponent={<CreateBookingModal spotId={spotId} spot={spot} />}
+                                /> :
+                                <NavLink to={`/spots/${spot.id}/edit`}>
+                                    <button className="reserve-button-id">Update Spot Details</button>
+                                </NavLink>
+                                }
                         </div>
                     </div>
                     <div className='spot-description'>{spot.description}</div>

@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 import { getOneSpot } from "./spots";
 
 const ALL = 'reviews/All_REVIEWS';
+const USER_REVIEWS = 'reviews/USER_REVIEWS'
 const CREATE = 'reviews/CREATE_REVIEW';
 const EDIT = 'reviews/EDIT_REVIEW'
 const DELETE = 'spots/DELETE-REVIEW';
@@ -10,6 +11,11 @@ const loadReviews = reviews => ({
     type: ALL,
     reviews
 });
+
+const userReviews = reviews => ({
+    type: USER_REVIEWS,
+    reviews
+})
 
 const addReview = review => ({
     type: CREATE,
@@ -45,6 +51,16 @@ export const getAllReviews = (spotId) => async dispatch => {
     }
 }
 
+export const getUserReviews = () => async dispatch => {
+    const response = await csrfFetch('/api/reviews/current')
+
+    if (response.ok) {
+        const reviews = await response.json();
+        const normalReviews = allNormalReviews(reviews.Reviews)
+        dispatch(userReviews(normalReviews))
+    }
+}
+
 export const addNewReview = (review, spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
         method: 'POST',
@@ -54,7 +70,7 @@ export const addNewReview = (review, spotId) => async dispatch => {
 
     if (response.ok) {
         const newReview = await response.json();
-        console.log('NEW REVIEW', newReview)
+        // console.log('NEW REVIEW', newReview)
         dispatch(addReview(newReview));
         dispatch(getAllReviews(spotId))
         dispatch(getOneSpot(spotId));
@@ -96,6 +112,8 @@ const initialState = { allReviews: {}, oneReview: {} }
 const reviewsReducer = (state = initialState, action) => {
     switch(action.type) {
         case ALL:
+            return { ...state, allReviews: { ...action.reviews }};
+        case USER_REVIEWS:
             return { ...state, allReviews: { ...action.reviews }};
         case CREATE:
             const newState = { ...state, allReviews: { ...state.allReviews }}

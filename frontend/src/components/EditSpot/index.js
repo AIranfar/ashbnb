@@ -9,38 +9,36 @@ const EditSpot = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
     const history = useHistory();
-    const spot = useSelector(state => state.spots.allSpots[id])
-    // console.log('SPOTS ---> ', spot)
+    const spot = useSelector(state => state.spots.singleSpot)
+    console.log('SPOTS ---> ', spot)
 
-    const [country, setCountry] = useState('');
-    const [address, setAddress] = useState('');
-    const [city, setCity] = useState('');
-    const [state, setState] = useState('');
-    const [description, setDescription] = useState('');
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
+    const [country, setCountry] = useState(spot.country);
+    const [address, setAddress] = useState(spot.address);
+    const [city, setCity] = useState(spot.city);
+    const [state, setState] = useState(spot.state);
+    const [description, setDescription] = useState(spot.description);
+    const [name, setName] = useState(spot.name);
+    const [price, setPrice] = useState(spot.price);
     const [errors, setErrors] = useState('');
 
     useEffect(() => {
-        dispatch(getOneSpot(id));
-    }, [dispatch]);
+        if (spot) {
+            setCountry(spot.country || '');
+            setAddress(spot.address || '');
+            setCity(spot.city || '');
+            setState(spot.state || '');
+            setDescription(spot.description || '');
+            setName(spot.name || '');
+            setPrice(Number(spot.price).toFixed(2) || '');
+        }
+    }, [spot]);
 
     useEffect(() => {
-        if (spot) {
-          setCountry(spot.country || '');
-          setAddress(spot.address || '');
-          setCity(spot.city || '');
-          setState(spot.state || '');
-          setDescription(spot.description || '');
-          setName(spot.name || '');
-          setPrice(Number(spot.price).toFixed(2) || '');
-        }
-      }, [spot]);
+        dispatch(getOneSpot(id));
+    }, [dispatch, id]);
 
-
-
-      if (!spot || !country || !address || !city || !state || !description || !name || !price) {
-        return null; // or render a placeholder component, such as a loading spinner
+      if (!spot) {
+        return <div>Loading...</div>;
     }
 
     const handleSubmit = async (e) => {
@@ -71,10 +69,7 @@ const EditSpot = () => {
         };
 
         const updatedSpot = await dispatch(editSpot(updateSpot, id))
-        if (updatedSpot) {
-            history.push(`/spots/${updatedSpot.id}`);
-            return
-        }
+        history.push(`/spots/${updatedSpot.id}`);
     };
 
 

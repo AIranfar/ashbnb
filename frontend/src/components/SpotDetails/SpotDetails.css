@@ -51,7 +51,7 @@
     /* margin-bottom: 50px; */
 }
 
-#reserve-button-id {
+.reserve-button-id {
     margin-top: 10px;
     font-weight: bold;
     background-color: red;
@@ -115,8 +115,8 @@
 }
 
 .edit-review-button {
-    height: 2rem;
-    width: 200px;
+    height: 1.5rem;
+    width: 125px;
     color: white;
     background-color: gray;
     border-radius: 20px;
@@ -126,9 +126,10 @@
 .delete-review-button {
     color: white;
     background-color: red;
-    width: 200px;
+    width: 125px;
     cursor: pointer;
     border-radius: 20px;
+    height: 1.5rem;
 }
 
 .post-new-review-button:hover, .edit-review-button:hover {
