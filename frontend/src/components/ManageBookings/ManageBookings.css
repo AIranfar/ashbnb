@@ -1,4 +1,10 @@
 .manage-bookings-image {
     width: 100px;
     height: 100px;
+    object-fit: cover;
+}
+
+.manage-bookings-bookings {
+    margin-top: 50px;
+    margin-left: 70px;
 }

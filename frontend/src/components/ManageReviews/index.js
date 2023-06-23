@@ -1,12 +1,12 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom'
 import OpenModalButton from "../OpenModalButton";
-import { getUserReviews } from "../../store/reviews";
+import { getUserReviews, deleteReview } from "../../store/reviews";
 import { getAllSpots } from "../../store/spots";
 import DeleteReviewModal from '../DeleteReviewModal';
 import EditReviewModal from '../EditReviewModal';
 import './ManageReviews.css';
-import { useEffect } from "react";
 
 const ManageReviews = () => {
     const dispatch = useDispatch();
@@ -15,9 +15,6 @@ const ManageReviews = () => {
     const userReviewsArr = Object.values(userReviews);
     const allSpots = useSelector((state) => state.spots.allSpots);
     const allSpotsArr = Object.values(allSpots);
-
-    // console.log('USER REVIEWS-->', userReviewsArr)
-    // console.log('ALL SPOTS-->', allSpotsArr)
 
     const getSpotById = (spotId) => {
         return allSpotsArr.find(spot => spot.id === spotId)
@@ -43,36 +40,40 @@ const ManageReviews = () => {
     };
 
     return (
-        <div>
-            <h1 className="header-manage">Manage your Reviews</h1>
-            <div>
+        <>
+            <h1 className="header-manage">Manage Your Reviews</h1>
+            <div className="manage-reviews-reviews">
                 {userReviewsArr.length ? (
                     userReviewsArr.reverse().map((review) => {
                         const spot = getSpotById(review.spotId);
                         const spotId = review.Spot?.id
                         return (
-                            <div key={review.id}>
-                                <NavLink to={`/spots/${spot?.id}`}>
+                            <div className='manage-reviews-content-wrapper' key={review.id}>
+                                <NavLink className='manage-reviews-navlink' to={`/spots/${spot?.id}`}>
+                                    <div className="manage-reviews-spot-name">{spot?.name}</div>
                                     <img src={spot?.previewImage} className="manage-reviews-image" />
                                 </NavLink>
-                                <div>{spot?.name}</div>
-                                <div>{review.review}</div>
-                                <div>{dateString(review.createdAt)}</div>
-                                <div>
-                                    {renderStars(review.stars)}
-                                    <i className="fa-solid fa-star star-icon" />
-                                </div>
-                                <div className='review-actions-container'>
-                                    <OpenModalButton
-                                        className='edit-review-button'
-                                        buttonText='Edit'
-                                        modalComponent={<EditReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
-                                    />
-                                    <OpenModalButton
-                                        className='delete-review-button'
-                                        buttonText='Delete'
-                                        modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
-                                    />
+                                <div className="manage-reviews-content">
+                                    <div className="manage-reviews-date-review">
+                                        <div>
+                                            {renderStars(review.stars)}
+                                            <i className="fa-solid fa-star star-icon" />
+                                        </div>
+                                        <div>{dateString(review.createdAt)}</div>
+                                        <div className="manage-review-review-content">{review.review}</div>
+                                    </div>
+                                    <div className='review-actions-container'>
+                                        <OpenModalButton
+                                            className='edit-review-button'
+                                            buttonText='Edit'
+                                            modalComponent={<EditReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
+                                        />
+                                        <OpenModalButton
+                                            className='delete-review-button'
+                                            buttonText='Delete'
+                                            modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         );
@@ -81,7 +82,7 @@ const ManageReviews = () => {
                     'You have no reviews'
                 )}
             </div>
-        </div>
+        </>
     );
 }
 

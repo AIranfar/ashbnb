@@ -1,9 +1,11 @@
 .header-manage {
-    margin-left: 50px;
+    margin-left: 70px;
+    text-decoration: underline;
+    margin-top: 40px;
 }
 
 .manage-create-spot {
-    margin-left: 50px;
+    margin-left: 70px;
 }
 
 .manage-spots-container {
@@ -13,7 +15,7 @@
 }
 
 .manage-spot-cards {
-    margin-left: 50px;
+    margin-left: 70px;
     display: flex;
     flex-direction: column;
     padding-bottom: 30px;
