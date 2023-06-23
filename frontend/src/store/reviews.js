@@ -90,6 +90,22 @@ export const editReview = (review, reviewId, spotId) => async dispatch => {
         dispatch(updateReview(updatedReview))
         dispatch(getAllReviews(spotId))
         dispatch(getOneSpot(spotId))
+        dispatch(getUserReviews())
+    }
+}
+
+export const editReviewSpotPage = (review, reviewId, spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'PUT',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(review)
+    })
+
+    if (response.ok) {
+        const updatedReview = await response.json();
+        dispatch(updateReview(updatedReview))
+        dispatch(getAllReviews(spotId))
+        dispatch(getOneSpot(spotId))
     }
 }
 
@@ -99,11 +115,10 @@ export const deleteReview = (reviewId, spotId) => async dispatch => {
     })
 
     if (response.ok) {
-        const data = await response.json()
         dispatch(deleteReviews(reviewId))
         dispatch(getAllReviews(spotId))
         dispatch(getOneSpot(spotId))
-        return data
+        dispatch(getUserReviews())
     }
 }
 

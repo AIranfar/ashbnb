@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { editReview } from '../../store/reviews';
+import { editReviewSpotPage } from '../../store/reviews';
 import { useModal } from '../../context/Modal';
-import './EditReview.css';
+import '../EditReviewModal/EditReview.css';
 
-const EditReview = ({ reviewId, spotId }) => {
+const EditReviewSpotPage = ({ reviewId, spotId }) => {
   const dispatch = useDispatch();
   const previousReview = useSelector((state) => state.reviews.allReviews);
   const [review, setReview] = useState(previousReview[reviewId].review);
@@ -22,7 +22,7 @@ const EditReview = ({ reviewId, spotId }) => {
       stars,
     };
 
-    dispatch(editReview(editedReview, reviewId, spotId));
+    dispatch(editReviewSpotPage(editedReview, reviewId, spotId));
     closeModal();
   };
 
@@ -95,4 +95,4 @@ const EditReview = ({ reviewId, spotId }) => {
   );
 };
 
-export default EditReview;
+export default EditReviewSpotPage;
