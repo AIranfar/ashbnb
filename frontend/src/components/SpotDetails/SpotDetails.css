@@ -144,3 +144,14 @@
     display: flex;
     gap: 1rem;
 }
+
+.spot-details-review-name-stars {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: -10px;
+}
+
+.spot-details-stars {
+    color: rgba(0, 0, 0, 0.764);
+    
+}
