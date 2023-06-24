@@ -36,13 +36,13 @@ const ReviewFormModal = ({ spotId }) => {
   const changeClassName = (value) => {
     if (hoveredStars !== null) {
       return value <= hoveredStars
-        ? "fas fa-star star-hover"
-        : "far fa-star";
+        ? "fas fa-star star-hover cursor-pointer"
+        : "far fa-star cursor-pointer";
     }
     if (value <= stars) {
-      return "fas fa-star";
+      return "fas fa-star cursor-pointer";
     }
-    return "far fa-star";
+    return "far fa-star cursor-pointer";
   };
 
   const disabledButton = () => {
