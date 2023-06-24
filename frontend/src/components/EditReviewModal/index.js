@@ -24,6 +24,7 @@ const EditReview = ({ reviewId, spotId }) => {
 
     dispatch(editReview(editedReview, reviewId, spotId));
     closeModal();
+    window.location.reload();
   };
 
   const handleMouseOver = (num) => {

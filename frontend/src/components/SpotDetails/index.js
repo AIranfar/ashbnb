@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, NavLink } from "react-router-dom";
 import { getOneSpot } from "../../store/spots";
-import { getAllReviews, getUserReviews } from '../../store/reviews';
+import { getAllReviews } from '../../store/reviews';
 import ReviewFormModal from '../ReviewFormModal';
 import OpenModalButton from '../OpenModalButton';
-import DeleteReviewModal from '../DeleteReviewModal';
+import DeleteReviewSpotPage from '../DeleteSpotPageReview';
 import EditReviewSpotPage from '../EditSpotPageReview';
 import CreateBookingModal from '../CreateBookingModal'
 import './SpotDetails.css';
@@ -145,7 +145,7 @@ const SpotDetails = () => {
                                         <OpenModalButton
                                             className='delete-review-button'
                                             buttonText='Delete'
-                                            modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
+                                            modalComponent={<DeleteReviewSpotPage reviewId={review.id} spotId={spotId} disabled={false} />}
                                         />
                                     </div>
 ) : null}

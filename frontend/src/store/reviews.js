@@ -89,7 +89,6 @@ export const editReview = (review, reviewId, spotId) => async dispatch => {
         const updatedReview = await response.json();
         dispatch(updateReview(updatedReview))
         dispatch(getAllReviews(spotId))
-        dispatch(getOneSpot(spotId))
         dispatch(getUserReviews())
     }
 }
@@ -117,8 +116,19 @@ export const deleteReview = (reviewId, spotId) => async dispatch => {
     if (response.ok) {
         dispatch(deleteReviews(reviewId))
         dispatch(getAllReviews(spotId))
-        dispatch(getOneSpot(spotId))
         dispatch(getUserReviews())
+    }
+}
+
+export const deleteReviewSpotPage = (reviewId, spotId) => async dispatch => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'DELETE'
+    })
+
+    if (response.ok) {
+        dispatch(deleteReviews(reviewId))
+        dispatch(getAllReviews(spotId))
+        dispatch(getOneSpot(spotId))
     }
 }
 
