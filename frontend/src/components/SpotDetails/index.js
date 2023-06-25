@@ -54,6 +54,17 @@ const SpotDetails = () => {
         else return 'New';
     }
 
+    const renderStars = (stars) => {
+        const maxStars = 5
+        const starIcons = [];
+        for (let i = 0; i < maxStars; i++) {
+            if (i < stars) {
+                starIcons.push(<i key={i} className="fa-solid fa-star star-icon" />);
+            }
+        }
+        return starIcons;
+    };
+
     // console.log('HELLO:', spotId)
 
     const dateString = (date) => {
@@ -132,7 +143,10 @@ const SpotDetails = () => {
                         {reviewsArr.length ? reviewsArr.reverse().map(review =>
                             <div className='each-review' key={review.id}>
                                 {/* {console.log('REVIEWWWW-------->', review)} */}
-                                <p>{review.User?.firstName}</p>
+                                <div className='spot-details-review-name-stars'>
+                                    <p>{review.User?.firstName}</p>
+                                    <p className='spot-details-stars'>{renderStars(review.stars)}</p>
+                                </div>
                                 <p>{dateString(review.createdAt)}</p>
                                 <p>{review.review}</p>
                                 {sessionUser && sessionUser.id === review.User?.id ? (
