@@ -73,6 +73,9 @@ export const editBooking = (booking, bookingId) => async dispatch => {
         const updatedBooking = await response.json()
         dispatch(editBooking(updatedBooking))
         dispatch(getUserBookings())
+    } else {
+        const bookingErrors = await response.json();
+        return bookingErrors
     }
 }
 

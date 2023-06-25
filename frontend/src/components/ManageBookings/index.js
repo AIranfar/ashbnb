@@ -50,12 +50,12 @@ const ManageBookings = () => {
                                 <OpenModalButton
                                     className='edit-booking-button'
                                     buttonText='Edit'
-                                    modalComponent={<EditBookingModal bookingId={booking.id} spotId={spot?.id} disabled={false} />}
+                                    modalComponent={<EditBookingModal bookingId={booking.id} spotId={spot?.id} spot={spot} disabled={false} />}
                                 />
                                 <OpenModalButton
                                     className='delete-booking-button'
                                     buttonText='Delete'
-                                    modalComponent={<DeleteBookingModal bookingId={booking.id} disabled={false} />}
+                                    modalComponent={<DeleteBookingModal bookingId={booking.id} spotId={spot?.id} disabled={false} />}
                                 />
                             </div>
                         );
