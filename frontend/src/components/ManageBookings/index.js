@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from 'react-router-dom';
 import { getUserBookings } from "../../store/bookings";
-// import DeleteBookingModal from '../DeleteBookingModal';
-// import EditBookingModal from '../EditBookingModal';
-import './ManageBookings.css';
 import { getAllSpots } from "../../store/spots";
+import DeleteBookingModal from '../DeleteBookingModal';
+// import EditBookingModal from '../EditBookingModal';
+import OpenModalButton from "../OpenModalButton";
+import './ManageBookings.css';
 
 const ManageBookings = () => {
     const dispatch = useDispatch();
@@ -25,6 +27,10 @@ const ManageBookings = () => {
         dispatch(getUserBookings())
     }, [dispatch])
 
+    if (!userBookings) {
+        return (<h1>loading...</h1>)
+    }
+
     return (
         <>
             <h1 className="header-manage">Manage Your Bookings</h1>
@@ -41,6 +47,11 @@ const ManageBookings = () => {
                                 <img className='manage-bookings-image' src={spot?.previewImage} alt="Spot Preview" />
                                 <div>{booking.startDate}</div>
                                 <div>{booking.endDate}</div>
+                                <OpenModalButton
+                                    className='delete-booking-button'
+                                    buttonText='Delete'
+                                    modalComponent={<DeleteBookingModal bookingId={booking.id} disabled={false} />}
+                                />
                             </div>
                         );
                     })
