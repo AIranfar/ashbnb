@@ -72,12 +72,12 @@ const ManageReviews = () => {
                                         <OpenModalButton
                                             className='edit-review-button'
                                             buttonText='Edit'
-                                            modalComponent={<EditReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
+                                            modalComponent={<EditReviewModal reviewId={review.id} disabled={false} />}
                                         />
                                         <OpenModalButton
                                             className='delete-review-button'
                                             buttonText='Delete'
-                                            modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
+                                            modalComponent={<DeleteReviewModal reviewId={review.id} disabled={false} />}
                                         />
                                     </div>
                                 </div>

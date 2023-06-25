@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { getUserBookings } from "../../store/bookings";
 import { getAllSpots } from "../../store/spots";
 import DeleteBookingModal from '../DeleteBookingModal';
-// import EditBookingModal from '../EditBookingModal';
+import EditBookingModal from '../EditBookingModal';
 import OpenModalButton from "../OpenModalButton";
 import './ManageBookings.css';
 
@@ -15,7 +15,7 @@ const ManageBookings = () => {
     const allSpots = useSelector((state) => state.spots.allSpots);
     const allSpotsArr = Object.values(allSpots);
 
-    // console.log('USER Bookings-->', userBookings)
+    // console.log('USER Bookings-->', userBookingsArr)
     // console.log('ALLSPOTS', allSpotsArr)
 
     const getSpotById = (spotId) => {
@@ -38,7 +38,7 @@ const ManageBookings = () => {
                 {userBookingsArr.length ? (
                     userBookingsArr.reverse().map((booking) => {
                         const spot = getSpotById(booking.Spot.id);
-                        // console.log('booking', booking.Spot)
+                        // console.log('booking', booking)
                         // console.log('spot', spot)
                         return (
                             <div key={booking.id}>
@@ -47,6 +47,11 @@ const ManageBookings = () => {
                                 <img className='manage-bookings-image' src={spot?.previewImage} alt="Spot Preview" />
                                 <div>{booking.startDate}</div>
                                 <div>{booking.endDate}</div>
+                                <OpenModalButton
+                                    className='edit-booking-button'
+                                    buttonText='Edit'
+                                    modalComponent={<EditBookingModal bookingId={booking.id} spotId={spot?.id} disabled={false} />}
+                                />
                                 <OpenModalButton
                                     className='delete-booking-button'
                                     buttonText='Delete'
