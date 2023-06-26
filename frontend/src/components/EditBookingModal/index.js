@@ -36,7 +36,7 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
         <div className="edit-booking-container">
             <h2 className='edit-booking-title-header'>Edit your booking for {spot.name}</h2>
             <form onSubmit={handleSubmit} className='booking-form'>
-                <div className='edit-booking-signup-errors'>
+                <div className='booking-signup-errors'>
                     {errors.map((error, idx) => <div key={idx}>*{error}</div>)}
                 </div>
                 <div className="starting-date-container">

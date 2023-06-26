@@ -28,23 +28,24 @@ const CreateBooking = ({ spotId, spot }) => {
     }
 
     return dispatch(createNewBooking(newBooking))
-      .then(closeModal())
-      .then(window.location.reload())
+      .then(closeModal)
       .catch(async (res) => {
         const data = await res.json();
         const errors = Object.values(data.errors)
         return setErrors(errors)
-      }
-    )
+      })
   };
 
-  console.log('ERRORS', errors)
+  // console.log('ERRORS', errors)
 
 
   return (
     <div className='new-booking-container'>
       <h2 className='new-booking-title-header'>Create a New Booking for {spot.name}</h2>
       <form onSubmit={handleSubmit} className='booking-form'>
+        <div className='booking-signup-errors'>
+          {errors.map((error, idx) => <div key={idx}>*{error}</div>)}
+        </div>
         <div className='starting-date-container'>
           <label className='new-booking-start-date'>Start Date:</label>
           <input

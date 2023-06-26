@@ -106,8 +106,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             message: "Sorry, this spot is already booked for the specified dates",
             statusCode: res.statusCode,
             errors: {
-                startDate: "Start date conflicts with an existing booking",
-                endDate: "End date conflicts with an existing booking",
+                startDate: "Dates conflict with an existing booking"
             },
         });
     }

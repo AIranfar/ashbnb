@@ -56,9 +56,10 @@ export const createNewBooking = (newBooking) => async dispatch => {
         const newBooking = await response.json();
         // console.log('NEW BOOKING RESPONSE', newBooking)
         dispatch(actionCreateBooking(newBooking))
+        dispatch(actionGetUserBookings())
     } else {
         const bookingErrors = await response.json();
-        console.log('BOOKING ERRORS', bookingErrors)
+        // console.log('BOOKING ERRORS', bookingErrors)
         return bookingErrors
     }
 }
