@@ -35,7 +35,7 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
                     <input
                         type="date"
                         id="start-date"
-                        value={previousBooking.startDate}
+                        value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
                     />
                 </div>
@@ -44,7 +44,7 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
                     <input
                         type="date"
                         id="end-date"
-                        value={previousBooking.endDate}
+                        value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
                     />
                 </div>
