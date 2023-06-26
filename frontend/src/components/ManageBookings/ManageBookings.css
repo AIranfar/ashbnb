@@ -1,10 +1,87 @@
 .manage-bookings-image {
-    width: 100px;
-    height: 100px;
+    height: 200px;
+    width: 250px;
     object-fit: cover;
+    border-radius: 10px;
+}
+
+.manage-bookings-image:hover{
+    box-shadow: 2px 2px 2px 2px gray;
 }
 
 .manage-bookings-bookings {
     margin-top: 50px;
     margin-left: 70px;
+    margin-bottom: 75px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px
+}
+
+.manage-bookings-spot-name {
+    color: black;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.manage-bookings-spot-name:hover {
+    text-decoration: underline;
+}
+
+.manage-bookings-content-wrapper {
+    display: flex;
+    gap: 50px
+}
+
+.manage-bookings-navlink {
+    text-decoration: none;
+}
+
+.manage-bookings-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px
+}
+
+.manage-bookings-date-review {
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+
+.edit-booking-button {
+    height: 1.5rem;
+    width: 125px;
+    color: white;
+    background-color: gray;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.delete-booking-button {
+    color: white;
+    background-color: red;
+    width: 125px;
+    cursor: pointer;
+    border-radius: 20px;
+    height: 1.5rem;
+}
+
+.edit-booking-button:hover {
+    background-color: rgb(160, 160, 160);
+}
+
+.delete-booking-button:hover {
+    background-color: rgba(255, 0, 0, 0.78);
+}
+
+.manage-bookings-dates {
+    font-size: 20px;
+}
+
+.booking-actions-container {
+    display: flex;
+    gap: 1rem
 }

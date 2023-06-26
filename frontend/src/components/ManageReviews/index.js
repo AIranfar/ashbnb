@@ -49,7 +49,6 @@ const ManageReviews = () => {
                 {userReviewsArr.length ? (
                     userReviewsArr.reverse().map((review) => {
                         const spot = getSpotById(review.spotId);
-                        const spotId = review.Spot?.id
                         return (
                             <div className='manage-reviews-content-wrapper' key={review.id}>
                                 <NavLink className='manage-reviews-navlink' to={`/spots/${spot?.id}`}>
