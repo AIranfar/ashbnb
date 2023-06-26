@@ -8,8 +8,8 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const previousBooking = useSelector((state) => state.bookings.bookings[bookingId])
-    const [startDate, setStartDate] = useState(previousBooking.startDate);
-    const [endDate, setEndDate] = useState(previousBooking.endDate);
+    const [startDate, setStartDate] = useState(previousBooking?.startDate);
+    const [endDate, setEndDate] = useState(previousBooking?.endDate);
     const [errors, setErrors] = useState([])
     const today = new Date().toISOString().split('T')[0];
 
