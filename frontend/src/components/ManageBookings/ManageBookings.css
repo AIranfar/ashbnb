@@ -108,3 +108,9 @@ button.manage-bookings-tab {
     display: flex;
     gap: 1rem
 }
+
+.no-bookings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
