@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { requireAuth } = require('../../utils/auth.js')
+const { requireAuth } = require('../../utils/auth.js');
+const { Op } = require('sequelize');
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
 
 // Get all Current User's Bookings --DONE
@@ -29,7 +30,7 @@ router.get('/current', requireAuth, async (req, res) => {
     for (let i = 0; i < spots.length; i++) {
         let spot = spots[i]
         spot.SpotImages.forEach(image => {
-            if(image.preview) {
+            if (image.preview) {
                 allBookings.forEach(review => {
                     review.Spot.dataValues.previewImage = image.url
                 })
@@ -52,7 +53,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         })
     }
 
-    if (booking.userId !== req.user.id){
+    if (booking.userId !== req.user.id) {
         return res.status(403).json({
             "message": "Forbidden",
             "statusCode": res.statusCode
@@ -61,8 +62,6 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
     const requestedStart = new Date(startDate).getTime();
     const requestedEnd = new Date(endDate).getTime();
-    const oldStart = new Date(booking.startDate).getTime();
-    const oldEnd = new Date(booking.endDate).getTime();
     const currentDate = new Date().getTime();
 
 
@@ -71,7 +70,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
             "message": "Validation error",
             "statusCode": res.statusCode,
             "errors": {
-              "endDate": "endDate cannot come before startDate"
+                "endDate": "End Date cannot come before Start Date"
             }
         })
     }
@@ -83,16 +82,33 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
         })
     }
 
-    if (oldStart >= requestedStart && oldEnd <= requestedEnd ||
-        oldStart <= requestedStart && oldEnd >= requestedEnd) {
+    const conflictingBooking = await Booking.findOne({
+        where: {
+            spotId: booking.spotId,
+            id: { [Op.not]: booking.id },
+            [Op.or]: [
+                {
+                    startDate: { [Op.between]: [requestedStart, requestedEnd] },
+                },
+                {
+                    endDate: { [Op.between]: [requestedStart, requestedEnd] },
+                },
+                {
+                    startDate: { [Op.lte]: requestedStart },
+                    endDate: { [Op.gte]: requestedEnd },
+                },
+            ],
+        },
+    });
+
+    if (conflictingBooking) {
         return res.status(403).json({
-            "message": "Sorry, this spot is already booked for the specified dates",
-            "statusCode": res.statusCode,
-            "errors": {
-              "startDate": "Start date conflicts with an existing booking",
-              "endDate": "End date conflicts with an existing booking"
-            }
-        })
+            message: "Sorry, this spot is already booked for the specified dates",
+            statusCode: res.statusCode,
+            errors: {
+                startDate: "Dates conflict with an existing booking"
+            },
+        });
     }
 
     booking.startDate = startDate;
@@ -124,7 +140,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
         })
     }
 
-    if (req.user.id !== deletedBooking.userId){
+    if (req.user.id !== deletedBooking.userId) {
         return res.status(403).json({
             "message": "Forbidden",
             "statusCode": res.statusCode

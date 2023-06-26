@@ -10,8 +10,9 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
     const previousBooking = useSelector((state) => state.bookings.bookings[bookingId])
     const [startDate, setStartDate] = useState(previousBooking.startDate);
     const [endDate, setEndDate] = useState(previousBooking.endDate);
+    const [errors, setErrors] = useState([])
 
-    console.log('previousBooking', previousBooking)
+    // console.log('previousBooking', previousBooking)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,14 +23,22 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
             endDate
         }
 
-        dispatch(editBooking(updatedBooking, bookingId))
-        closeModal()
+        return dispatch(editBooking(updatedBooking, bookingId))
+            .then(closeModal)
+            .catch(async (res) => {
+                const data = await res.json();
+                const errors = Object.values(data.errors)
+                return setErrors(errors)
+            })
     }
 
     return (
         <div className="edit-booking-container">
             <h2 className='edit-booking-title-header'>Edit your booking for {spot.name}</h2>
             <form onSubmit={handleSubmit} className='booking-form'>
+                <div className='booking-signup-errors'>
+                    {errors.map((error, idx) => <div key={idx}>*{error}</div>)}
+                </div>
                 <div className="starting-date-container">
                     <label className="edit-booking-start-date">Start Date:</label>
                     <input

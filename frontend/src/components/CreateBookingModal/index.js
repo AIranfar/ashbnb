@@ -9,6 +9,7 @@ const CreateBooking = ({ spotId, spot }) => {
   const { closeModal } = useModal();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [errors, setErrors] = useState([])
 
   // console.log('SPOTSPOT ->', spot)
 
@@ -26,16 +27,25 @@ const CreateBooking = ({ spotId, spot }) => {
       endDate
     }
 
-    dispatch(createNewBooking(newBooking))
-    closeModal()
-    window.location.reload()
+    return dispatch(createNewBooking(newBooking))
+      .then(closeModal)
+      .catch(async (res) => {
+        const data = await res.json();
+        const errors = Object.values(data.errors)
+        return setErrors(errors)
+      })
   };
+
+  // console.log('ERRORS', errors)
 
 
   return (
     <div className='new-booking-container'>
       <h2 className='new-booking-title-header'>Create a New Booking for {spot.name}</h2>
       <form onSubmit={handleSubmit} className='booking-form'>
+        <div className='booking-signup-errors'>
+          {errors.map((error, idx) => <div key={idx}>*{error}</div>)}
+        </div>
         <div className='starting-date-container'>
           <label className='new-booking-start-date'>Start Date:</label>
           <input
