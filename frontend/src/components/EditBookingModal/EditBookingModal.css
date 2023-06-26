@@ -19,3 +19,9 @@
     display: flex;
     align-items: center;
 }
+
+.edit-booking-signup-errors {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}

@@ -72,7 +72,7 @@ export const editBooking = (booking, bookingId) => async dispatch => {
 
     if (response.ok) {
         const updatedBooking = await response.json()
-        dispatch(editBooking(updatedBooking))
+        dispatch(actionEditBooking(updatedBooking))
         dispatch(getUserBookings())
     } else {
         const bookingErrors = await response.json();
@@ -103,7 +103,7 @@ const bookingsReducer = (state = initialState, action) => {
             return newState
         case EDIT_BOOKING:
             const editState = { ...state }
-            editState.bookings[action.bookingId.id] = action.bookingId;
+            editState.bookings[action.booking.id] = action.bookingId;
             return editState;
         case DELETE_BOOKING:
             const deleteState = { ...state, bookings: { ...state.bookings } }

@@ -9,6 +9,7 @@ const CreateBooking = ({ spotId, spot }) => {
   const { closeModal } = useModal();
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
+  const [errors, setErrors] = useState([])
 
   // console.log('SPOTSPOT ->', spot)
 
@@ -26,10 +27,18 @@ const CreateBooking = ({ spotId, spot }) => {
       endDate
     }
 
-    dispatch(createNewBooking(newBooking))
-    closeModal()
-    window.location.reload()
+    return dispatch(createNewBooking(newBooking))
+      .then(closeModal())
+      .then(window.location.reload())
+      .catch(async (res) => {
+        const data = await res.json();
+        const errors = Object.values(data.errors)
+        return setErrors(errors)
+      }
+    )
   };
+
+  console.log('ERRORS', errors)
 
 
   return (
