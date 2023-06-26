@@ -28,7 +28,6 @@ const CreateBooking = ({ spotId, spot }) => {
 
     dispatch(createNewBooking(newBooking))
     closeModal()
-    window.location.reload()
   };
 
 

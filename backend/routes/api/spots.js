@@ -442,7 +442,7 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const spot = await Spot.findByPk(req.params.spotId);
     const { startDate, endDate } = req.body;
-    
+
     if (!spot) {
         return res.status(404).json({
             "message": "Spot couldn't be found",
@@ -459,13 +459,24 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
 
     const requestedStart = new Date(startDate).getTime()
     const requestedEnd = new Date(endDate).getTime()
+    const today = new Date()
 
     if (requestedEnd <= requestedStart){
         return res.status(400).json({
-            "message": "Validation error",
+            "message": "End Date cannot be on or before Start Date",
             "statusCode": res.statusCode,
             "errors": {
                 "endDate": "End Date cannot be on or before Start Date"
+            }
+        })
+    }
+
+    if (requestedStart < today) {
+        return res.status(400).json({
+            "message": "Start Date cannot be in the past",
+            "statusCode": res.statusCode,
+            "errors": {
+                'startDate': "Start Date cannot be in the past"
             }
         })
     }

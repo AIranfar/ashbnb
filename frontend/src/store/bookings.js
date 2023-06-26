@@ -58,6 +58,7 @@ export const createNewBooking = (newBooking) => async dispatch => {
         dispatch(actionCreateBooking(newBooking))
     } else {
         const bookingErrors = await response.json();
+        console.log('BOOKING ERRORS', bookingErrors)
         return bookingErrors
     }
 }
