@@ -1,0 +1,21 @@
+.edit-booking-container {
+    width: 500px;
+    border-radius: 20px;
+    border-color: 10px solid black;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.edit-booking-title-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.edit-booking-start-date, .edit-booking-end-date {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
