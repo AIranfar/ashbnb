@@ -83,29 +83,35 @@ export const getOneSpot = (spotId) => async dispatch => {
 
 export const createASpot = (spots, spotImages) => async dispatch => {
     const response = await csrfFetch('/api/spots', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(spots),
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(spots),
     });
-    if (response.ok) {
-        const newSpot = await response.json();
 
-        for (let image of spotImages) {
-            const spotImageResponse = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(image)
-            });
-            if (spotImageResponse.ok) {
-                const spotImage = await spotImageResponse.json()
-                newSpot.previewImage = spotImage.spotImages
-                dispatch(create(newSpot))
-                return newSpot
-            }
+    if (response.ok) {
+      const newSpot = await response.json();
+      const uploadedImages = [];
+
+      for (let image of spotImages) {
+        const spotImageResponse = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(image)
+        });
+
+        if (spotImageResponse.ok) {
+          const spotImage = await spotImageResponse.json();
+          uploadedImages.push(spotImage.spotImages);
         }
+      }
+
+      newSpot.previewImage = uploadedImages;
+      dispatch(create(newSpot));
+      return newSpot;
     }
+
     return response;
-}
+  };
 
 export const editSpot = (spot, spotId) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${spotId}`, {

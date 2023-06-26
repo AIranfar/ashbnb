@@ -11,6 +11,8 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
     const [startDate, setStartDate] = useState(previousBooking.startDate);
     const [endDate, setEndDate] = useState(previousBooking.endDate);
     const [errors, setErrors] = useState([])
+    const today = new Date().toISOString().split('T')[0];
+
 
     // console.log('previousBooking', previousBooking)
 
@@ -44,6 +46,7 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
                     <input
                         type="date"
                         id="start-date"
+                        min={today}
                         value={startDate}
                         onChange={(e) => setStartDate(e.target.value)}
                     />
@@ -53,6 +56,7 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
                     <input
                         type="date"
                         id="end-date"
+                        min={startDate}
                         value={endDate}
                         onChange={(e) => setEndDate(e.target.value)}
                     />

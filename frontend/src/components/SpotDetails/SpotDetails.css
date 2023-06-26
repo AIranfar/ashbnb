@@ -4,8 +4,10 @@
 }
 
 .spot-details-image {
-    height:400px;
-    width: 700px;
+    height:300px;
+    width: 470px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .price-reviews {
@@ -30,7 +32,7 @@
 }
 
 
-.big-small-box {
+.spot-details-name-description-reserve {
     display: flex;
     justify-content: space-between;
 }
@@ -65,7 +67,7 @@
 }
 
 .spot-description {
-    width:60%;
+    width:70%;
 }
 
 .bottom-reviews {
@@ -94,7 +96,12 @@
 }
 
 .images-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-gap: 10px;
+    max-width: 400px;
+    /* margin: 0 auto; */
 }
 
 .image-not-found {
@@ -153,5 +160,27 @@
 
 .spot-details-stars {
     color: rgba(0, 0, 0, 0.764);
-    
+}
+
+.spot-details-first-image {
+    height: 610px;
+    width: 700px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.spot-details-image-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.spot-details-name-description {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.no-review-text {
+    margin-bottom: 25px;
 }

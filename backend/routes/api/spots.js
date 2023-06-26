@@ -3,7 +3,8 @@ const router = express.Router();
 const { handleValidationErrors } = require('../../utils/validation');
 const { setTokenCookie, requireAuth } = require('../../utils/auth.js')
 const { Booking, Review, ReviewImage, Spot, SpotImage, User } = require('../../db/models');
-const { check } = require('express-validator')
+const { check } = require('express-validator');
+const { Op } = require('sequelize');
 
 const validateSpotError = [
     check('address')
@@ -26,12 +27,12 @@ const validateSpotError = [
         // .exists({ checkFalsy: true })
         // .notEmpty()
         .optional(),
-        // .withMessage('Latitude is not valid'),
+    // .withMessage('Latitude is not valid'),
     check('lng')
         // .exists({ checkFalsy: true })
         // .notEmpty()
         .optional(),
-        // .withMessage('Longitude is not valid'),
+    // .withMessage('Longitude is not valid'),
     check('name')
         .exists({ checkFalsy: true })
         // .notEmpty()
@@ -51,7 +52,7 @@ const validateSpotError = [
 // get all spots --DONE
 
 router.get('/', async (req, res) => {
-    let { page, size , minLat, minLng, maxLat, maxLng, minPrice, maxPrice } = req.query
+    let { page, size, minLat, minLng, maxLat, maxLng, minPrice, maxPrice } = req.query
 
     page = parseInt(page);
     size = parseInt(size);
@@ -121,7 +122,7 @@ router.get('/', async (req, res) => {
                 preview: true
             }
         });
-        if (!image){
+        if (!image) {
             spot.previewImage = 'Null'
         } else {
             spot.previewImage = image.url
@@ -171,7 +172,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 preview: true
             }
         });
-        if (!image){
+        if (!image) {
             spot.previewImage = 'Null'
         } else {
             spot.previewImage = image.url
@@ -239,7 +240,7 @@ router.get('/:spotId', async (req, res) => {
 
 router.post('/', validateSpotError, requireAuth, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
-    console.log('This sucks')
+    // console.log('This sucks')
     const newSpot = await Spot.create({
         ownerId: req.user.id,
         address,
@@ -461,7 +462,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const requestedEnd = new Date(endDate).getTime()
     const today = new Date()
 
-    if (requestedEnd <= requestedStart){
+    if (requestedEnd <= requestedStart) {
         return res.status(400).json({
             "message": "End Date cannot be on or before Start Date",
             "statusCode": res.statusCode,
@@ -488,18 +489,33 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     })
 
     for (let booking of allBookings) {
-        let oldStart = new Date(booking.startDate).getTime();
-        let oldEnd = new Date(booking.endDate).getTime();
+        const conflictingBooking = await Booking.findOne({
+            where: {
+                spotId: booking.spotId,
+                id: { [Op.not]: booking.id },
+                [Op.or]: [
+                    {
+                        startDate: { [Op.between]: [requestedStart, requestedEnd] },
+                    },
+                    {
+                        endDate: { [Op.between]: [requestedStart, requestedEnd] },
+                    },
+                    {
+                        startDate: { [Op.lte]: requestedStart },
+                        endDate: { [Op.gte]: requestedEnd },
+                    },
+                ],
+            },
+        });
 
-        if (oldStart >= requestedStart && oldEnd <= requestedEnd ||
-            oldStart <= requestedStart && oldEnd >= requestedEnd) {
+        if (conflictingBooking) {
             return res.status(403).json({
-                "message": "Sorry, this spot is already booked for the specified dates",
-                "statusCode": res.statusCode,
-                "errors": {
-                  "startDate": "Dates conflict with an existing booking"
-                }
-            })
+                'message': "Sorry, this spot is already booked for the specified dates",
+                statusCode: res.statusCode,
+                errors: {
+                    startDate: "Dates conflict with an existing booking"
+                },
+            });
         }
     }
 

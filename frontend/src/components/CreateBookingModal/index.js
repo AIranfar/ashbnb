@@ -10,6 +10,7 @@ const CreateBooking = ({ spotId, spot }) => {
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [errors, setErrors] = useState([])
+  const today = new Date().toISOString().split('T')[0];
 
   // console.log('SPOTSPOT ->', spot)
 
@@ -36,9 +37,6 @@ const CreateBooking = ({ spotId, spot }) => {
       })
   };
 
-  // console.log('ERRORS', errors)
-
-
   return (
     <div className='new-booking-container'>
       <h2 className='new-booking-title-header'>Create a New Booking for {spot.name}</h2>
@@ -51,6 +49,7 @@ const CreateBooking = ({ spotId, spot }) => {
           <input
             type="date"
             id="start-date"
+            min={today}
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
           />
@@ -60,6 +59,7 @@ const CreateBooking = ({ spotId, spot }) => {
           <input
             type="date"
             id="end-date"
+            min={startDate}
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
           />
