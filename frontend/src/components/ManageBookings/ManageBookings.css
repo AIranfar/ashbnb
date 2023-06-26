@@ -1,6 +1,30 @@
+.manage-bookings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.manage-bookings-tabs {
+    display: flex;
+    gap: 1rem;
+    color: black;
+}
+
+.manage-bookings-tab.active {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+button.manage-bookings-tab {
+    border: none;
+    font-size: 25px;
+    background-color: transparent;
+    cursor: pointer;
+  }
+
 .manage-bookings-image {
-    height: 200px;
-    width: 250px;
+    height: 250px;
+    width: 450px;
     object-fit: cover;
     border-radius: 10px;
 }
@@ -11,7 +35,6 @@
 
 .manage-bookings-bookings {
     margin-top: 50px;
-    margin-left: 70px;
     margin-bottom: 75px;
     display: flex;
     flex-direction: column;

@@ -43,7 +43,7 @@ const ManageReviews = () => {
     };
 
     return (
-        <>
+        <div className="manage-reviews-container">
             <h1 className="header-manage">Manage Your Reviews</h1>
             <div className="manage-reviews-reviews">
                 {userReviewsArr.length ? (
@@ -87,7 +87,7 @@ const ManageReviews = () => {
                     'You have no reviews'
                 )}
             </div>
-        </>
+        </div>
     );
 }
 

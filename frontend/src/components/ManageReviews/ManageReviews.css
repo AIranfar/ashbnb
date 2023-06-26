@@ -1,11 +1,17 @@
+.manage-reviews-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .manage-reviews-content-wrapper {
     display: flex;
     gap: 50px
 }
 
 .manage-reviews-image {
-    height: 200px;
-    width: 250px;
+    height: 250px;
+    width: 450px;
     object-fit: cover;
     border-radius: 10px;
 }
@@ -16,7 +22,6 @@
 
 .manage-reviews-reviews {
     margin-top: 50px;
-    margin-left: 70px;
     margin-bottom: 75px;
     display: flex;
     flex-direction: column;
