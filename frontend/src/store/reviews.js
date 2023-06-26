@@ -78,7 +78,7 @@ export const addNewReview = (review, spotId) => async dispatch => {
     }
 }
 
-export const editReview = (review, reviewId, spotId) => async dispatch => {
+export const editReview = (review, reviewId) => async dispatch => {
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
@@ -88,7 +88,6 @@ export const editReview = (review, reviewId, spotId) => async dispatch => {
     if (response.ok) {
         const updatedReview = await response.json();
         dispatch(updateReview(updatedReview))
-        dispatch(getAllReviews(spotId))
         dispatch(getUserReviews())
     }
 }
@@ -108,14 +107,13 @@ export const editReviewSpotPage = (review, reviewId, spotId) => async dispatch =
     }
 }
 
-export const deleteReview = (reviewId, spotId) => async dispatch => {
+export const deleteReview = (reviewId) => async dispatch => {
     const response = await csrfFetch(`/api/reviews/${reviewId}`, {
         method: 'DELETE'
     })
 
     if (response.ok) {
         dispatch(deleteReviews(reviewId))
-        dispatch(getAllReviews(spotId))
         dispatch(getUserReviews())
     }
 }
@@ -135,13 +133,13 @@ export const deleteReviewSpotPage = (reviewId, spotId) => async dispatch => {
 const initialState = { allReviews: {}, oneReview: {} }
 
 const reviewsReducer = (state = initialState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case ALL:
-            return { ...state, allReviews: { ...action.reviews }};
+            return { ...state, allReviews: { ...action.reviews } };
         case USER_REVIEWS:
-            return { ...state, allReviews: { ...action.reviews }};
+            return { ...state, allReviews: { ...action.reviews } };
         case CREATE:
-            const newState = { ...state, allReviews: { ...state.allReviews }}
+            const newState = { ...state, allReviews: { ...state.allReviews } }
             newState.allReviews[action.review.id] = action.review
             return newState;
         case EDIT:
@@ -149,7 +147,7 @@ const reviewsReducer = (state = initialState, action) => {
             editState.oneReview[action.reviewId.id] = action.reviewId;
             return editState
         case DELETE:
-            const newState2 = { ...state, allReviews: { ...state.allReviews }}
+            const newState2 = { ...state, allReviews: { ...state.allReviews } }
             delete newState2.allReviews[action.reviewId];
             return newState2
         default:

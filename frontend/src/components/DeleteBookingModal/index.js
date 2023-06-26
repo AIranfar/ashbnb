@@ -1,19 +1,20 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { deleteReview } from "../../store/reviews";
-import { useModal } from '../../context/Modal'
-import './DeleteReviewModal.css';
+import { deleteBooking, getUserBookings } from "../../store/bookings";
+import { useModal } from "../../context/Modal";
+import './DeleteBookingModal.css';
 
-const DeleteReviewModal = ({ reviewId }) => {
+const DeleteBookingModal = ({ bookingId }) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const [refreshPage, setRefreshPage] = useState(false)
 
     // console.log('ID--->', reviewId)
     const handleSubmit = () => {
-        dispatch(deleteReview(reviewId));
+        dispatch(deleteBooking(bookingId));
         closeModal();
         setRefreshPage(true);
+
     };
 
     return (
@@ -23,13 +24,13 @@ const DeleteReviewModal = ({ reviewId }) => {
             ) : (
                 <div>
                     <h1 class='text'>Confirm Delete</h1>
-                    <p>Are you sure you want to delete this review?</p>
-                    <button id='yes-delete' onClick={handleSubmit}>Yes (Delete Review)</button>
-                    <button id='no-keep' onClick={closeModal}>No (Keep Review)</button>
+                    <p>Are you sure you want to delete this booking?</p>
+                    <button id='yes-delete' onClick={handleSubmit}>Yes (Delete Booking)</button>
+                    <button id='no-keep' onClick={closeModal}>No (Keep Booking)</button>
                 </div>
             )}
         </div>
     );
 };
 
-export default DeleteReviewModal;
+export default DeleteBookingModal;

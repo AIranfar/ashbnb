@@ -49,7 +49,6 @@ const ManageReviews = () => {
                 {userReviewsArr.length ? (
                     userReviewsArr.reverse().map((review) => {
                         const spot = getSpotById(review.spotId);
-                        const spotId = review.Spot?.id
                         return (
                             <div className='manage-reviews-content-wrapper' key={review.id}>
                                 <NavLink className='manage-reviews-navlink' to={`/spots/${spot?.id}`}>
@@ -72,12 +71,12 @@ const ManageReviews = () => {
                                         <OpenModalButton
                                             className='edit-review-button'
                                             buttonText='Edit'
-                                            modalComponent={<EditReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
+                                            modalComponent={<EditReviewModal reviewId={review.id} disabled={false} />}
                                         />
                                         <OpenModalButton
                                             className='delete-review-button'
                                             buttonText='Delete'
-                                            modalComponent={<DeleteReviewModal reviewId={review.id} spotId={spotId} disabled={false} />}
+                                            modalComponent={<DeleteReviewModal reviewId={review.id} disabled={false} />}
                                         />
                                     </div>
                                 </div>

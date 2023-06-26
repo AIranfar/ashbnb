@@ -4,7 +4,7 @@ import { editReview } from '../../store/reviews';
 import { useModal } from '../../context/Modal';
 import './EditReview.css';
 
-const EditReview = ({ reviewId, spotId }) => {
+const EditReview = ({ reviewId }) => {
   const dispatch = useDispatch();
   const previousReview = useSelector((state) => state.reviews.allReviews);
   const [review, setReview] = useState(previousReview[reviewId].review);
@@ -22,7 +22,7 @@ const EditReview = ({ reviewId, spotId }) => {
       stars,
     };
 
-    dispatch(editReview(editedReview, reviewId, spotId));
+    dispatch(editReview(editedReview, reviewId));
     closeModal();
     window.location.reload();
   };

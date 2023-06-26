@@ -14,7 +14,6 @@
     box-shadow: 2px 2px 2px 2px gray;
 }
 
-
 .manage-reviews-reviews {
     margin-top: 50px;
     margin-left: 70px;
@@ -49,7 +48,6 @@
     flex-direction: column;
     gap: 40px
 }
-
 
 .manage-reviews-date-review {
     display: flex;
