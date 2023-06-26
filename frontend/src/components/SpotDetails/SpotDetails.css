@@ -7,6 +7,7 @@
     height:300px;
     width: 470px;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .price-reviews {
@@ -165,6 +166,7 @@
     height: 610px;
     width: 700px;
     object-fit: cover;
+    border-radius: 10px;
 }
 
 .spot-details-image-container {
