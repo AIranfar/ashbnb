@@ -100,7 +100,6 @@ export const createASpot = (spots, spotImages) => async dispatch => {
                 const spotImage = await spotImageResponse.json()
                 newSpot.previewImage = spotImage.spotImages
                 dispatch(create(newSpot))
-                return newSpot
             }
         }
     }

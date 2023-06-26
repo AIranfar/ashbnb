@@ -19,6 +19,7 @@ const CreateASpot = () => {
     const [imageUrl, setImageUrl] = useState('');
     const [imageUrl2, setImageUrl2] = useState('');
     const [imageUrl3, setImageUrl3] = useState('');
+    const [imageUrl4, setImageUrl4] = useState('');
     const [errors, setErrors] = useState('');
 
     const handleSubmit = async (e) => {
@@ -39,6 +40,7 @@ const CreateASpot = () => {
         if (imageUrl !== "" && !imageUrl.endsWith('.png') && !imageUrl.endsWith('.jpg') && !imageUrl.endsWith('.jpeg')) allErrors.imageUrl = 'Image URL must end in .png, .jpg, or .jpeg'
         if (imageUrl2 !== "" && !imageUrl2.endsWith('.png') && !imageUrl2.endsWith('.jpg') && !imageUrl2.endsWith('.jpeg')) allErrors.imageUrl2 = 'Image URL must end in .png, .jpg, or .jpeg'
         if (imageUrl3 !== "" && !imageUrl3.endsWith('.png') && !imageUrl3.endsWith('.jpg') && !imageUrl3.endsWith('.jpeg')) allErrors.imageUrl3 = 'Image URL must end in .png, .jpg, or .jpeg'
+        if (imageUrl4 !== "" && !imageUrl4.endsWith('.png') && !imageUrl4.endsWith('.jpg') && !imageUrl4.endsWith('.jpeg')) allErrors.imageUrl4 = 'Image URL must end in .png, .jpg, or .jpeg'
 
         if (Object.keys(allErrors).length) {
             return setErrors(allErrors)
@@ -82,6 +84,12 @@ const CreateASpot = () => {
                 preview: false
             });
         }
+        if (imageUrl4) {
+            photoArr.push({
+                url: imageUrl4,
+                preview: false
+            });
+        }
 
         const createdSpot = await dispatch(createASpot(newSpot, photoArr))
         if (createdSpot) {
@@ -99,7 +107,7 @@ const CreateASpot = () => {
                 <div className='address-container'>
                     <div className='error-container'>
                         <label className='placement'>Country</label>
-                        {errors.country ? <p className='errors-style'>{errors.country}</p> : null}
+                        {errors.country ? <p className='errors-style'>*{errors.country}</p> : null}
                     </div>
                     <input className='input-size'
                         type="text"
@@ -110,7 +118,7 @@ const CreateASpot = () => {
                     />
                     <div className='error-container'>
                         <label className='placement'>Street Address</label>
-                        {errors.address ? <p className='errors-style'>{errors.address}</p> : null}
+                        {errors.address ? <p className='errors-style'>*{errors.address}</p> : null}
                     </div>
                     <input className='input-size'
                         type="text"
@@ -122,7 +130,7 @@ const CreateASpot = () => {
                     <div className='city-and-state'>
                         <div className='error-container'>
                             <label className='placement'>City</label>
-                            {errors.city ? <p className='errors-style'>{errors.city}</p> : null}
+                            {errors.city ? <p className='errors-style'>*{errors.city}</p> : null}
                         </div>
                         <input
                             type="text"
@@ -133,7 +141,7 @@ const CreateASpot = () => {
                         />
                         <div className='error-container'>
                             <label className='placement'>State</label>
-                            {errors.address ? <p className='errors-style'>{errors.state}</p> : null}
+                            {errors.state ? <p className='errors-style'>*{errors.state}</p> : null}
                         </div>
                         <input
                             type="text"
@@ -156,7 +164,7 @@ const CreateASpot = () => {
                     rows="7"
                 />
                 <div className='error-container'>
-                    {errors.address ? <p className='errors-style'>{errors.description}</p> : null}
+                    {errors.description ? <p className='errors-style'>*{errors.description}</p> : null}
                 </div>
                 <h3>Create a title for your spot</h3>
                 <p>Catch guests' attention with a spot title that highlights what makes
@@ -171,7 +179,7 @@ const CreateASpot = () => {
                 <br />
                 <div className='error-container'>
                     <label className='placement' />
-                    {errors.address ? <p className='errors-style'>{errors.name}</p> : null}
+                    {errors.name ? <p className='errors-style'>*{errors.name}</p> : null}
                 </div>
                 <h3>Set a base price for your spot</h3>
                 <p>Competitive pricing can help your listing stand out and rank higher
@@ -180,14 +188,14 @@ const CreateASpot = () => {
                     type="number"
                     onChange={(e) => setPrice(e.target.value)}
                     value={price}
-                    placeholder="$Price per night (USD)"
+                    placeholder="$ Price per night (USD)"
                     name="State"
                 />
                 <br />
                 <div class='photo-container'>
                     <div className='error-container'>
                         <label className='placement' />
-                        {errors.address ? <p className='errors-style'>{errors.price}</p> : null}
+                        {errors.price ? <p className='errors-style'>*{errors.price}</p> : null}
                     </div>
                     <h3>Liven up your spot with photos</h3>
                     <p>Submit a link to at least one photo to publish your spot.</p>
@@ -200,9 +208,8 @@ const CreateASpot = () => {
                     />
                     <div className='error-container'>
                         <label className='placement' />
-                        {errors.address ? <p className='errors-style'>{errors.previewImage}</p> : null}
+                        {errors.previewImage ? <p className='errors-style'>*{errors.previewImage}</p> : null}
                     </div>
-                    <br />
                     <input
                         type="text"
                         onChange={(e) => setImageUrl(e.target.value)}
@@ -211,10 +218,9 @@ const CreateASpot = () => {
                         name="imageUrl"
                     />
                     <div className='error-container'>
-                            <label className='placement' />
-                            {errors.address ? <p className='errors-style'>{errors.previewImages}</p> : null}
-                        </div>
-                    <br />
+                        <label className='placement' />
+                        {errors.imageUrl ? <p className='errors-style'>*{errors.imageUrl}</p> : null}
+                    </div>
                     <input
                         type="text"
                         onChange={(e) => setImageUrl2(e.target.value)}
@@ -222,7 +228,10 @@ const CreateASpot = () => {
                         placeholder="Image URL"
                         name="imageUrl2"
                     />
-                    <br />
+                    <div className='error-container'>
+                        <label className='placement' />
+                        {errors.imageUrl2 ? <p className='errors-style'>*{errors.imageUrl2}</p> : null}
+                    </div>
                     <input
                         type="text"
                         onChange={(e) => setImageUrl3(e.target.value)}
@@ -230,8 +239,21 @@ const CreateASpot = () => {
                         placeholder="Image URL"
                         name="imageUrl3"
                     />
-                    <br />
-                    <br />
+                    <div className='error-container'>
+                        <label className='placement' />
+                        {errors.imageUrl3 ? <p className='errors-style'>*{errors.imageUrl3}</p> : null}
+                    </div>
+                    <input
+                        type="text"
+                        onChange={(e) => setImageUrl4(e.target.value)}
+                        value={imageUrl4}
+                        placeholder="Image URL"
+                        name="imageUrl4"
+                    />
+                    <div className='error-container'>
+                        <label className='placement' />
+                        {errors.imageUrl4 ? <p className='errors-style'>*{errors.imageUrl4}</p> : null}
+                    </div>
                 </div>
                 <div className='new-spot-submit-container'>
                     <button className='submit-button' type="submit">Create Spot</button>

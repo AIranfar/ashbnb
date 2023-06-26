@@ -239,7 +239,7 @@ router.get('/:spotId', async (req, res) => {
 
 router.post('/', validateSpotError, requireAuth, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body
-    console.log('This sucks')
+    // console.log('This sucks')
     const newSpot = await Spot.create({
         ownerId: req.user.id,
         address,
