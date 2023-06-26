@@ -54,8 +54,8 @@ const CreateBooking = ({ spotId, spot }) => {
             onChange={(e) => setEndDate(e.target.value)}
           />
         </div>
-        <div className='new-booking-submit-container'>
-        <button className='submit-booking-button' type="submit">Create Booking</button>
+        <div className='booking-submit-container'>
+          <button className='submit-booking-button' type="submit">Create Booking</button>
         </div>
       </form>
     </div>

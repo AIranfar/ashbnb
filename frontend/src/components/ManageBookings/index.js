@@ -96,7 +96,10 @@ const ManageBookings = () => {
             );
           })
         ) : (
-          'You have no bookings.'
+          <>
+            <h3>You have no upcoming bookings</h3>
+            <h2>Book a spot for your next adventure</h2>
+          </>
         )}
       </div>
     </div>

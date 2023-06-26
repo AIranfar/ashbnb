@@ -11,8 +11,8 @@
 }
 
 .manage-bookings-tab.active {
-    color: #fff;
     text-decoration: underline;
+    font-weight: bold;
   }
 
 button.manage-bookings-tab {

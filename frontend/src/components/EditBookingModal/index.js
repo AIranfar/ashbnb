@@ -27,24 +27,30 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
     }
 
     return (
-        <div>
-            <h1>Edit your booking for {spot.name}</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="start-date">Start Date:</label>
-                <input
-                    type="date"
-                    id="start-date"
-                    value={previousBooking.startDate}
-                    onChange={(e) => setStartDate(e.target.value)}
-                />
-                <label htmlFor="end-date">End Date:</label>
-                <input
-                    type="date"
-                    id="end-date"
-                    value={previousBooking.endDate}
-                    onChange={(e) => setEndDate(e.target.value)}
-                />
-                <button type="submit">Edit Booking</button>
+        <div className="edit-booking-container">
+            <h2 className='edit-booking-title-header'>Edit your booking for {spot.name}</h2>
+            <form onSubmit={handleSubmit} className='booking-form'>
+                <div className="starting-date-container">
+                    <label className="edit-booking-start-date">Start Date:</label>
+                    <input
+                        type="date"
+                        id="start-date"
+                        value={previousBooking.startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
+                    />
+                </div>
+                <div className="ending-date-container">
+                    <label className="edit-booking-end-date">End Date:</label>
+                    <input
+                        type="date"
+                        id="end-date"
+                        value={previousBooking.endDate}
+                        onChange={(e) => setEndDate(e.target.value)}
+                    />
+                </div>
+                <div className="booking-submit-container">
+                    <button className='submit-booking-button' type="submit">Edit Booking</button>
+                </div>
             </form>
         </div>
     );
