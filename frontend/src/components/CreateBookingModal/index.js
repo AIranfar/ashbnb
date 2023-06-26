@@ -20,10 +20,10 @@ const CreateBooking = ({ spotId, spot }) => {
     e.preventDefault();
 
     const newBooking = {
-        spot,
-        spotId,
-        startDate,
-        endDate
+      spot,
+      spotId,
+      startDate,
+      endDate
     }
 
     dispatch(createNewBooking(newBooking))
@@ -32,24 +32,30 @@ const CreateBooking = ({ spotId, spot }) => {
 
 
   return (
-    <div>
-      <h1>Create a New Booking for {spot.name}</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="start-date">Start Date:</label>
-        <input
-          type="date"
-          id="start-date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-        <label htmlFor="end-date">End Date:</label>
-        <input
-          type="date"
-          id="end-date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
-        />
-        <button type="submit">Create Booking</button>
+    <div className='new-booking-container'>
+      <h2 className='new-booking-title-header'>Create a New Booking for {spot.name}</h2>
+      <form onSubmit={handleSubmit} className='booking-form'>
+        <div className='starting-date-container'>
+          <label className='new-booking-start-date'>Start Date:</label>
+          <input
+            type="date"
+            id="start-date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </div>
+        <div className='ending-date-container'>
+          <label className='new-booking-end-date'>End Date:</label>
+          <input
+            type="date"
+            id="end-date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </div>
+        <div className='new-booking-submit-container'>
+        <button className='submit-booking-button' type="submit">Create Booking</button>
+        </div>
       </form>
     </div>
   );
