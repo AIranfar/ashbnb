@@ -31,9 +31,12 @@ const ManageBookings = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
+    const timezoneOffset = date.getTimezoneOffset() * 60000;
+    const adjustedDate = new Date(date.getTime() + timezoneOffset);
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
-    return date.toLocaleDateString(undefined, options);
+    return adjustedDate.toLocaleDateString(undefined, options);
   };
+
 
   const sortedBookings = Object.values(userBookings).sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
 
@@ -60,6 +63,7 @@ const ManageBookings = () => {
         {filteredBookings.length ? (
           filteredBookings.map((booking) => {
             const spot = getSpotById(booking.Spot.id);
+            // console.log('BOOKING ->', booking)
             return (
               <div className="manage-bookings-content-wrapper" key={booking.id}>
                 <NavLink className="manage-bookings-navlink" to={`/spots/${spot?.id}`}>
