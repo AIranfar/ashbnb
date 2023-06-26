@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import { getUserBookings } from "../../store/bookings";
@@ -14,6 +14,7 @@ const ManageBookings = () => {
   const allSpots = useSelector((state) => state.spots.allSpots);
   const allSpotsArr = Object.values(allSpots);
   const today = new Date();
+  const [activeTab, setActiveTab] = useState('upcoming');
 
   const getSpotById = (spotId) => {
     return allSpotsArr.find((spot) => spot.id === spotId);
@@ -30,19 +31,39 @@ const ManageBookings = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
+    const timezoneOffset = date.getTimezoneOffset() * 60000;
+    const adjustedDate = new Date(date.getTime() + timezoneOffset);
     const options = { month: 'long', day: 'numeric', year: 'numeric' };
-    return date.toLocaleDateString(undefined, options);
+    return adjustedDate.toLocaleDateString(undefined, options);
   };
+
 
   const sortedBookings = Object.values(userBookings).sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
 
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+  };
+
+  const filteredBookings = activeTab === 'upcoming'
+    ? sortedBookings.filter(booking => new Date(booking.startDate) > today)
+    : sortedBookings.filter(booking => new Date(booking.endDate) < today);
+
   return (
-    <>
+    <div className="manage-bookings-container">
       <h1 className="header-manage">Manage Your Bookings</h1>
+      <div className="manage-bookings-tabs">
+        <button className={`manage-bookings-tab ${activeTab === 'upcoming' ? 'active' : ''}`} onClick={() => handleTabClick('upcoming')}>
+          Upcoming
+        </button>
+        <button className={`manage-bookings-tab ${activeTab === 'past' ? 'active' : ''}`} onClick={() => handleTabClick('past')}>
+          Past
+        </button>
+      </div>
       <div className="manage-bookings-bookings">
-        {sortedBookings.length ? (
-          sortedBookings.map((booking) => {
+        {filteredBookings.length ? (
+          filteredBookings.map((booking) => {
             const spot = getSpotById(booking.Spot.id);
+            // console.log('BOOKING ->', booking)
             return (
               <div className="manage-bookings-content-wrapper" key={booking.id}>
                 <NavLink className="manage-bookings-navlink" to={`/spots/${spot?.id}`}>
@@ -56,7 +77,7 @@ const ManageBookings = () => {
                     <div className="manage-bookings-dates">Start Date: {formatDate(booking.startDate)}</div>
                     <div className="manage-bookings-dates">End Date: {formatDate(booking.endDate)}</div>
                   </div>
-                  {new Date(booking.startDate) > today && (
+                  {activeTab === 'upcoming' && (
                     <div className="booking-actions-container">
                       <OpenModalButton
                         className="edit-booking-button"
@@ -75,10 +96,10 @@ const ManageBookings = () => {
             );
           })
         ) : (
-          'You have no Bookings'
+          'You have no bookings.'
         )}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,0 +1,56 @@
+.new-booking-container {
+    width: 500px;
+    border-radius: 20px;
+    border-color: 10px solid black;
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.new-booking-title-header {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    gap: 2rem;
+}
+
+.starting-date-container, .ending-date-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem
+}
+
+.new-booking-start-date, .new-booking-end-date {
+    font-size: 20px;
+}
+
+#start-date, #end-date {
+    font-size: 20px;
+}
+
+.submit-booking-button {
+    background-color: rgb(253, 55, 55);
+    color: white;
+    width: 300px;
+    box-shadow: 1px 1px 1px 1px black;
+    height: 2rem;
+    border-radius: 20px;
+}
+
+.submit-booking-button:hover {
+    cursor: pointer;
+    background-color: rgb(214, 95, 95);
+}
+
+.new-booking-submit-container {
+    display: flex;
+    justify-content: center;
+    /* margin-top: 30px; */
+}

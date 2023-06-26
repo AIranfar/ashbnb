@@ -11,7 +11,7 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
     const [startDate, setStartDate] = useState(previousBooking.startDate);
     const [endDate, setEndDate] = useState(previousBooking.endDate);
 
-    // console.log('previousBooking', previousBooking)
+    console.log('previousBooking', previousBooking)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,14 +34,14 @@ const EditBookingModal = ({ bookingId, spotId, spot }) => {
                 <input
                     type="date"
                     id="start-date"
-                    value={startDate}
+                    value={previousBooking.startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                 />
                 <label htmlFor="end-date">End Date:</label>
                 <input
                     type="date"
                     id="end-date"
-                    value={endDate}
+                    value={previousBooking.endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                 />
                 <button type="submit">Edit Booking</button>

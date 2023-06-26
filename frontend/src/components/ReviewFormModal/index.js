@@ -86,14 +86,7 @@ const ReviewFormModal = ({ spotId }) => {
           <div className="stars">Stars</div>
         </div>
         <div className="new-review-submit-container">
-          <button
-            className='submit-review-button'
-            id={reviewButton}
-            type="submit"
-            disabled={disabledButton()}
-          >
-            Submit Your Review
-          </button>
+          <button className='submit-review-button' id={reviewButton} type="submit" disabled={disabledButton()}>Submit Your Review</button>
         </div>
       </form>
     </div>

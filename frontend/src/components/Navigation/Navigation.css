@@ -84,6 +84,7 @@
     cursor: pointer;
     border-radius: 10px;
     font-size: 1rem;
+    margin-bottom: 8px;
 }
 
 .profile-button {
