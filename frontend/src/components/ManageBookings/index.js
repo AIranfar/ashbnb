@@ -96,10 +96,10 @@ const ManageBookings = () => {
             );
           })
         ) : (
-          <>
+          <div className="no-bookings-container">
             <h3>You have no upcoming bookings</h3>
-            <h2>Book a spot for your next adventure</h2>
-          </>
+            <h4>Book a spot for your next adventure</h4>
+          </div>
         )}
       </div>
     </div>
