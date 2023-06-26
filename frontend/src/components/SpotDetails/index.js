@@ -24,11 +24,6 @@ const SpotDetails = () => {
     }
     // console.log('singleReview ->')
 
-    // console.log('ReviewArr', reviewsArr)
-    // console.log('SPOT--->', spot);
-    // console.log('REVIEWSOBJ --->', allReviewsObj);
-    // console.log('USER --->', sessionUser);
-
     useEffect(() => {
         dispatch(getOneSpot(spotId));
         dispatch(getAllReviews(spotId))
@@ -65,12 +60,14 @@ const SpotDetails = () => {
         return starIcons;
     };
 
-    // console.log('HELLO:', spotId)
-
     const dateString = (date) => {
         const newDate = new Date(date);
         const formattedDate = newDate.toLocaleString('default', { month: 'long', year: 'numeric' })
         return formattedDate
+    }
+
+    const imageArraySlice = (arr) => {
+        return arr.slice(1)
     }
 
     return (
@@ -80,19 +77,19 @@ const SpotDetails = () => {
                     <h1>{spot.name}</h1>
                     <div className='spot-images-div' />
                     <h3>{spot.city}, {spot.state}, {spot.country}</h3>
-                    {spot.SpotImages.map(img => {
-                        return <div className='images-container'>
-                            <img className='spot-details-image' src={img.url} alt={spot.name} key={img.id} />
-                            <div className='images-not-found-container'>
-                                <img src='https://www.dunstableroadrunners.org/wp-content/uploads/2019/04/image-coming-soon.jpg' alt='no-image' className='image-not-found'></img>
-                                <img src='https://www.dunstableroadrunners.org/wp-content/uploads/2019/04/image-coming-soon.jpg' alt='no-image' className='image-not-found'></img>
-                                <img src='https://www.dunstableroadrunners.org/wp-content/uploads/2019/04/image-coming-soon.jpg' alt='no-image' className='image-not-found'></img>
-                                <img src='https://www.dunstableroadrunners.org/wp-content/uploads/2019/04/image-coming-soon.jpg' alt='no-image' className='image-not-found'></img>
-                            </div>
+                    <div className='spot-details-image-container'>
+                        <img className='spot-details-first-image' src={spot.SpotImages[0].url} />
+                        <div className='images-container'>
+                            {imageArraySlice(spot.SpotImages).map(img => {
+                                return <img className='spot-details-image' src={img.url} alt={spot.name} key={img.id} />
+                            })}
                         </div>
-                    })}
-                    <div className='big-small-box'>
+                    </div>
+                    <div className='spot-details-name-description-reserve'>
+                        <div className='spot-details-name-description'>
                         <div className='hosted-by'>Hosted by {spot.Owner.firstName} {spot.Owner.lastName}</div>
+                        <div className='spot-description'>{spot.description}</div>
+                        </div>
                         <div className='small-box'>
                             <div className='price-reviews'>
                                 <div id='spot-price'>
@@ -118,10 +115,9 @@ const SpotDetails = () => {
                                 <NavLink to={`/spots/${spot.id}/edit`}>
                                     <button className="reserve-button-id">Update Spot Details</button>
                                 </NavLink>
-                                }
+                            }
                         </div>
                     </div>
-                    <div className='spot-description'>{spot.description}</div>
                 </div>
                 <div className='bottom-reviews'>
                     <h2 className='star-num-reviews'>
@@ -162,10 +158,10 @@ const SpotDetails = () => {
                                             modalComponent={<DeleteReviewSpotPage reviewId={review.id} spotId={spotId} disabled={false} />}
                                         />
                                     </div>
-) : null}
+                                ) : null}
 
                             </div>
-                        ) : 'Be the first to post a review'}
+                        ) : <div className='no-review-text'>Be the first to post a review</div>}
                     </div>
                 </div>
             </div>

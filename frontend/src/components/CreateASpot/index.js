@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from "react-router-dom";
-import { createASpot } from "../../store/spots";
+import { createASpot, getOneSpot } from "../../store/spots";
 import { useHistory } from 'react-router-dom';
 import './CreateASpot.css';
 
@@ -92,6 +92,7 @@ const CreateASpot = () => {
         }
 
         const createdSpot = await dispatch(createASpot(newSpot, photoArr))
+        // console.log('CREATED SPOT-->', createASpot)
         if (createdSpot) {
             history.push(`/spots/${createdSpot.id}`);
             return
