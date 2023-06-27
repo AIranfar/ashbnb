@@ -11,7 +11,7 @@ const Search = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const inputRef = useRef();
-    const ulRef = useRef();
+    const ulRef = useRef(null);
 
     useEffect(() => {
         if (query) {
@@ -37,7 +37,7 @@ const Search = () => {
     };
 
     const handleClickOutside = (e) => {
-        if (!ulRef.current.contains(e.target) && !inputRef.current.contains(e.target)) {
+        if (ulRef.current && !ulRef.current.contains(e.target) && !inputRef.current.contains(e.target)) {
             setSearchTerm('');
         }
     };
@@ -69,10 +69,10 @@ const Search = () => {
                     {searchResults.map((spot) => (
                         <div className='search-results-container' key={spot.id}>
                             <NavLink to={`/spots/${spot.id}`} className="search-results-navlink" onClick={handleNavLinkClick}>
-                                <img src={spot.previewImage} className="search-bar-spot-image" />
+                                <img src={spot.previewImage} className="search-bar-spot-image" alt="Spot Preview" />
                                 <div className="search-results-content">
                                     <div className="search-bar-spot-name">{spot.name}</div>
-                                    <div className="search-bar-price"> ${spot.price} /night</div>
+                                    <div className="search-bar-price">${spot.price} /night</div>
                                     <div className="search-bar-location">{spot.city}, {spot.state}</div>
                                 </div>
                             </NavLink>

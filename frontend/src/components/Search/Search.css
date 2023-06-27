@@ -25,13 +25,8 @@
     width: 100%;
     background-color: #fff;
     border-radius: 10px;
+    margin-top: 10px;
     z-index: 9999;
-}
-
-.search-results ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
 }
 
 .search-results-content {

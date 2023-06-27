@@ -32,6 +32,7 @@ const CreateASpot = () => {
         if (!city.length) allErrors.city = 'City is required'
         if (!state.length) allErrors.state = 'State is required'
         if (description.length < 30) allErrors.description = 'Description needs 30 or more characters'
+        if (description.length > 500) allErrors.description = 'Description needs to be less then 500 characters'
         if (!name.length) allErrors.name = 'Name is required'
         if (!price.length) allErrors.price = 'Price is required'
         if (!previewImage.length) allErrors.image = 'Preview Image is required'
