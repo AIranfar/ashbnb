@@ -5,6 +5,7 @@ import ProfileButton from './ProfileButton';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import Search from '../Search'
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -34,6 +35,7 @@ function Navigation({ isLoaded }) {
         </NavLink>
         <NavLink className='logo' exact to='/'>shbnb</NavLink>
       </div>
+      <Search />
       <div className='create'>
         {sessionUser ? <NavLink className='create-button' to='/spots/new'>Create a New Spot</NavLink> : null}
         {isLoaded && (

@@ -106,7 +106,7 @@ const SpotDetails = () => {
                                     </div>
                                 </div>
                             </div>
-                            {sessionUser.id !== spot.ownerId ?
+                            {sessionUser?.id !== spot.ownerId ?
                                 <OpenModalButton
                                     className='reserve-button-id'
                                     buttonText='Reserve this spot'
