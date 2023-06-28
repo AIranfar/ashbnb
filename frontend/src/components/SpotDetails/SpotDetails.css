@@ -3,13 +3,6 @@
     margin-right: 80px;
 }
 
-.spot-details-image {
-    height:300px;
-    width: 470px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
 .price-reviews {
     display: flex;
     flex-direction: row;
@@ -100,8 +93,6 @@
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     grid-gap: 10px;
-    max-width: 400px;
-    /* margin: 0 auto; */
 }
 
 .image-not-found {
@@ -169,6 +160,13 @@
     border-radius: 10px;
 }
 
+.spot-details-image {
+    height:300px;
+    width: 470px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
 .spot-details-image-container {
     display: flex;
     gap: 10px;
@@ -185,3 +183,15 @@
 .no-review-text {
     margin-bottom: 25px;
 }
+
+@media (max-width: 1450px) {
+    .spot-details-image {
+      height: 200px;
+      width: 370px;
+    }
+
+    .spot-details-first-image {
+      height: 410px;
+      width: 500px;
+    }
+  }
