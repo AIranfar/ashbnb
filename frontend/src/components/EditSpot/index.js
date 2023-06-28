@@ -53,6 +53,7 @@ const EditSpot = () => {
         if (description.length < 30) allErrors.description = 'Description needs 30 or more characters'
         if (!name.length) allErrors.name = 'Name is required'
         if (!price.length) allErrors.price = 'Price is required'
+        if (price > 100001) allErrors.price = 'Price is too high'
 
         if (Object.keys(allErrors).length > 0) {
             return setErrors(allErrors)
@@ -65,7 +66,7 @@ const EditSpot = () => {
             state,
             description,
             name,
-            price
+            price: parseFloat(price).toFixed(2)
         };
 
         const updatedSpot = await dispatch(editSpot(updateSpot, id))
