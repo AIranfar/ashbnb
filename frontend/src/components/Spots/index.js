@@ -46,7 +46,7 @@ const AllSpots = () => {
                                 <div className='spot-location'>{`${spot.city}, ${spot.state}`}</div>
                                 <div className='star-rating'>{rating(spot.avgRating)}</div>
                             </div>
-                            <div className='spot-price'>{`$${spot.price}`} Night</div>
+                            <div className='spot-price'>{`$${spot.price}`} / Night</div>
                         </NavLink>
                     </div>
                 )}

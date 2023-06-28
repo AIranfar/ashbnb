@@ -35,6 +35,7 @@ const CreateASpot = () => {
         if (description.length > 255) allErrors.description = 'Description needs to be less then 255 characters'
         if (!name.length) allErrors.name = 'Name is required'
         if (!price.length) allErrors.price = 'Price is required'
+        if (price > 100001) allErrors.price = 'Price is too high'
         if (!previewImage.length) allErrors.image = 'Preview Image is required'
         if (!previewImage || previewImage === '') allErrors.previewImage = 'Preview image is required'
         if (!previewImage.endsWith('.png') && !previewImage.endsWith('.jpg') && !previewImage.endsWith('.jpeg')) allErrors.previewImages = 'Image URL must end in .png, .jpg, or .jpeg'
@@ -54,7 +55,7 @@ const CreateASpot = () => {
             state,
             description,
             name,
-            price,
+            price: parseFloat(price).toFixed(2),
             previewImage
         };
 
@@ -158,6 +159,7 @@ const CreateASpot = () => {
                 <p>Mention the best features of your space, any special amentities like
                     fast wifi or parking, and what you love about the neighborhood.</p>
                 <textarea
+                    className='description-textarea'
                     type="text"
                     onChange={(e) => setDescription(e.target.value)}
                     value={description}
