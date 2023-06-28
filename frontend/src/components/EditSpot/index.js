@@ -37,7 +37,7 @@ const EditSpot = () => {
         dispatch(getOneSpot(id));
     }, [dispatch, id]);
 
-      if (!spot) {
+    if (!spot) {
         return <div>Loading...</div>;
     }
 
@@ -169,6 +169,10 @@ const EditSpot = () => {
                     name="State"
                 />
                 <br />
+                <div className='error-container'>
+                    <label className='placement' />
+                    {errors.price ? <p className='errors-style'>*{errors.price}</p> : null}
+                </div>
                 <div className='edit-spot-submit-container'>
                     <button class='submit-button' type="submit">Update your Spot</button>
                 </div>
