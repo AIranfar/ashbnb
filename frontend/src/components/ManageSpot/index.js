@@ -9,7 +9,7 @@ import './ManageSpot.css';
 const ManageSpots = () => {
     const dispatch = useDispatch();
     const spots = Object.values(useSelector(state => state.spots.allSpots));
-    
+
     useEffect(() => {
         dispatch(getAllSpotCurrentUser())
     }, [dispatch])
@@ -28,6 +28,10 @@ const ManageSpots = () => {
                 <i className='fa-solid fa-star star-icon' /> New
             </div>
             )
+    }
+
+    if (!spots) {
+        return (<div>Loading...</div>)
     }
 
     return (
