@@ -47,13 +47,20 @@ const EditSpot = () => {
         let allErrors = {};
 
         if (!country.length) allErrors.country = 'Country is required'
+        if (country.length > 40) allErrors.country = 'Country needs to be fewer than 40 characters'
         if (!address.length) allErrors.address = 'Address is required'
+        if (address.length > 40) allErrors.address = 'Address needs to be fewer than 40 characters'
         if (!city.length) allErrors.city = 'City is required'
+        if (city.length > 40) allErrors.city = 'City needs to be fewer than 40 characters'
         if (!state.length) allErrors.state = 'State is required'
-        if (description.length < 30) allErrors.description = 'Description needs 30 or more characters'
+        if (state.length > 40) allErrors.state = 'State needs to be fewer than 40 characters'
+        if (description.length < 30) allErrors.description = 'Description needs to be 30 or more characters'
+        if (description.length > 255) allErrors.description = 'Description needs to be less then 255 characters'
         if (!name.length) allErrors.name = 'Name is required'
+        if (name.length > 40) allErrors.name = 'Name needs to be fewer than 40 characters'
         if (!price.length) allErrors.price = 'Price is required'
         if (price > 100001) allErrors.price = 'Price is too high'
+        if (price < 1) allErrors.price = 'Price must be at least $1'
 
         if (Object.keys(allErrors).length > 0) {
             return setErrors(allErrors)

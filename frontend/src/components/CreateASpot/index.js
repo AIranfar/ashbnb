@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from "react-router-dom";
-import { createASpot, getOneSpot } from "../../store/spots";
+import { createASpot } from "../../store/spots";
 import { useHistory } from 'react-router-dom';
 import './CreateASpot.css';
 
@@ -22,26 +21,37 @@ const CreateASpot = () => {
     const [imageUrl4, setImageUrl4] = useState('');
     const [errors, setErrors] = useState('');
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         let allErrors = {};
 
         if (!country.length) allErrors.country = 'Country is required'
+        if (country.length > 40) allErrors.country = 'Country needs to be fewer than 40 characters'
         if (!address.length) allErrors.address = 'Address is required'
+        if (address.length > 40) allErrors.address = 'Address needs to be fewer than 40 characters'
         if (!city.length) allErrors.city = 'City is required'
+        if (city.length > 40) allErrors.city = 'City needs to be fewer than 40 characters'
         if (!state.length) allErrors.state = 'State is required'
-        if (description.length < 30) allErrors.description = 'Description needs 30 or more characters'
+        if (state.length > 40) allErrors.state = 'State needs to be fewer than 40 characters'
+        if (description.length < 30) allErrors.description = 'Description needs to be 30 or more characters'
         if (description.length > 255) allErrors.description = 'Description needs to be less then 255 characters'
         if (!name.length) allErrors.name = 'Name is required'
+        if (name.length > 40) allErrors.name = 'Name needs to be fewer than 40 characters'
         if (!price.length) allErrors.price = 'Price is required'
         if (price > 100001) allErrors.price = 'Price is too high'
+        if (price < 1) allErrors.price = 'Price must be at least $1'
         if (!previewImage.length) allErrors.image = 'Preview Image is required'
-        if (!previewImage || previewImage === '') allErrors.previewImage = 'Preview image is required'
+        if (!previewImage || previewImage === '') allErrors.previewImage = 'All Images are required'
         if (!previewImage.endsWith('.png') && !previewImage.endsWith('.jpg') && !previewImage.endsWith('.jpeg')) allErrors.previewImages = 'Image URL must end in .png, .jpg, or .jpeg'
+        if (!imageUrl || imageUrl === '') allErrors.imageUrl = 'All Images are required'
         if (imageUrl !== "" && !imageUrl.endsWith('.png') && !imageUrl.endsWith('.jpg') && !imageUrl.endsWith('.jpeg')) allErrors.imageUrl = 'Image URL must end in .png, .jpg, or .jpeg'
+        if (!imageUrl2 || imageUrl2 === '') allErrors.imageUrl2 = 'All Images are required'
         if (imageUrl2 !== "" && !imageUrl2.endsWith('.png') && !imageUrl2.endsWith('.jpg') && !imageUrl2.endsWith('.jpeg')) allErrors.imageUrl2 = 'Image URL must end in .png, .jpg, or .jpeg'
+        if (!imageUrl3 || imageUrl3 === '') allErrors.imageUrl3 = 'All Images are required'
         if (imageUrl3 !== "" && !imageUrl3.endsWith('.png') && !imageUrl3.endsWith('.jpg') && !imageUrl3.endsWith('.jpeg')) allErrors.imageUrl3 = 'Image URL must end in .png, .jpg, or .jpeg'
+        if (!imageUrl || imageUrl === '') allErrors.imageUrl = 'All Images are required'
         if (imageUrl4 !== "" && !imageUrl4.endsWith('.png') && !imageUrl4.endsWith('.jpg') && !imageUrl4.endsWith('.jpeg')) allErrors.imageUrl4 = 'Image URL must end in .png, .jpg, or .jpeg'
 
         if (Object.keys(allErrors).length) {
@@ -118,6 +128,7 @@ const CreateASpot = () => {
                         value={country}
                         placeholder="Country"
                         name="country"
+
                     />
                     <div className='error-container'>
                         <label className='placement'>Street Address</label>
@@ -129,6 +140,7 @@ const CreateASpot = () => {
                         value={address}
                         placeholder="Address"
                         name="address"
+
                     />
                     <div className='city-and-state'>
                         <div className='error-container'>
@@ -141,6 +153,7 @@ const CreateASpot = () => {
                             value={city}
                             placeholder="City"
                             name="City"
+
                         />
                         <div className='error-container'>
                             <label className='placement'>State</label>
@@ -152,6 +165,7 @@ const CreateASpot = () => {
                             value={state}
                             placeholder="State"
                             name="State"
+
                         />
                     </div>
                 </div>
@@ -200,59 +214,64 @@ const CreateASpot = () => {
                     <label className='placement' />
                     {errors.price ? <p className='errors-style'>*{errors.price}</p> : null}
                 </div>
-                <div class='photo-container'>
+                <div className='photo-container'>
                     <h3>Liven up your spot with photos</h3>
                     <p>Submit a link to at least one photo to publish your spot.</p>
                     <input
-                        type="text"
+                        type="url"
                         onChange={(e) => setPreviewImage(e.target.value)}
                         value={previewImage}
                         placeholder="Preview Image URL"
                         name="previewImage"
+
                     />
                     <div className='error-container'>
                         <label className='placement' />
                         {errors.previewImage ? <p className='errors-style'>*{errors.previewImage}</p> : null}
                     </div>
                     <input
-                        type="text"
+                        type="url"
                         onChange={(e) => setImageUrl(e.target.value)}
                         value={imageUrl}
                         placeholder="Image URL"
                         name="imageUrl"
+
                     />
                     <div className='error-container'>
                         <label className='placement' />
                         {errors.imageUrl ? <p className='errors-style'>*{errors.imageUrl}</p> : null}
                     </div>
                     <input
-                        type="text"
+                        type="url"
                         onChange={(e) => setImageUrl2(e.target.value)}
                         value={imageUrl2}
                         placeholder="Image URL"
                         name="imageUrl2"
+
                     />
                     <div className='error-container'>
                         <label className='placement' />
                         {errors.imageUrl2 ? <p className='errors-style'>*{errors.imageUrl2}</p> : null}
                     </div>
                     <input
-                        type="text"
+                        type="url"
                         onChange={(e) => setImageUrl3(e.target.value)}
                         value={imageUrl3}
                         placeholder="Image URL"
                         name="imageUrl3"
+
                     />
                     <div className='error-container'>
                         <label className='placement' />
                         {errors.imageUrl3 ? <p className='errors-style'>*{errors.imageUrl3}</p> : null}
                     </div>
                     <input
-                        type="text"
+                        type="url"
                         onChange={(e) => setImageUrl4(e.target.value)}
                         value={imageUrl4}
                         placeholder="Image URL"
                         name="imageUrl4"
+
                     />
                     <div className='error-container'>
                         <label className='placement' />
@@ -268,4 +287,3 @@ const CreateASpot = () => {
 };
 
 export default CreateASpot;
-
