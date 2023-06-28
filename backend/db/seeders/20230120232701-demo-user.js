@@ -12,8 +12,8 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
 
       {
-        firstName: 'Alec',
-        lastName: 'Keeler',
+        firstName: 'Demo',
+        lastName: 'User',
         email: 'demo@user.io',
         username: 'Demo-lition',
         hashedPassword: bcrypt.hashSync('password')
@@ -31,6 +31,41 @@ module.exports = {
         email: 'user2@user.io',
         username: 'FakeUser2',
         hashedPassword: bcrypt.hashSync('password3')
+      },
+      {
+        firstName: 'Han',
+        lastName: 'Nguyen',
+        email: 'Han@aa.io',
+        username: 'AllIDoIsNguyen',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        firstName: 'Christian',
+        lastName: 'Oviedo',
+        email: 'Christian@aa.io',
+        username: 'CallMeTort',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        firstName: 'Alec',
+        lastName: 'Keeler',
+        email: 'Alec@aa.io',
+        username: 'Helloprogrammers',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        firstName: 'Ash',
+        lastName: 'Iranfar',
+        email: 'Ash@aa.io',
+        username: 'AshIranfar',
+        hashedPassword: bcrypt.hashSync('password')
+      },
+      {
+        firstName: 'Azita',
+        lastName: 'Amighi',
+        email: 'Azita@aa.io',
+        username: 'AzitaAmighi',
+        hashedPassword: bcrypt.hashSync('password')
       }
     ], {});
   },
@@ -39,7 +74,7 @@ module.exports = {
     options.tableName = 'Users';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2'] }
+      username: { [Op.in]: ['Demo-lition', 'FakeUser1', 'FakeUser2', 'AllIDoIsNguyen', 'CallMeTort', 'Helloprogrammers', 'AshIranfar', 'AzitaAmighi',] }
     }, {});
   }
 };
