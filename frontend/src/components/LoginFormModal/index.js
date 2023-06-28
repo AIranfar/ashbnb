@@ -9,7 +9,7 @@ function LoginFormModal() {
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const [login, setLogin] = useState();
+  // const [login, setLogin] = useState();
   const { closeModal } = useModal();
 
   const handleSubmit = (e) => {
@@ -28,25 +28,25 @@ function LoginFormModal() {
   };
 
 
-  const disabledButton = () => {
-    if (!credential.length || !password.length) {
-      return true;
-    } else if (credential.length < 4 || password.length < 6) {
-      return true;
-    }
-    return false;
-  };
+  // const disabledButton = () => {
+  //   if (!credential.length || !password.length) {
+  //     return true;
+  //   } else if (credential.length < 4 || password.length < 6) {
+  //     return true;
+  //   }
+  //   return false;
+  // };
 
-  useEffect(() => {
-    if (!credential.length || !password.length) {
-      setLogin('login-disabled')
-    }
-    else if (credential.length < 4 || password.length < 6) {
-      setLogin('login-disabled')
-    } else {
-      setLogin('login-enabled')
-    }
-  }, [credential, password])
+  // useEffect(() => {
+  //   if (!credential.length || !password.length) {
+  //     setLogin('login-disabled')
+  //   }
+  //   else if (credential.length < 4 || password.length < 6) {
+  //     setLogin('login-disabled')
+  //   } else {
+  //     setLogin('login-enabled')
+  //   }
+  // }, [credential, password])
 
   const demoUserButton = () => {
     return dispatch(sessionActions.login({ credential: "Demo-lition", password: "password" }))
@@ -86,7 +86,7 @@ function LoginFormModal() {
           required
         />
         <br />
-        <button className='login-modal-button' id={login} type="submit" disabled={disabledButton()}>Log In</button>
+        <button className='login-modal-button' type="submit">Log In</button>
         <button onClick={demoUserButton} className='demo-user-button'>Log in as Demo User</button>
       </form>
     </div>
