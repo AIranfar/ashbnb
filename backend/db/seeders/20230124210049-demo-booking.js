@@ -12,22 +12,76 @@ module.exports = {
     options.tableName = 'Bookings';
     await queryInterface.bulkInsert(options, [
       {
-        spotId: 1,
+        spotId: 2,
         userId: 1,
         startDate: '2020-09-12',
         endDate: '2020-09-18'
       },
       {
-        spotId: 2,
+        spotId: 3,
         userId: 2,
         startDate: '2021-01-03',
         endDate: '2021-01-05'
       },
       {
-        spotId: 3,
+        spotId: 4,
         userId: 3,
         startDate: '2021-05-11',
         endDate: '2021-05-15'
+      },
+      {
+        spotId: 5,
+        userId: 4,
+        startDate: '2023-09-12',
+        endDate: '2023-09-15'
+      },
+      {
+        spotId: 6,
+        userId: 5,
+        startDate: '2023-08-01',
+        endDate: '2023-08-06'
+      },
+      {
+        spotId: 7,
+        userId: 6,
+        startDate: '2023-12-23',
+        endDate: '2023-12-28'
+      },
+      {
+        spotId: 8,
+        userId: 7,
+        startDate: '2023-11-12',
+        endDate: '2023-11-15'
+      },
+      {
+        spotId: 9,
+        userId: 8,
+        startDate: '2023-10-29',
+        endDate: '2023-11-05'
+      },
+      {
+        spotId: 10,
+        userId: 1,
+        startDate: '2023-07-02',
+        endDate: '2023-07-08'
+      },
+      {
+        spotId: 1,
+        userId: 2,
+        startDate: '2023-08-20',
+        endDate: '2023-08-29'
+      },
+      {
+        spotId: 11,
+        userId: 5,
+        startDate: '2023-08-11',
+        endDate: '2023-08-18'
+      },
+      {
+        spotId: 12,
+        userId: 8,
+        startDate: '2023-09-01',
+        endDate: '2023-09-05'
       }
     ], {});
   },
@@ -36,8 +90,7 @@ module.exports = {
     options.tableName = 'Bookings';
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3] }
+      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
     });
   }
 };
-
