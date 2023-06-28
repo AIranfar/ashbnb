@@ -196,11 +196,11 @@ const CreateASpot = () => {
                     name="State"
                 />
                 <br />
+                <div className='error-container'>
+                    <label className='placement' />
+                    {errors.price ? <p className='errors-style'>*{errors.price}</p> : null}
+                </div>
                 <div class='photo-container'>
-                    <div className='error-container'>
-                        <label className='placement' />
-                        {errors.price ? <p className='errors-style'>*{errors.price}</p> : null}
-                    </div>
                     <h3>Liven up your spot with photos</h3>
                     <p>Submit a link to at least one photo to publish your spot.</p>
                     <input
@@ -268,3 +268,4 @@ const CreateASpot = () => {
 };
 
 export default CreateASpot;
+
