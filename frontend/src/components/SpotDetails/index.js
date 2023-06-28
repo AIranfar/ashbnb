@@ -29,12 +29,12 @@ const SpotDetails = () => {
         dispatch(getAllReviews(spotId))
     }, [dispatch, spotId])
 
-    if (!spot || !spot.name) {
-        return (<h1>loading...</h1>)
+    if (!spot || !spot?.name) {
+        return (<h1>Loading...</h1>)
     }
 
-    if (!spot.Owner || !spot.SpotImages.length) {
-        return (<div>Loading...</div>)
+    if (!spot?.Owner || !spot?.SpotImages.length) {
+        return (<h1>Loading...</h1>)
     }
 
     const rating = (rating) => {
