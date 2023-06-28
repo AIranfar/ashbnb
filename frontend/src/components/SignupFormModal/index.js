@@ -15,7 +15,7 @@ function SignupFormPage() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState([]);
-  const [signUp, setSignUp] = useState()
+  // const [signUp, setSignUp] = useState()
   const { closeModal } = useModal();
 
 
@@ -34,25 +34,25 @@ function SignupFormPage() {
     return setErrors(['Confirm Password field must be the same as the Password field']);
   };
 
-  const disabledButton = () => {
-    if (!email.length || !username.length || !firstName.length || !lastName.length || !password.length || !confirmPassword.length) {
-      return true;
-    } else if (username.length < 4 || password.length < 6 || password !== confirmPassword) {
-      return true;
-    }
-    return false;
-  }
+  // const disabledButton = () => {
+  //   if (!email.length || !username.length || !firstName.length || !lastName.length || !password.length || !confirmPassword.length) {
+  //     return true;
+  //   } else if (username.length < 4 || password.length < 6 || password !== confirmPassword) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
-  useEffect(() => {
-    if (!email.length || !username.length || !firstName.length || !password.length || !confirmPassword.length) {
-      setSignUp('submit-disabled')
-    }
-    else if (username.length < 4 || password.length < 6 || password !== confirmPassword) {
-      setSignUp('submit-disabled')
-    } else {
-      setSignUp('submit-enabled')
-    }
-  }, [email, username, firstName, lastName, password, confirmPassword])
+  // useEffect(() => {
+  //   if (!email.length || !username.length || !firstName.length || !password.length || !confirmPassword.length) {
+  //     setSignUp('submit-disabled')
+  //   }
+  //   else if (username.length < 4 || password.length < 6 || password !== confirmPassword) {
+  //     setSignUp('submit-disabled')
+  //   } else {
+  //     setSignUp('submit-enabled')
+  //   }
+  // }, [email, username, firstName, lastName, password, confirmPassword])
 
   if (sessionUser) return <Redirect to="/" />;
 
@@ -141,7 +141,7 @@ function SignupFormPage() {
           required
         />
         </div>
-        <button className='signup-button' id={signUp} type="submit" disabled={disabledButton()}>Sign Up</button>
+        <button className='signup-button' type="submit">Sign Up</button>
       </form>
     </div>
   );
