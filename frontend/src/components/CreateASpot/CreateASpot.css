@@ -64,6 +64,10 @@
     flex-direction: column;
 }
 
+.description-textarea {
+    resize: none;
+}
+
 .city {
     display: flex;
     flex-direction: column;
