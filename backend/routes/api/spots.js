@@ -52,34 +52,39 @@ const validateSpotError = [
 // get all spots --DONE
 
 router.get('/', async (req, res) => {
-    let { page, size, minLat, minLng, maxLat, maxLng, minPrice, maxPrice } = req.query
+    let { page, size, minLat, minLng, maxLat, maxLng, minPrice, maxPrice } = req.query;
 
     page = parseInt(page);
     size = parseInt(size);
 
     if (!page) {
-        page = 1
+      page = 1;
     }
     if (!size || size > 20) {
-        size = 20
+      size = 20;
     }
 
-    if (page <= 0 || size <= 0 || minPrice <= 0 || maxPrice <= 0) {
-        return res.status(400).json({
-            "message": "Validation Error",
-            "statusCode": 400,
-            "errors": {
-                "page": "Page must be greater than or equal to 1",
-                "size": "Size must be greater than or equal to 1",
-                "maxLat": "Maximum latitude is invalid",
-                "minLat": "Minimum latitude is invalid",
-                "minLng": "Maximum longitude is invalid",
-                "maxLng": "Minimum longitude is invalid",
-                "minPrice": "Maximum price must be greater than or equal to 0",
-                "maxPrice": "Minimum price must be greater than or equal to 0"
-            }
-        })
-    };
+    if (
+      page <= 0 ||
+      size <= 0 ||
+      minPrice <= 0 ||
+      maxPrice <= 0
+    ) {
+      return res.status(400).json({
+        "message": "Validation Error",
+        "statusCode": 400,
+        "errors": {
+          "page": "Page must be greater than or equal to 1",
+          "size": "Size must be greater than or equal to 1",
+          "maxLat": "Maximum latitude is invalid",
+          "minLat": "Minimum latitude is invalid",
+          "minLng": "Maximum longitude is invalid",
+          "maxLng": "Minimum longitude is invalid",
+          "minPrice": "Maximum price must be greater than or equal to 0",
+          "maxPrice": "Minimum price must be greater than or equal to 0"
+        }
+      });
+    }
 
     let pagination = {};
 
@@ -87,51 +92,59 @@ router.get('/', async (req, res) => {
     pagination.offset = size * (page - 1);
 
     const allSpots = await Spot.findAll({
-        ...pagination,
-        include: [
-            {
-                model: SpotImage
-            }
-        ]
+      ...pagination,
+      include: [
+        {
+          model: SpotImage
+        }
+      ]
     });
 
     let spots = [];
     for (let spot of allSpots) {
-        spots.push(spot.toJSON())
+      const spotImages = await SpotImage.findAll({
+        where: {
+          spotId: spot.id
+        }
+      });
+      spot = spot.toJSON();
+      spot.spotImages = spotImages;
+      spots.push(spot);
     }
 
     for (let spot of spots) {
-        const reviews = await Review.findAll({
-            where: {
-                spotId: spot.id
-            }
-        })
-        if (reviews.length) {
-            let sum = 0
-            for (let review of reviews) {
-                sum += review.stars;
-            }
-            let average = sum / reviews.length;
-            spot.avgRating = average;
-        } else {
-            spot.avgRating = 'No ratings yet'
+      const reviews = await Review.findAll({
+        where: {
+          spotId: spot.id
         }
-        const image = await SpotImage.findOne({
-            where: {
-                spotId: spot.id,
-                preview: true
-            }
-        });
-        if (!image) {
-            spot.previewImage = 'Null'
-        } else {
-            spot.previewImage = image.url
+      });
+      if (reviews.length) {
+        let sum = 0;
+        for (let review of reviews) {
+          sum += review.stars;
         }
-        delete spot.SpotImages
+        let average = sum / reviews.length;
+        spot.avgRating = average;
+      } else {
+        spot.avgRating = 'No ratings yet';
+      }
+      const image = await SpotImage.findOne({
+        where: {
+          spotId: spot.id,
+          preview: true
+        }
+      });
+      if (!image) {
+        spot.previewImage = 'Null';
+      } else {
+        spot.previewImage = image.url;
+      }
+      delete spot.SpotImages;
     }
 
-    return res.json({ Spots: spots, page, size })
-})
+    return res.json({ Spots: spots, page, size });
+  });
+
 
 // Get all spots owned by the Current User --DONE
 

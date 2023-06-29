@@ -41,36 +41,36 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DECIMAL,
       // allowNull: false
     },
-      lng: {
-        type: DataTypes.DECIMAL,
-        // allowNull: false
-      },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      description: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      price: {
-        type: DataTypes.DECIMAL,
-        allowNull: false
-      },
-      createdAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: new Date()
-      },
-      updatedAt: {
-        type: DataTypes.DATE,
-        allowNull: false,
-        defaultValue: new Date()
-      }
-    }, {
+    lng: {
+      type: DataTypes.DECIMAL,
+      // allowNull: false
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    price: {
+      type: DataTypes.DECIMAL,
+      allowNull: false
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: new Date()
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: new Date()
+    }
+  }, {
     sequelize,
     modelName: 'Spot',
   })
-  ;
+    ;
   return Spot;
 };
