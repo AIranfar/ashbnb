@@ -20,7 +20,7 @@ module.exports = {
         lat: 38.897957,
         lng: -77.036560,
         name: 'The White House',
-        description: "Experience the ultimate luxury and prestige at the White House, where you can immerse yourself in the rich history and opulence of America's most iconic residence, complete with exclusive access to presidential suites and breathtaking views of the capital's landmarks.",
+        description: "Experience the ultimate luxury and prestige at the White House, where you can immerse yourself in the rich history, complete with exclusive access to presidential suites and breathtaking views of the capital's landmarks.",
         price: 2500.00
       },
       {
@@ -44,7 +44,7 @@ module.exports = {
         lat: 35.6852,
         lng: -121.1682,
         name: 'Hearst Castle',
-        description: "Indulge in the timeless elegance and majestic charm. Immerse yourself in the opulent world of this legendary estate, surrounded by breathtaking architecture, sprawling gardens, and awe-inspiring views, offering a truly unforgettable retreat on California's central coast.",
+        description: "Indulge in the timeless elegance and majestic charm. Immerse yourself in the opulent world of this legendary estate, surrounded by breathtaking architecture, sprawling gardens, and awe-inspiring views.",
         price: 1800.00
       },
       {
@@ -124,7 +124,7 @@ module.exports = {
         state: 'California',
         country: 'USA',
         name: 'Santa Monica Apartment',
-        description: "Discover the coastal charm and vibrant lifestyle of Santa Monica with our apartment rentals. Experience the perfect blend of beachside relaxation and urban excitement as you enjoy modern amenities, proximity to iconic attractions, and the captivating energy of this renowned Southern California destination.",
+        description: "Discover the coastal charm and vibrant lifestyle of Santa Monica with our apartment rentals. Experience the perfect blend of beachside relaxation and urban excitement as you enjoy modern amenities.",
         price: 600.00
       },
       {
@@ -134,7 +134,7 @@ module.exports = {
         state: 'California',
         country: 'USA',
         name: 'Whisper Rock Ranch',
-        description: "Find your escape in our high-desert hidden gem, perched on the brink of untouched wilderness amidst enchantingly weathered boulders, ancient juniper, pinón and desert oak trees. The tranquility will envelop you as you take in the brilliant, fiery sunsets with a 360 degree view from our expansive wrap-around wood deck equipped with ample seating, pool and jacuzzi, and a propane grill.",
+        description: "Find your escape in our high-desert hidden gem, perched on the brink of untouched wilderness amidst enchantingly weathered boulders, ancient juniper, pinón and desert oak trees. Enjoy our 360° outdoor deck equipped with a pool, hottub, and propane grill.",
         price: 1500.00
       }
     ], {});
