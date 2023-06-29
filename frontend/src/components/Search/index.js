@@ -24,7 +24,8 @@ const Search = () => {
             const filteredSpots = allSpotsArr.filter(
                 (spot) =>
                     spot.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    spot.state.toLowerCase().includes(searchTerm.toLowerCase())
+                    spot.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    spot.country.toLowerCase().includes(searchTerm.toLowerCase())
             );
             setSearchResults(filteredSpots);
         } else {
@@ -60,7 +61,7 @@ const Search = () => {
                 ref={inputRef}
                 className="search-bar"
                 type="text"
-                placeholder="Search cities or states"
+                placeholder="Search cities, states, or countries"
                 value={searchTerm}
                 onChange={handleSearch}
             />
