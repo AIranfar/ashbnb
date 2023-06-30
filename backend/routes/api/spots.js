@@ -60,8 +60,8 @@ router.get('/', async (req, res) => {
     if (!page) {
       page = 1;
     }
-    if (!size || size > 20) {
-      size = 20;
+    if (!size || size > 24) {
+      size = 24;
     }
 
     if (

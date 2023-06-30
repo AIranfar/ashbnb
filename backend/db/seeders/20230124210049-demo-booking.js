@@ -82,7 +82,97 @@ module.exports = {
         userId: 8,
         startDate: '2023-09-01',
         endDate: '2023-09-05'
-      }
+      },
+      {
+        spotId: 13,
+        userId: 2,
+        startDate: '2023-09-26',
+        endDate: '2023-09-30'
+      },
+      {
+        spotId: 13,
+        userId: 1,
+        startDate: '2023-12-26',
+        endDate: '2023-12-31'
+      },
+      {
+        spotId: 14,
+        userId: 3,
+        startDate: '2023-08-01',
+        endDate: '2023-08-06'
+      },
+      {
+        spotId: 14,
+        userId: 4,
+        startDate: '2023-11-25',
+        endDate: '2023-11-31'
+      },
+      {
+        spotId: 15,
+        userId: 5,
+        startDate: '2023-11-01',
+        endDate: '2023-11-06'
+      },
+      {
+        spotId: 15,
+        userId: 7,
+        startDate: '2023-07-10',
+        endDate: '2023-07-17'
+      },
+      {
+        spotId: 16,
+        userId: 2,
+        startDate: '2023-07-01',
+        endDate: '2023-07-06'
+      },
+      {
+        spotId: 16,
+        userId: 4,
+        startDate: '2023-07-06',
+        endDate: '2023-07-13'
+      },
+      {
+        spotId: 17,
+        userId: 1,
+        startDate: '2024-02-12',
+        endDate: '2024-02-19'
+      },
+      {
+        spotId: 17,
+        userId: 8,
+        startDate: '2023-09-15',
+        endDate: '2023-09-21'
+      },
+      {
+        spotId: 18,
+        userId: 4,
+        startDate: '2023-10-05',
+        endDate: '2023-10-10'
+      },
+      {
+        spotId: 18,
+        userId: 6,
+        startDate: '2023-09-18',
+        endDate: '2023-09-24'
+      },
+      {
+        spotId: 19,
+        userId: 7,
+        startDate: '2023-10-05',
+        endDate: '2023-10-10'
+      },
+      {
+        spotId: 19,
+        userId: 8,
+        startDate: '2023-01-01',
+        endDate: '2023-01-18'
+      },
+      {
+        spotId: 20,
+        userId: 8,
+        startDate: '2023-07-01',
+        endDate: '2023-07-08'
+      },
     ], {});
   },
 
@@ -90,7 +180,7 @@ module.exports = {
     options.tableName = 'Bookings';
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] }
+      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20] }
     });
   }
 };
