@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllSpots } from '../../store/spots';
 import { NavLink } from 'react-router-dom';
+import Footer from '../Footer';
 import './Spot.css';
 
 const AllSpots = () => {
@@ -30,18 +31,19 @@ const AllSpots = () => {
             )
         }
         else return (
-        <div>
-            <i className='fa-solid fa-star star-icon' /> New
-        </div>
+            <div>
+                <i className='fa-solid fa-star star-icon' /> New
+            </div>
         )
     }
 
     return (
-        <div className='all-spots-container'>
+        <div className='all-spots-wrapper'>
+            <div className='all-spots-container'>
                 {spotsArr.map(spot =>
                     <div className='spot-cards' key={spot.id} data-tooltip={spot.name}>
                         <NavLink to={`/spots/${spot.id}`} className='spot-link' >
-                            <img className='spot-image' src={`${spot.previewImage}`}></img>
+                            <img className='spot-image' src={`${spot.previewImage}`} alt={spot.name} />
                             <div className='location-rating'>
                                 <div className='spot-location'>{`${spot.city}, ${spot.state}`}</div>
                                 <div className='star-rating'>{rating(spot.avgRating)}</div>
@@ -51,6 +53,8 @@ const AllSpots = () => {
                     </div>
                 )}
             </div>
+            <Footer />
+        </div>
     )
 }
 

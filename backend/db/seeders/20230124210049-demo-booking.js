@@ -105,7 +105,7 @@ module.exports = {
         spotId: 14,
         userId: 4,
         startDate: '2023-11-25',
-        endDate: '2023-11-31'
+        endDate: '2023-11-30'
       },
       {
         spotId: 15,
