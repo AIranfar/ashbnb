@@ -622,7 +622,7 @@ module.exports = {
       },
       {
         spotId: 24,
-        url: 'https://afar.brightspotcdn.com/dims4/default/20e019d/2147483647/strip/false/crop/1600x1067+0+0/resize/1486x991!/quality/90/?url=https%3A%2F%2Fafar-media-production-web.s3.amazonaws.com%2Fbrightspot%2F09%2F78%2Faf2d79c91eb8c78dc480a2d52cce%2Foriginal-1-hawaii-20airbnb-tropical-20garden.jpg',
+        url: 'https://d.newsweek.com/en/full/1310267/best-hawaii-beaches.jpg',
         preview: false
       },
       {
