@@ -61,7 +61,7 @@ const Search = () => {
                 ref={inputRef}
                 className="search-bar"
                 type="text"
-                placeholder="Search cities, states, or countries"
+                placeholder="Search by city, state, or country"
                 value={searchTerm}
                 onChange={handleSearch}
             />
