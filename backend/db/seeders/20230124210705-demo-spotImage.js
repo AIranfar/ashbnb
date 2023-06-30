@@ -8,7 +8,7 @@ if (process.env.NODE_ENV === 'production') {
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     options.tableName = 'SpotImages';
     await queryInterface.bulkInsert(options, [
       // spot 1
@@ -323,14 +323,326 @@ module.exports = {
         url: 'https://cdn.shopify.com/s/files/1/0043/8471/8938/files/234ce420-1588-11ec-ba5c-ab0bdb0a6b9b-JoshuaTreeQ321SiteHero2_812x457_crop_center.jpg',
         preview: false
       },
+      // spot 13
+      {
+        spotId: 13,
+        url: 'https://www.miamiherald.com/latest-news/b870js/picture252310098/alternates/LANDSCAPE_1140/4.%20District%20225.jpg',
+        preview: true
+      },
+      {
+        spotId: 13,
+        url: 'https://luxlifemiamiblog.com/wp-content/uploads/2019/01/Turnberry-OC-12-Amenities_AMEast01-02-1.jpg',
+        preview: false
+      },
+      {
+        spotId: 13,
+        url: 'https://cdn.floridadesign.com/wp-content/uploads/sites/137/2020/03/fb7-5.jpg',
+        preview: false
+      },
+      {
+        spotId: 13,
+        url: 'https://www.thepinnaclelist.com/wp-content/uploads/2019/07/03-Brickell-Flatiron-1001-S-Miami-Ave-Miami-Florida.jpg',
+        preview: false
+      },
+      {
+        spotId: 13,
+        url: 'https://media01.findrentals.com/rentals/14897/145727/miami-beach-condo-mon-104-balcony-view-sunset-pool-24h-gym-spa-free-wifi-1.jpg',
+        preview: false
+      },
+      // spot 14
+      {
+        spotId: 14,
+        url: 'https://media.architecturaldigest.com/photos/57644ef1e1e6f08b2aa59813/4:3/w_2299,h_1724,c_limit/50%20Gramercy%20Park%202.jpg',
+        preview: true
+      },
+      {
+        spotId: 14,
+        url: 'https://media.architecturaldigest.com/photos/570522a05fc159282a6446e5/master/w_1600%2Cc_limit/the-bryant-david-chipperfields-first-high-rise-new-york-city-02.jpg',
+        preview: false
+      },
+      {
+        spotId: 14,
+        url: 'https://thumbs.cityrealty.com/assets/smart/0x0/webp/6/61/61d4abdc2c940b6b62565506f50e30e909347340/one57-157-west-57th-street-00.jpg',
+        preview: false
+      },
+      {
+        spotId: 14,
+        url: 'https://secretnyc.co/wp-content/uploads/2022/09/serhant4-1024x767.jpg',
+        preview: false
+      },
+      {
+        spotId: 14,
+        url: 'https://e1.pxfuel.com/desktop-wallpaper/191/900/desktop-wallpaper-new-york-apartment-luxury-apartment.jpg',
+        preview: false
+      },
+      // spot 15
+      {
+        spotId: 15,
+        url: 'https://images.dwell.com/photos/6996557515874611200/6996563860283920384/large.jpg',
+        preview: true
+      },
+      {
+        spotId: 15,
+        url: 'https://www.collater.al/wp-content/uploads/2020/06/invisible-house-collater.al-009-1024x683.jpg',
+        preview: false
+      },
+      {
+        spotId: 15,
+        url: 'https://cdn.blessthisstuff.com/imagens/stuff/invisible-house-5.jpg',
+        preview: false
+      },
+      {
+        spotId: 15,
+        url: 'https://cdn.archilovers.com/projects/6d9da57f-314e-4a04-a123-f156ad7774cd.jpeg',
+        preview: false
+      },
+      {
+        spotId: 15,
+        url: 'https://viemagazine.com/wp-content/uploads/2021/02/vie-magazine-invisible-house-3-min.jpg',
+        preview: false
+      },
+      // spot 16
+      {
+        spotId: 16,
+        url: 'https://americansnowbird.com/img/uploads/29502/thumb/large/1M3A8621.jpg',
+        preview: true
+      },
+      {
+        spotId: 16,
+        url: 'https://arizona-content.usedirect.com/storage/gallery/0004/0023/7AD55ADA0F6D459CB69AF74FC9E236C6/medium.jpg',
+        preview: false
+      },
+      {
+        spotId: 16,
+        url: 'https://images.contentstack.io/v3/assets/blt00454ccee8f8fe6b/blt65ecbf6d3b732c95/5fd432ef50460c30dd540e98/US_LakeHavasuCity_US_Header.jpeg',
+        preview: false
+      },
+      {
+        spotId: 16,
+        url: 'https://lavish-lake-house-getaway-w-pool-lake-havasu-city-az-us.booked.net/data/Photos/OriginalPhoto/9614/961473/961473346/Lavish-Lake-House-Retreat-With-Private-Pool-Spa-And-Bbq-Lake-Havasu-City-Exterior.JPEG',
+        preview: false
+      },
+      {
+        spotId: 16,
+        url: 'https://upload.travelawaits.com/ta/uploads/2023/02/Cover-Lake-Havasu-State-Park-800x800.jpeg',
+        preview: false
+      },
+      // spot 17
+      {
+        spotId: 17,
+        url: 'https://images1.apartments.com/i2/_CJdx_po89Hb0z9L2ktdGiwzxBygtMIZEBkUczOPMaE/111/719-bourbon-st-unit-719-new-orleans-la-primary-photo.jpg',
+        preview: true
+      },
+      {
+        spotId: 17,
+        url: 'https://images1.apartments.com/i2/-mqDeFwV31JhUbU7wxKGB1ZPJrwBfWNM3A_bpsFwlZM/111/812-bourbon-st-unit-apt-4-new-orleans-la-primary-photo.jpg',
+        preview: false
+      },
+      {
+        spotId: 17,
+        url: 'https://i.pinimg.com/736x/b0/73/f6/b073f61a7430232518eada9aaab2baea--parisian-apartment-paris-apartments.jpg',
+        preview: false
+      },
+      {
+        spotId: 17,
+        url: 'https://bourbonstreetbalconyrentals.com/wp-content/uploads/2022/09/BSBR-Home-Image.jpg',
+        preview: false
+      },
+      {
+        spotId: 17,
+        url: 'https://bourbonvieux.com/wp-content/uploads/sites/14/2020/03/REVVHP_1962-1024x576.jpg',
+        preview: false
+      },
+      // spot 18
+      {
+        spotId: 18,
+        url: 'https://media.architecturaldigest.com/photos/57041af15fc159282a6443be/16:9/w_2580,c_limit/don-rela-gleason-mcalpine-napa-valley-for-sale-01.jpg',
+        preview: true
+      },
+      {
+        spotId: 18,
+        url: 'https://4.bp.blogspot.com/-ofLQMZtNu6E/VsKMbxG__ZI/AAAAAAAAJS0/hFBQrUs7nzc/s1600/IMG_7077.JPG',
+        preview: false
+      },
+      {
+        spotId: 18,
+        url: 'https://m.wsj.net/video/20191025/102819lotd_ca/102819lotd_ca_640x360.jpg',
+        preview: false
+      },
+      {
+        spotId: 18,
+        url: 'https://daily.sevenfifty.com/app/uploads/2017/06/SFD_Wine_Region_Napa_CR_iStock_2520x1890.jpg',
+        preview: false
+      },
+      {
+        spotId: 18,
+        url: 'https://www.tastingtable.com/img/gallery/25-absolute-best-wineries-in-napa-valley/l-intro-1649178566.jpg',
+        preview: false
+      },
+      // spot 19
+      {
+        spotId: 19,
+        url: 'https://www.hollywoodreporter.com/wp-content/uploads/2013/12/WINTERREALESTATESidebar_TAHOE.jpg',
+        preview: true
+      },
+      {
+        spotId: 19,
+        url: 'https://onefinestay.imgix.net/cms-media/Aspen-header.jpg',
+        preview: false
+      },
+      {
+        spotId: 19,
+        url: 'https://www.territorysupply.com/wp-content/uploads/2022/01/luxury-aspen-colorado-cabin-rental.jpg',
+        preview: false
+      },
+      {
+        spotId: 19,
+        url: 'https://media.glampinghub.com/CACHE/images/accommodations/moving-mountains-mountain-high-chalet-log-cabin-1528712075659/1ae8b8f43b8801d1312f125e4ab44d52.jpg',
+        preview: false
+      },
+      {
+        spotId: 19,
+        url: 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Lift_1A_on_Aspen_Mountain.jpg',
+        preview: false
+      },
+      // spot 20
+      {
+        spotId: 20,
+        url: 'https://upload.wikimedia.org/wikipedia/commons/6/66/Pra%C3%A7a_Cant%C3%A3o.jpg',
+        preview: true
+      },
+      {
+        spotId: 20,
+        url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/1_rio_de_janeiro_slum_2010.JPG/650px-1_rio_de_janeiro_slum_2010.JPG',
+        preview: false
+      },
+      {
+        spotId: 20,
+        url: 'https://cdn.vanderbilt.edu/vu-news/files/20210604141452/Favela.jpg',
+        preview: false
+      },
+      {
+        spotId: 20,
+        url: 'https://img.lemde.fr/2023/06/16/167/0/4000/2666/1440/960/60/0/6e3d157_1686940346823-20230608-122615.jpg',
+        preview: false
+      },
+      {
+        spotId: 20,
+        url: 'https://p1.pxfuel.com/preview/958/654/553/brazil-favela-slum-rio-de-janeiro-sunrise.jpg',
+        preview: false
+      },
+      // spot 21
+      {
+        spotId: 21,
+        url: 'https://media.cntraveler.com/photos/55e47965cdd1761348bdba87/16:9/w_1280,c_limit/amsterdam-canal-cr-gallery-stock.jpg',
+        preview: true
+      },
+      {
+        spotId: 21,
+        url: 'https://archello.s3.eu-central-1.amazonaws.com/images/2014/04/10/2014AMS0004LR.1506073140.096.jpg',
+        preview: false
+      },
+      {
+        spotId: 21,
+        url: 'https://hollywoodlife.com/wp-content/uploads/2016/10/justin-bieber-penthouse-ftr.jpg',
+        preview: false
+      },
+      {
+        spotId: 21,
+        url: 'https://a.cdn-hotels.com/gdcs/production145/d676/6b38790d-7db5-436b-a8eb-73eef8dec89e.jpg',
+        preview: false
+      },
+      {
+        spotId: 21,
+        url: 'https://a.cdn-hotels.com/gdcs/production26/d703/2d2c1043-304b-4b16-ba00-67d78d810f10.jpg',
+        preview: false
+      },
+      // spot 22
+      {
+        spotId: 22,
+        url: 'https://www.jonesaroundtheworld.com/wp-content/uploads/2019/12/Best-Airbnbs-in-Madrid.jpg',
+        preview: true
+      },
+      {
+        spotId: 22,
+        url: 'https://media.cntraveler.com/photos/5e2208607a47880008257c58/master/w_1600%2Cc_limit/AIRBNB-9659461.jpg',
+        preview: false
+      },
+      {
+        spotId: 22,
+        url: 'https://media.timeout.com/images/105930140/750/422/image.jpg',
+        preview: false
+      },
+      {
+        spotId: 22,
+        url: 'https://images.contentstack.io/v3/assets/blt00454ccee8f8fe6b/blta97c98aa90f3d46b/60913338f6a831100b5df01d/US_Madrid_ES_Header.jpg',
+        preview: false
+      },
+      {
+        spotId: 22,
+        url: 'https://www.jonesaroundtheworld.com/wp-content/uploads/2019/12/Best-Airbnbs-in-Madrid-2020.jpg',
+        preview: false
+      },
+      // spot 23
+      {
+        spotId: 23,
+        url: 'https://cdn1.matadornetwork.com/blogs/1/2023/05/airbnb-in-iceland-13-1.jpg',
+        preview: true
+      },
+      {
+        spotId: 23,
+        url: 'https://i.pinimg.com/originals/55/1f/94/551f9411846a37e8e0b6ca19456a365d.jpg',
+        preview: false
+      },
+      {
+        spotId: 23,
+        url: 'https://a0.muscache.com/im/pictures/25625163/d4833a1c_original.jpg',
+        preview: false
+      },
+      {
+        spotId: 23,
+        url: 'https://compote.slate.com/images/e215b527-a335-4674-89ee-3145892c8737.jpg',
+        preview: false
+      },
+      {
+        spotId: 23,
+        url: 'https://www.indystar.com/gcdn/presto/2018/12/15/USAT/2e7b9863-85ac-4faa-aad3-096fc1826c20-GettyImages-841647034.jpg',
+        preview: false
+      },
+      // spot 24
+      {
+        spotId: 24,
+        url: 'https://a0.muscache.com/im/pictures/22c14fea-4d19-4a9a-8582-be641941d9e8.jpg',
+        preview: true
+      },
+      {
+        spotId: 24,
+        url: 'https://cdn.gobankingrates.com/wp-content/uploads/2022/09/Kahua-Kohola-Estate-Airbnb-1.jpg',
+        preview: false
+      },
+      {
+        spotId: 24,
+        url: 'https://afar.brightspotcdn.com/dims4/default/20e019d/2147483647/strip/false/crop/1600x1067+0+0/resize/1486x991!/quality/90/?url=https%3A%2F%2Fafar-media-production-web.s3.amazonaws.com%2Fbrightspot%2F09%2F78%2Faf2d79c91eb8c78dc480a2d52cce%2Foriginal-1-hawaii-20airbnb-tropical-20garden.jpg',
+        preview: false
+      },
+      {
+        spotId: 24,
+        url: 'https://assets.vogue.com/photos/60a55df57881505c9fecf8af/master/w_1600%2Cc_limit/dc60abc6-a945-4b02-9b23-cc00d1077cd6.jpg',
+        preview: false
+      },
+      {
+        spotId: 24,
+        url: 'https://images.contentstack.io/v3/assets/blt00454ccee8f8fe6b/blt8d9a75aa58e8b523/6139d8b150d82f3b0a7aa2ce/US_Kailua-Kona_US_Header.jpg',
+        preview: false
+      },
     ], {});
   },
 
-  async down (queryInterface, Sequelize) {
+  async down(queryInterface, Sequelize) {
     options.tableName = 'SpotImages';
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
-      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12] }
+      spotId: { [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24] }
     }, {});
   }
 };
